@@ -1,8 +1,7 @@
-import 'package:consignt/ui/buyer/home_buyer_page.dart';
-import 'package:consignt/ui/buyer/login_buyer_page.dart';
-import 'package:consignt/ui/seller/login_seller_page.dart';
-import 'package:consignt/ui/buyer/register_buyer_page.dart';
-import 'package:consignt/ui/seller/register_seller_page.dart';
+
+import 'package:consignt/screen/home/home_screen.dart';
+import 'package:consignt/screen/login/login_screen.dart';
+import 'package:consignt/screen/register/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -20,13 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      initialRoute: LoginBuyerPage.routeName,
+      initialRoute: LoginScreen.routeName,
       routes: {
-        LoginBuyerPage.routeName: (context) => const LoginBuyerPage(),
-        RegisterBuyerPage.routeName: (context) => const RegisterBuyerPage(),
-        HomeBuyerPage.routeName: (context) => const HomeBuyerPage(),
-        LoginSellerPage.routeName: (context) => const LoginSellerPage(),
-        RegisterSellerPage.routeName: (context) => const RegisterSellerPage(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
+        RegisterScreen.routeName: (context) => const RegisterScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
       },
     );
   }

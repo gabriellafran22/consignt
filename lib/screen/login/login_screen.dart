@@ -1,20 +1,20 @@
 import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/styles.dart';
-import 'package:consignt/ui/buyer/home_buyer_page.dart';
-import 'package:consignt/ui/seller/login_seller_page.dart';
-import 'package:consignt/ui/buyer/register_buyer_page.dart';
+import 'package:consignt/screen/home/home_screen.dart';
+import 'package:consignt/screen/register/register_screen.dart';
+
 import 'package:flutter/material.dart';
 
-class LoginBuyerPage extends StatefulWidget{
+class LoginScreen extends StatefulWidget{
   static const routeName = '/login_buyer_page';
 
-  const LoginBuyerPage({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginBuyerPageState createState() => _LoginBuyerPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginBuyerPageState extends State<LoginBuyerPage>{
+class _LoginScreenState extends State<LoginScreen>{
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -86,7 +86,7 @@ class _LoginBuyerPageState extends State<LoginBuyerPage>{
                         ),
                         onPressed: () {
                           //TODO: HOME PAGE AFTER CHECK EMAIL & PASSWORD IN FIREBASE
-                          Navigator.pushNamed(context, HomeBuyerPage.routeName);
+                          Navigator.pushNamed(context, HomeScreen.routeName);
                         },
                       ),
                     ),
@@ -99,24 +99,10 @@ class _LoginBuyerPageState extends State<LoginBuyerPage>{
               Center(
                 child: TextButton(
                   onPressed: (){
-                    Navigator.pushNamed(context, RegisterBuyerPage.routeName);
+                    Navigator.pushNamed(context, RegisterScreen.routeName);
                   },
                   child: Text(
                     'Don’t have an account? Register',
-                    style: loginAndRegisterTextWithUnderline,
-                  ),
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                  ),
-                ),
-              ),
-              Center(
-                child: TextButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, LoginSellerPage.routeName);
-                  },
-                  child: Text(
-                    'Login as a seller',
                     style: loginAndRegisterTextWithUnderline,
                   ),
                   style: TextButton.styleFrom(

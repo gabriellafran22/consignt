@@ -1,18 +1,17 @@
 import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/styles.dart';
-import 'package:consignt/ui/buyer/login_buyer_page.dart';
 import 'package:flutter/material.dart';
 
-class HomeBuyerPage extends StatefulWidget{
+class HomeScreen extends StatefulWidget{
   static const routeName = '/home_buyer_page';
 
-  const HomeBuyerPage({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeBuyerPageState createState() => _HomeBuyerPageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeBuyerPageState extends State<HomeBuyerPage>{
+class _HomeScreenState extends State<HomeScreen>{
 
   @override
   Widget build(BuildContext context) {

@@ -1,18 +1,17 @@
 import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/styles.dart';
-import 'package:consignt/ui/buyer/login_buyer_page.dart';
 import 'package:flutter/material.dart';
 
-class RegisterBuyerPage extends StatefulWidget{
+class RegisterScreen extends StatefulWidget{
   static const routeName = '/register_buyer_page';
 
-  const RegisterBuyerPage({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  _RegisterBuyerPageState createState() => _RegisterBuyerPageState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _RegisterBuyerPageState extends State<RegisterBuyerPage>{
+class _RegisterScreenState extends State<RegisterScreen>{
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordVerifyController = TextEditingController();
