@@ -18,7 +18,26 @@ TextStyle loginAndRegisterTextWithUnderline = const TextStyle(
   decoration: TextDecoration.underline,
 );
 
-TextStyle titleText = const TextStyle(
+TextStyle textFormFieldStyle = const TextStyle(
+  fontSize: 14,
+);
+
+InputDecoration textFormFieldDecoration(String hintText) => InputDecoration(
+  fillColor: Colors.white,
+  filled: true,
+  hintText: hintText,
+  border: const OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  ),
+);
+
+TextStyle titleTextWhite = const TextStyle(
   color: Colors.white,
   fontSize: 18,
+);
+
+TextStyle titleText = const TextStyle(
+  color: Colors.black,
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
 );

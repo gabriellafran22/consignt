@@ -1,9 +1,11 @@
-import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/screen/about/about_screen.dart';
+import 'package:consignt/widgets/product_grid_card.dart';
+import 'package:consignt/widgets/product_list_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget{
-  static const routeName = '/home_buyer_page';
+  static const routeName = '/home_screen';
 
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -12,6 +14,7 @@ class HomeScreen extends StatefulWidget{
 }
 
 class _HomeScreenState extends State<HomeScreen>{
+  bool isListView = true;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,17 @@ class _HomeScreenState extends State<HomeScreen>{
             ),
           ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                 setState(() {
+                   if(isListView) isListView = false;
+                   else isListView = true;
+                 });
+              },
+              icon: isListView ? Icon(Icons.format_list_bulleted) : Icon(Icons.grid_view)
+          )
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -46,54 +60,48 @@ class _HomeScreenState extends State<HomeScreen>{
                 color: Colors.black54,
               ),
               child: Column(
+              //TODO: profile picture & nama orang yg login
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundImage: AssetImage('assets/consignt_logo.jpg'),
                     radius: 40,
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Expanded(
-                    child: Text('User profile name (if set), else => email', style: titleText,),
+                    child: Text('User Name', style: titleTextWhite,),
                   ),
-                  //TODO: KALAU NAMANYA KEPANJANGAN, HARUSNYA DRAWER HEADER BISA AUTO BESARIN UKURANNYA
                 ],
               )
-              //TODO: profile picture & nama orang yg login
             ),
             ListTile(
               leading: Icon(Icons.person),
               title: const Text('Profile'),
               onTap: () {
-                //TODO: GO TO BUYER PROFILE PAGE
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.switch_account_rounded),
-              title: const Text('Switch to seller account'),
-              onTap: () {
-                //TODO: GO TO SELLER HOME PAGE
+                //TODO: GO TO PROFILE PAGE
               },
             ),
             ListTile(
               leading: Icon(Icons.help),
               title: const Text('Help'),
               onTap: () {
-                //TODO: GO TO BUYER HELP PAGE
+                //TODO: GO TO HELP PAGE
               },
             ),
             ListTile(
               leading: Icon(Icons.info),
               title: const Text('About'),
               onTap: () {
-                //TODO: GO TO BUYER ABOUT PAGE
+                Navigator.pushNamed(context, AboutScreen.routeName);
               },
             ),
             ListTile(
               leading: Icon(Icons.logout),
               title: const Text('Logout'),
               onTap: () {
-                //TODO: GO TO BUYER LOGIN PAGE & KASIH PENANDA KALAU UDAH GA LOG IN
+                //TODO: KASIH PENANDA KALAU UDAH GA LOG IN
+                Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
           ],
@@ -102,6 +110,21 @@ class _HomeScreenState extends State<HomeScreen>{
       body: SingleChildScrollView(
         child: Container(
           //TODO: CONTENT LIST TILE / GRID OF PRODUCTS
+          child: isListView ?
+          Column(
+            //TODO NANTI GANTI LIST VIEW
+            children: [
+              productListCard(context),
+              productListCard(context),
+            ],
+          ) :
+          Column(
+            //TODO NANTI GANTI GRID VIEW
+            children: [
+              productGridCard(),
+              productGridCard(),
+            ],
+          )
         ),
       )
     );
