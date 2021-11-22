@@ -41,7 +41,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           children: <Widget>[
             Image.asset('assets/consignt_logo.jpg'),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -52,13 +52,13 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         'Harga Produk',
                         style: titleText,
                       ),
-                      Icon(Icons.favorite_border),
+                      const Icon(Icons.favorite_border),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text('Nama Produk'),
+                  const Text('Nama Produk'),
                 ],
               ),
             ),
@@ -67,7 +67,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               thickness: 10,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -75,10 +75,10 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     'Description',
                     style: titleText,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text('Description Produk'),
+                  const Text('Description Produk'),
                 ],
               ),
             ),
@@ -95,18 +95,18 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                 return Column(
                   children: [
                     ListTile(
-                      leading: Icon(Icons.phone),
-                      title: Text('Phone Number'),
+                      leading: const Icon(Icons.phone),
+                      title: const Text('Phone Number'),
                       onTap: () {},
                     ),
                     ListTile(
-                      leading: FaIcon(FontAwesomeIcons.whatsapp),
-                      title: Text('Whats App'),
+                      leading: const FaIcon(FontAwesomeIcons.whatsapp),
+                      title: const Text('Whats App'),
                       onTap: () {},
                     ),
                     ListTile(
-                      leading: FaIcon(FontAwesomeIcons.telegram),
-                      title: Text('Telegram'),
+                      leading: const FaIcon(FontAwesomeIcons.telegram),
+                      title: const Text('Telegram'),
                       onTap: () {},
                     ),
                   ],
@@ -114,7 +114,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               },
             );
           },
-          child: Text('Contact Seller'),
+          child: const Text('Contact Seller'),
         ),
       ),
     );

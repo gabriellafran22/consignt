@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen>{
                           height: 40,
                           width: double.infinity,
                           child: ElevatedButton(
-                            child: Text('LOG IN'),
+                            child: const Text('LOG IN'),
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(Colors.white),
                                 shape: MaterialStateProperty.all(
