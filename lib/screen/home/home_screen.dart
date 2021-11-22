@@ -1,12 +1,13 @@
+import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
-import 'package:consignt/screen/about/about_screen.dart';
+import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/widgets/product_grid_card.dart';
 import 'package:consignt/widgets/product_list_card.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const routeName = '/home_screen';
+import '../../di.dart';
 
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -99,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 leading: const Icon(Icons.info),
                 title: const Text('About'),
                 onTap: () {
-                  Navigator.pushNamed(context, AboutScreen.routeName);
+                  inject<Navigate>().navigateTo(ScreenConst.about);
                 },
               ),
               ListTile(

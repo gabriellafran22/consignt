@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AboutScreen extends StatelessWidget {
-  static const routeName = '/about_screen';
-
   const AboutScreen({Key? key}) : super(key: key);
 
   @override

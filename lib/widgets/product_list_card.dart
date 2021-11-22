@@ -1,10 +1,13 @@
-import 'package:consignt/screen/detail_product/detail_product_screen.dart';
+import 'package:consignt/common/navigate.dart';
+import 'package:consignt/constant/screen_const.dart';
 import 'package:flutter/material.dart';
+
+import '../di.dart';
 
 Widget productListCard(BuildContext context) {
   return InkWell(
     onTap: () {
-      Navigator.pushNamed(context, DetailProductScreen.routeName);
+      inject<Navigate>().navigateTo(ScreenConst.detailProduct);
     },
     child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

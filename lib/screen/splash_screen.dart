@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/constant/screen_const.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: darkGrey,
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(16.0),
           child: Image.asset(
             'assets/consignt_logo.jpg',
-            width: 100,
-            height: 100,
           ),
         ),
       ),

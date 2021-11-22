@@ -4,7 +4,6 @@ import 'package:consignt/common/validation.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget{
-  static const routeName = '/register_screen';
 
   const RegisterScreen({Key? key}) : super(key: key);
 

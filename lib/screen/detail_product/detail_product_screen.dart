@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DetailProductScreen extends StatefulWidget {
-  static const routeName = '/detail_product_screen';
-
   const DetailProductScreen({Key? key}) : super(key: key);
 
   @override
