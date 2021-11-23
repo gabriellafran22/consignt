@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       const Duration(seconds: 3),
-      () => inject<Navigate>().navigateTo(ScreenConst.home, replace: true),
+      () => inject<Navigate>().navigateTo(ScreenConst.login, replace: true),
     );
   }
 
