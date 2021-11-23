@@ -23,13 +23,17 @@ TextStyle textFormFieldStyle = const TextStyle(
 );
 
 InputDecoration textFormFieldDecoration(String hintText) => InputDecoration(
-  fillColor: Colors.white,
-  filled: true,
-  hintText: hintText,
-  border: const OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(10)),
-  ),
-);
+      fillColor: Colors.white,
+      filled: true,
+      hintText: hintText,
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: 0,
+        horizontal: 12,
+      ),
+    );
 
 TextStyle titleTextWhite = const TextStyle(
   color: Colors.white,

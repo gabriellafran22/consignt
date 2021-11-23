@@ -25,6 +25,10 @@ class RegisterProvider extends CustomChangeNotifier {
 
   final GlobalKey<FormState> formKey = GlobalKey();
 
+  var hiddenCity = true;
+  var provinceId = 0;
+  var cityId = 0;
+
   bool saveForm() {
     final bool isValid = formKey.currentState!.validate();
     if (isValid) {
@@ -33,7 +37,7 @@ class RegisterProvider extends CustomChangeNotifier {
     return isValid;
   }
 
-  void getProvince() async {
+  Future getProvince() async {
     customApi(
       service: _rajaOngkirService.getProvince(),
       object: province,
