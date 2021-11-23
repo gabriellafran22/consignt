@@ -12,7 +12,6 @@ import '../../../di.dart';
 class RegisterProvider extends CustomChangeNotifier {
   RegisterProvider() {
     getProvince();
-    getCity('1');
   }
 
   final _rajaOngkirService = inject.get<RajaOngkirService>();
@@ -65,12 +64,13 @@ class RegisterProvider extends CustomChangeNotifier {
     );
   }
 
-  void setProvince(Province? province) {
+  Future setProvince(Province? province) async {
     if (province == null) {
       provinceId = 0;
       hiddenCity = true;
     } else {
       provinceId = int.parse(province.provinceId as String);
+      await getCity(provinceId.toString());
       hiddenCity = false;
     }
     notifyListeners();

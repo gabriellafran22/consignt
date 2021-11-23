@@ -1,18 +1,18 @@
 import 'package:consignt/common/styles.dart';
-import 'package:consignt/core/model/province.dart';
+import 'package:consignt/core/model/city.dart';
 import 'package:consignt/screen/register/provider/register_provider.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
-class ProvinceWidget extends StatelessWidget {
-  const ProvinceWidget({Key? key, required this.provider}) : super(key: key);
+class CityWidget extends StatelessWidget {
+  const CityWidget({Key? key, required this.provider}) : super(key: key);
 
   final RegisterProvider provider;
 
   @override
   Widget build(BuildContext context) {
-    return DropdownSearch<Province>(
-      dropdownSearchDecoration: textFormFieldDecoration('Province'),
+    return DropdownSearch<City>(
+      dropdownSearchDecoration: textFormFieldDecoration('City'),
       showClearButton: true,
       showSearchBox: true,
       searchBoxDecoration: InputDecoration(
@@ -20,17 +20,19 @@ class ProvinceWidget extends StatelessWidget {
           vertical: 10,
           horizontal: 25,
         ),
-        hintText: "Province...",
+        hintText: "City...",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
       onFind: (text) async {
-        await provider.getProvince();
-        return provider.province.data ?? [];
+        await provider.getCity(
+          provider.provinceId.toString(),
+        );
+        return provider.city.data ?? [];
       },
       onChanged: (value) {
-        provider.setProvince(value);
+        provider.setCity(value);
       },
       popupItemBuilder: (context, item, isSelected) {
         return Container(
@@ -39,12 +41,12 @@ class ProvinceWidget extends StatelessWidget {
             vertical: 10,
           ),
           child: Text(
-            "${item.province}",
+            "${item.type} ${item.cityName}",
             style: const TextStyle(fontSize: 18),
           ),
         );
       },
-      itemAsString: (item) => item.province as String,
+      itemAsString: (item) => item.cityName as String,
     );
   }
 }
