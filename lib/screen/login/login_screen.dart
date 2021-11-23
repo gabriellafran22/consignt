@@ -31,6 +31,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 Image.asset(
                   'assets/consignt_logo_cropped.jpg',
                 ),
+                Text(
+                  'LOGIN AN ACCOUNT',
+                  style: loginAndRegisterLargeText,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Consumer<LoginProvider>(
@@ -94,7 +101,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                 ),
-                                onPressed: () => provider.saveForm(),
+                                onPressed: () {
+                                  if (provider.saveForm()) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                            content:
+                                                Text('Account Logged in')));
+                                    inject<Navigate>()
+                                        .navigateTo(ScreenConst.home);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                            content: Text('Failed')));
+                                  }
+                                },
                               ),
                             ),
                           ],
