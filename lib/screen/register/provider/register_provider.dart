@@ -17,4 +17,14 @@ class RegisterProvider extends ChangeNotifier {
     }
     return isValid;
   }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    passwordRetypedController.dispose();
+    phoneNumberController.dispose();
+    super.dispose();
+  }
 }

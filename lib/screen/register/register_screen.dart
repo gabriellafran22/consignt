@@ -119,7 +119,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               height: 10,
                             ),
                             Text(
-                              'Phone Number (+62XXXXXXXXXX)',
+                              'Phone Number (081234567890)',
                               style: loginAndRegisterText,
                             ),
                             const SizedBox(
@@ -163,23 +163,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: ElevatedButton(
                                 child: const Text('REGISTER'),
                                 style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all(Colors.white),
-                                    shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)))),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                ),
                                 onPressed: () {
                                   if (provider.saveForm()) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content:
-                                                Text('Account Registered')));
+                                      const SnackBar(
+                                        content: Text('Account Registered'),
+                                      ),
+                                    );
                                     Navigator.pop(context);
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content: Text('Failed')));
+                                      const SnackBar(
+                                        content: Text('Failed'),
+                                      ),
+                                    );
                                   }
                                 },
                               ),

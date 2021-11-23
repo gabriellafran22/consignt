@@ -13,4 +13,11 @@ class LoginProvider extends ChangeNotifier {
     }
     return isValid;
   }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 }

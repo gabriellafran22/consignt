@@ -104,15 +104,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () {
                                   if (provider.saveForm()) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content:
-                                                Text('Account Logged in')));
-                                    inject<Navigate>()
-                                        .navigateTo(ScreenConst.home);
+                                      const SnackBar(
+                                        content: Text('Account Logged in'),
+                                      ),
+                                    );
+                                    inject<Navigate>().navigateTo(
+                                      ScreenConst.home,
+                                      popPrevious: true,
+                                    );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content: Text('Failed')));
+                                      const SnackBar(
+                                        content: Text('Failed'),
+                                      ),
+                                    );
                                   }
                                 },
                               ),

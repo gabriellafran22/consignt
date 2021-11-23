@@ -37,7 +37,7 @@ String? passwordMatched(String? password, String? retypedPassword) {
 
 String? phoneNumberValidation(String? phoneNumber) {
   phoneNumber ??= '';
-  if (phoneNumber.length < 10 || phoneNumber.length > 12) {
+  if (phoneNumber.length < 10 || phoneNumber.length > 13) {
     return 'Phone Number not valid';
   }
 
