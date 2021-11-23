@@ -65,6 +65,26 @@ class RegisterProvider extends CustomChangeNotifier {
     );
   }
 
+  void setProvince(Province? province) {
+    if (province == null) {
+      provinceId = 0;
+      hiddenCity = true;
+    } else {
+      provinceId = int.parse(province.provinceId as String);
+      hiddenCity = false;
+    }
+    notifyListeners();
+  }
+
+  void setCity(City? city) {
+    if (city == null) {
+      cityId = 0;
+    } else {
+      cityId = int.parse(city.cityId as String);
+    }
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     nameController.dispose();
