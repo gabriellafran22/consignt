@@ -1,9 +1,9 @@
 import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
-import 'package:consignt/common/validation.dart';
 import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/screen/login/provider/login_provider.dart';
+import 'package:consignt/screen/login/widget/form_login.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,100 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Consumer<LoginProvider>(
-                    builder: (context, provider, _) {
-                      return Form(
-                        key: provider.formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Email',
-                              style: loginAndRegisterText,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextFormField(
-                              controller: provider.emailController,
-                              validator: (value) {
-                                return emailValidation(value);
-                              },
-                              decoration:
-                                  textFormFieldDecoration('Email Address'),
-                              style: textFormFieldStyle,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Password',
-                              style: loginAndRegisterText,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextFormField(
-                              controller: provider.passwordController,
-                              obscureText: true,
-                              enableSuggestions: false,
-                              autocorrect: false,
-                              validator: (value) {
-                                return passwordValidation(value);
-                              },
-                              decoration: textFormFieldDecoration('Password'),
-                              style: textFormFieldStyle,
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            SizedBox(
-                              height: 40,
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                child: const Text(
-                                  'LOG IN',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.white),
-                                  shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  if (provider.saveForm()) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('Account Logged in'),
-                                      ),
-                                    );
-                                    inject<Navigate>().navigateTo(
-                                      ScreenConst.init,
-                                      popPrevious: true,
-                                    );
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('Log in Failed'),
-                                      ),
-                                    );
-                                  }
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                const FormLogin(),
                 const SizedBox(
                   height: 10,
                 ),
