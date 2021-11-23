@@ -14,7 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Route routes(RouteSettings settings) {
-  // var args = (settings.arguments ?? {}) as Map;
+  var args = (settings.arguments ?? {}) as Map;
   switch (settings.name) {
     case '/':
       return buildRoute(settings, const SplashScreen());

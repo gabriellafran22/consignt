@@ -38,7 +38,7 @@ InputDecoration textFormFieldDecoration(String hintText) => InputDecoration(
 TextStyle titleTextWhite = const TextStyle(
   color: Colors.white,
   fontSize: 18,
-  fontWeight: FontWeight.bold
+  fontWeight: FontWeight.bold,
 );
 
 TextStyle titleText = const TextStyle(

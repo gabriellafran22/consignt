@@ -19,81 +19,83 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: NestedScrollView(
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-        return <Widget>[
-          SliverAppBar(
-            expandedHeight: 150.0,
-            floating: false,
-            pinned: false,
-            flexibleSpace: FlexibleSpaceBar(
-              background: SafeArea(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  color: Colors.blueGrey,
-                  child: Row(
-                    children: [
-                      const CircleAvatar(
-                        backgroundImage: AssetImage('assets/consignt_logo.jpg'),
-                        radius: 40,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'User Name',
-                              style: titleTextWhite,
-                            ),
-                            Text(
-                              'email',
-                              style: titleTextWhite,
-                            ),
-                          ],
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 150.0,
+              floating: false,
+              pinned: false,
+              flexibleSpace: FlexibleSpaceBar(
+                background: SafeArea(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    color: Colors.blueGrey,
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/consignt_logo.jpg'),
+                          radius: 40,
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'User Name',
+                                style: titleTextWhite,
+                              ),
+                              Text(
+                                'email',
+                                style: titleTextWhite,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ];
-      },
-      body: ListView(
-        children: ListTile.divideTiles(
-          color: Colors.blueGrey,
-          context: context,
-          tiles: [
-            _listTileFaIcon(FontAwesomeIcons.user, 'Profile', () {
-              inject<Navigate>().navigateTo(ScreenConst.profile);
-            }),
-            store
-                ? _listTileFaIcon(FontAwesomeIcons.store, 'My Store', () {
-                    //TODO: MY STORE PAGE
-                  })
-                : Container(),
-            const Divider(
-              height: 10,
-              thickness: 10,
-            ),
-            _listTileIcon(Icons.help_outline, 'Help', () {
-              //TODO: HELP PAGE
-            }),
-            _listTileIcon(Icons.info_outlined, 'About App', () {
-              inject<Navigate>().navigateTo(ScreenConst.about);
-            }),
-            _listTileFaIcon(FontAwesomeIcons.signOutAlt, 'Log Out', () {
-              //TODO: LOG OUT ACCOUNT
-            }),
-          ],
-        ).toList(),
+          ];
+        },
+        body: ListView(
+          children: ListTile.divideTiles(
+            color: Colors.blueGrey,
+            context: context,
+            tiles: [
+              _listTileFaIcon(FontAwesomeIcons.user, 'Profile', () {
+                inject<Navigate>().navigateTo(ScreenConst.profile);
+              }),
+              store
+                  ? _listTileFaIcon(FontAwesomeIcons.store, 'My Store', () {
+                      //TODO: MY STORE PAGE
+                    })
+                  : Container(),
+              const Divider(
+                height: 10,
+                thickness: 10,
+              ),
+              _listTileIcon(Icons.help_outline, 'Help', () {
+                //TODO: HELP PAGE
+              }),
+              _listTileIcon(Icons.info_outlined, 'About App', () {
+                inject<Navigate>().navigateTo(ScreenConst.about);
+              }),
+              _listTileFaIcon(FontAwesomeIcons.signOutAlt, 'Log Out', () {
+                //TODO: LOG OUT ACCOUNT
+              }),
+            ],
+          ).toList(),
+        ),
       ),
-    ));
+    );
   }
 }
 

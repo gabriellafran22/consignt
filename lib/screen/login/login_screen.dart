@@ -92,11 +92,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 child: const Text(
-                                    'LOG IN',
-                                    style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16
-                                  ),
+                                  'LOG IN',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16),
                                 ),
                                 style: ButtonStyle(
                                   backgroundColor:

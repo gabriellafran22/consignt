@@ -10,34 +10,35 @@ Widget productListCard(BuildContext context) {
       inject<Navigate>().navigateTo(ScreenConst.detailProduct);
     },
     child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            children: [
-              Image.asset(
-                'assets/consignt_logo.jpg',
-                width: 80,
-                height: 80,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            Image.asset(
+              'assets/consignt_logo.jpg',
+              width: 80,
+              height: 80,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Product Name'),
+                  Text('Product Price'),
+                  Text('Product Seller Location'),
+                ],
               ),
-              const SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text('Product Name'),
-                    Text('Product Price'),
-                    Text('Product Seller Location'),
-                  ],
-                ),
-              ),
-              const Icon(Icons.favorite_border),
-            ],
-          ),
-        )),
+            ),
+            const Icon(Icons.favorite_border),
+          ],
+        ),
+      ),
+    ),
   );
 }
