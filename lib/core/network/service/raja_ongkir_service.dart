@@ -1,3 +1,4 @@
+import 'package:consignt/core/network/response/city_response.dart';
 import 'package:consignt/core/network/response/province_response.dart';
 import 'package:dio/dio.dart';
 
@@ -12,6 +13,16 @@ class RajaOngkirService {
     return await clientExecutor<ProvinceResponse>(execute: () async {
       var response = await _client.get('/province');
       return ProvinceResponse.fromJson(
+        response.data,
+      );
+    });
+  }
+
+  Future<CityResponse> getCity(String provinceId) async {
+    return await clientExecutor<CityResponse>(execute: () async {
+      var response =
+          await _client.get('/city', queryParameters: {'province': provinceId});
+      return CityResponse.fromJson(
         response.data,
       );
     });

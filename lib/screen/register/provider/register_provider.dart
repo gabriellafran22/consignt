@@ -1,6 +1,8 @@
 import 'package:consignt/common/async.dart';
 import 'package:consignt/core/custom_change_notifier.dart';
+import 'package:consignt/core/model/city.dart';
 import 'package:consignt/core/model/province.dart';
+import 'package:consignt/core/network/response/city_response.dart';
 import 'package:consignt/core/network/response/province_response.dart';
 import 'package:consignt/core/network/service/raja_ongkir_service.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +12,13 @@ import '../../../di.dart';
 class RegisterProvider extends CustomChangeNotifier {
   RegisterProvider() {
     getProvince();
+    getCity('1');
   }
 
   final _rajaOngkirService = inject.get<RajaOngkirService>();
 
   Async<List<Province>> province = uninitialized<List<Province>>();
+  Async<List<City>> city = uninitialized<List<City>>();
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -43,6 +47,18 @@ class RegisterProvider extends CustomChangeNotifier {
       object: province,
       execute: (ProvinceResponse response) {
         province.success(
+          response.rajaongkir?.results ?? [],
+        );
+      },
+    );
+  }
+
+  Future getCity(String provinceId) async {
+    customApi(
+      service: _rajaOngkirService.getCity(provinceId),
+      object: city,
+      execute: (CityResponse response) {
+        city.success(
           response.rajaongkir?.results ?? [],
         );
       },
