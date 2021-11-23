@@ -1,6 +1,21 @@
+import 'package:consignt/common/async.dart';
+import 'package:consignt/core/custom_change_notifier.dart';
+import 'package:consignt/core/model/province.dart';
+import 'package:consignt/core/network/response/province_response.dart';
+import 'package:consignt/core/network/service/raja_ongkir_service.dart';
 import 'package:flutter/material.dart';
 
-class RegisterProvider extends ChangeNotifier {
+import '../../../di.dart';
+
+class RegisterProvider extends CustomChangeNotifier {
+  RegisterProvider() {
+    getProvince();
+  }
+
+  final _rajaOngkirService = inject.get<RajaOngkirService>();
+
+  Async<List<Province>> province = uninitialized<List<Province>>();
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -16,6 +31,18 @@ class RegisterProvider extends ChangeNotifier {
       //TODO: create buyer account in firebase.
     }
     return isValid;
+  }
+
+  void getProvince() async {
+    customApi(
+      service: _rajaOngkirService.getProvince(),
+      object: province,
+      execute: (ProvinceResponse response) {
+        province.success(
+          response.rajaongkir?.results ?? [],
+        );
+      },
+    );
   }
 
   @override

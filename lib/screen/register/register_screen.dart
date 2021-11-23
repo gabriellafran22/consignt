@@ -138,22 +138,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            //TODO: csc_picker gabisa di pakai & belum nemu penggantinya
-                            // CSCPicker(
-                            //   showCities: true,
-                            //   showStates: true,
-                            //   defaultCountry: DefaultCountry.Indonesia,
-                            //   onStateChanged:(value) {
-                            //     setState(() {
-                            //       stateValue = value!;
-                            //     });
-                            //   },
-                            //   onCityChanged:(value) {
-                            //     setState(() {
-                            //       cityValue = value!;
-                            //     });
-                            //   },
-                            // ),
                             const SizedBox(
                               height: 30,
                             ),
