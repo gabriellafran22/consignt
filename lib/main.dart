@@ -2,6 +2,7 @@ import 'package:consignt/di.dart';
 import 'package:consignt/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'common/navigate.dart';
 import 'core/routes.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Consignt',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.blueGrey,
+        textTheme: GoogleFonts.ubuntuTextTheme(),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       onGenerateRoute: routes,

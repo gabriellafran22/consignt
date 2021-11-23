@@ -91,7 +91,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 40,
                               width: double.infinity,
                               child: ElevatedButton(
-                                child: const Text('LOG IN'),
+                                child: const Text(
+                                    'LOG IN',
+                                    style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16
+                                  ),
+                                ),
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(Colors.white),
@@ -109,13 +115,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     );
                                     inject<Navigate>().navigateTo(
-                                      ScreenConst.home,
+                                      ScreenConst.init,
                                       popPrevious: true,
                                     );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        content: Text('Failed'),
+                                        content: Text('Log in Failed'),
                                       ),
                                     );
                                   }

@@ -1,9 +1,14 @@
 import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/screen/about/about_screen.dart';
 import 'package:consignt/screen/detail_product/detail_product_screen.dart';
+import 'package:consignt/screen/favorite/favorite_screen.dart';
 import 'package:consignt/screen/home/home_screen.dart';
+import 'package:consignt/screen/init_screen.dart';
 import 'package:consignt/screen/login/login_screen.dart';
+import 'package:consignt/screen/profile/profile_screen.dart';
 import 'package:consignt/screen/register/register_screen.dart';
+import 'package:consignt/screen/settings/settings_screen.dart';
+import 'package:consignt/screen/shipping/shipping_screen.dart';
 import 'package:consignt/screen/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +22,20 @@ Route routes(RouteSettings settings) {
       return buildRoute(settings, const LoginScreen());
     case ScreenConst.register:
       return buildRoute(settings, const RegisterScreen());
+    case ScreenConst.init:
+      return buildRoute(settings, const InitScreen());
     case ScreenConst.home:
       return buildRoute(settings, const HomeScreen());
+    case ScreenConst.favorite:
+      return buildRoute(settings, const FavoriteScreen());
+    case ScreenConst.profile:
+      return buildRoute(settings, const ProfileScreen());
+    case ScreenConst.settings:
+      return buildRoute(settings, const SettingsScreen());
     case ScreenConst.about:
       return buildRoute(settings, const AboutScreen());
+    case ScreenConst.shipping:
+      return buildRoute(settings, const ShippingScreen());
     case ScreenConst.detailProduct:
       return buildRoute(settings, const DetailProductScreen());
     default:
@@ -36,7 +51,9 @@ MaterialPageRoute buildRoute(RouteSettings settings, Widget builder) {
 }
 
 class CustomPageRoute<T> extends MaterialPageRoute<T> {
+  @override
   final WidgetBuilder builder;
+  @override
   final RouteSettings settings;
 
   CustomPageRoute({
