@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "424947920876",
+    "project_id": "consignt",
+    "storage_bucket": "consignt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424947920876:android:8009f630b4e4d59a32dac9",
+        "android_client_info": {
+          "package_name": "com.example.consignt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424947920876-2rclof56l9qcdc8eh2ul30qoj6k5s58o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCMUjKejsvqCOQhu1gPtE3CZljHiXke18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424947920876-2rclof56l9qcdc8eh2ul30qoj6k5s58o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
