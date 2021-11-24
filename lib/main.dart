@@ -2,6 +2,7 @@ import 'package:consignt/di.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,8 @@ import 'common/navigate.dart';
 import 'core/routes.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await setupDependencyInjection();
   runApp(const MyApp());
 }
@@ -24,12 +27,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) =>
-              PreferencesProvider(
-                preferencesHelper: PreferencesHelper(
-                  sharedPreferences: SharedPreferences.getInstance()
-                ),
-              ),
+          create: (_) => PreferencesProvider(
+            preferencesHelper: PreferencesHelper(
+                sharedPreferences: SharedPreferences.getInstance()),
+          ),
         ),
       ],
       child: MaterialApp(

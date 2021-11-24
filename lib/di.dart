@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 
 import 'common/navigate.dart';
 import 'core/network/client.dart';
-import 'core/network/service/raja_ongkir_service.dart';
+import 'core/network/service/api/raja_ongkir_service.dart';
 
 GetIt inject = GetIt.instance;
 

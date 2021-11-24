@@ -3,7 +3,7 @@ import 'package:consignt/core/custom_change_notifier.dart';
 import 'package:consignt/core/model/city.dart';
 import 'package:consignt/core/model/cost.dart';
 import 'package:consignt/core/network/response/all_city_response.dart';
-import 'package:consignt/core/network/service/raja_ongkir_service.dart';
+import 'package:consignt/core/network/service/api/raja_ongkir_service.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../di.dart';

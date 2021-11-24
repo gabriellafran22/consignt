@@ -28,8 +28,8 @@ class ButtonRegister extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: () {
-          if (provider.saveForm()) {
+        onPressed: () async {
+          if (await provider.saveForm()) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Account Registered'),
@@ -38,8 +38,8 @@ class ButtonRegister extends StatelessWidget {
             Navigator.pop(context);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Failed'),
+              SnackBar(
+                content: Text(RegisterProvider.status.split(']').last),
               ),
             );
           }

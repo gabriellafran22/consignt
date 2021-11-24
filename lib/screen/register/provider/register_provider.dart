@@ -4,7 +4,9 @@ import 'package:consignt/core/model/city.dart';
 import 'package:consignt/core/model/province.dart';
 import 'package:consignt/core/network/response/city_response.dart';
 import 'package:consignt/core/network/response/province_response.dart';
-import 'package:consignt/core/network/service/raja_ongkir_service.dart';
+import 'package:consignt/core/network/service/api/raja_ongkir_service.dart';
+import 'package:consignt/core/network/service/firebase/authentication_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../di.dart';
@@ -32,12 +34,22 @@ class RegisterProvider extends CustomChangeNotifier {
   var provinceId = 0;
   var cityId = 0;
 
-  bool saveForm() {
+  static String status = '';
+
+  Future<bool> saveForm() async {
     final bool isValid = formKey.currentState!.validate();
     if (isValid) {
-      //TODO: create buyer account in firebase.
+      User? user = await AuthenticationService.signUp(
+        emailController.text,
+        passwordController.text,
+      );
+      if (user != null) {
+        return true;
+      } else {
+        return false;
+      }
     }
-    return isValid;
+    return false;
   }
 
   Future getProvince() async {

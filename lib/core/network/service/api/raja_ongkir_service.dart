@@ -4,7 +4,7 @@ import 'package:consignt/core/network/response/cost_response.dart';
 import 'package:consignt/core/network/response/province_response.dart';
 import 'package:dio/dio.dart';
 
-import '../client.dart';
+import '../../client.dart';
 
 class RajaOngkirService {
   final Dio _client;
