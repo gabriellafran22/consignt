@@ -3,7 +3,6 @@ import 'package:consignt/core/custom_change_notifier.dart';
 import 'package:consignt/core/model/city.dart';
 import 'package:consignt/core/model/cost.dart';
 import 'package:consignt/core/network/response/all_city_response.dart';
-import 'package:consignt/core/network/response/cost_response.dart';
 import 'package:consignt/core/network/service/raja_ongkir_service.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -58,12 +57,12 @@ class ShippingProvider extends CustomChangeNotifier {
   }
 
   Future getCostJNE() async {
-    CostQuery costQuery = CostQuery(
-      origin: cityIdFrom.toString(),
-      destination: cityIdTo.toString(),
-      weight: int.parse(weightController.text),
-      courier: 'JNE',
-    );
+    // CostQuery costQuery = CostQuery(
+    //   origin: cityIdFrom.toString(),
+    //   destination: cityIdTo.toString(),
+    //   weight: int.parse(weightController.text),
+    //   courier: 'JNE',
+    // );
 
     // customApi(
     //   service: _rajaOngkirService.getCost(costQuery),

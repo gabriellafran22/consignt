@@ -2,6 +2,8 @@ import 'package:consignt/common/styles.dart';
 import 'package:flutter/material.dart';
 
 class ShowShippingPrice extends StatelessWidget {
+  const ShowShippingPrice({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

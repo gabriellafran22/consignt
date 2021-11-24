@@ -107,9 +107,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    checkPrice ?
-                    ShowShippingPrice() :
-                    Container(),
+                    checkPrice ? const ShowShippingPrice() : Container(),
                   ],
                 ),
               ),
