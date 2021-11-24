@@ -35,14 +35,33 @@ InputDecoration textFormFieldDecoration(String hintText) => InputDecoration(
       ),
     );
 
+InputDecoration textFormFieldDecorationWithLabel(String labelText) => InputDecoration(
+  labelText: labelText,
+  fillColor: Colors.white,
+  filled: true,
+  border: const OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  ),
+  contentPadding: const EdgeInsets.symmetric(
+    vertical: 0,
+    horizontal: 12,
+  ),
+);
+
 TextStyle titleTextWhite = const TextStyle(
   color: Colors.white,
   fontSize: 18,
   fontWeight: FontWeight.bold,
 );
 
-TextStyle titleText = const TextStyle(
+TextStyle titleText20 = const TextStyle(
   color: Colors.black,
   fontSize: 20,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle titleText16 = const TextStyle(
+  color: Colors.black,
+  fontSize: 16,
   fontWeight: FontWeight.bold,
 );

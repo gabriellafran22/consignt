@@ -35,23 +35,28 @@ class ButtonLogin extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          if (provider.saveForm()) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Account Logged in'),
-              ),
-            );
-            inject<Navigate>().navigateTo(
-              ScreenConst.init,
-              popPrevious: true,
-            );
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Log in Failed'),
-              ),
-            );
-          }
+          //TODO: JGN LUPA UNCOMMENT YG DI BAWAH (BIARIN GINI DLU BIAR GA CAPE INPUT EMAIL & PASSWORD)
+          inject<Navigate>().navigateTo(
+            ScreenConst.init,
+            popPrevious: true,
+          );
+          // if (provider.saveForm()) {
+          //   ScaffoldMessenger.of(context).showSnackBar(
+          //     const SnackBar(
+          //       content: Text('Account Logged in'),
+          //     ),
+          //   );
+          //   inject<Navigate>().navigateTo(
+          //     ScreenConst.init,
+          //     popPrevious: true,
+          //   );
+          // } else {
+          //   ScaffoldMessenger.of(context).showSnackBar(
+          //     const SnackBar(
+          //       content: Text('Log in Failed'),
+          //     ),
+          //   );
+          // }
         },
       ),
     );

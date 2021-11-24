@@ -48,7 +48,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     children: [
                       Text(
                         'Harga Produk',
-                        style: titleText,
+                        style: titleText20,
                       ),
                       const Icon(Icons.favorite_border),
                     ],
@@ -71,7 +71,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                 children: [
                   Text(
                     'Description',
-                    style: titleText,
+                    style: titleText20,
                   ),
                   const SizedBox(
                     height: 10,
