@@ -1,4 +1,5 @@
 import 'package:consignt/core/network/service/firebase/firestore_service.dart';
+import 'package:consignt/screen/login/provider/login_provider.dart';
 import 'package:consignt/screen/register/provider/register_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -6,8 +7,8 @@ class AuthenticationService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
 
   static Future<User?> signUp({
-    String email = '',
-    String password = '',
+    required String email,
+    required String password,
     String name = '',
     String phoneNumber = '',
     String province = '',
@@ -33,13 +34,17 @@ class AuthenticationService {
     }
   }
 
-  static Future<User?> signIn(String email, String password) async {
+  static Future<User?> signIn({
+    required String email,
+    required String password,
+  }) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = userCredential.user;
       return user;
     } catch (error) {
+      LoginProvider.status = error.toString();
       return null;
     }
   }
