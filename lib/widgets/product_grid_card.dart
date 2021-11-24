@@ -73,7 +73,7 @@ Widget productGridCard2() {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Product Name'),
+                const Text('Product Name', maxLines: 2, overflow: TextOverflow.ellipsis,),
                 const Text('Product Price'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

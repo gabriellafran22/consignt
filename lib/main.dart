@@ -1,8 +1,12 @@
 import 'package:consignt/di.dart';
+import 'package:consignt/preferences/preferences_helper.dart';
+import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'common/navigate.dart';
 import 'core/routes.dart';
@@ -17,17 +21,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Consignt',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        textTheme: GoogleFonts.ubuntuTextTheme(),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) =>
+              PreferencesProvider(
+                preferencesHelper: PreferencesHelper(
+                  sharedPreferences: SharedPreferences.getInstance()
+                ),
+              ),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Consignt',
+        theme: ThemeData(
+          primarySwatch: Colors.blueGrey,
+          textTheme: GoogleFonts.ubuntuTextTheme(),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        onGenerateRoute: routes,
+        navigatorKey: inject<Navigate>().navigatorKey,
+        home: const SplashScreen(),
       ),
-      onGenerateRoute: routes,
-      navigatorKey: inject<Navigate>().navigatorKey,
-      home: const SplashScreen(),
     );
   }
 }
