@@ -1,10 +1,10 @@
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/screen/shipping/provider/shipping_provider.dart';
-import 'package:consignt/screen/shipping/shipping_price_card.dart';
+import 'package:consignt/screen/shipping/widget/shipping_price_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'all_city_widget.dart';
+import 'widget/all_city_widget.dart';
 
 class ShippingScreen extends StatefulWidget {
   const ShippingScreen({Key? key}) : super(key: key);

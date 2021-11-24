@@ -73,33 +73,85 @@ class _SettingsScreenState extends State<SettingsScreen> {
             color: Colors.blueGrey,
             context: context,
             tiles: [
-              _listTileFaIcon(FontAwesomeIcons.user, 'Profile', () {
-                inject<Navigate>().navigateTo(ScreenConst.profile);
-              }),
+              _listTileFaIcon(
+                FontAwesomeIcons.user,
+                'Profile',
+                () {
+                  inject<Navigate>().navigateTo(ScreenConst.profile);
+                },
+              ),
               store
-                  ? _listTileFaIcon(FontAwesomeIcons.store, 'My Store', () {
-                      //TODO: MY STORE PAGE
-                    })
+                  ? _listTileFaIcon(
+                      FontAwesomeIcons.store,
+                      'My Store',
+                      () {
+                        inject<Navigate>().navigateTo(ScreenConst.myStore);
+                      },
+                    )
                   : Container(),
               const Divider(
                 height: 10,
                 thickness: 10,
               ),
-              _listTileIcon(Icons.help_outline, 'Help', () {
-                //TODO: HELP PAGE
-              }),
-              _listTileIcon(Icons.info_outlined, 'About App', () {
-                inject<Navigate>().navigateTo(ScreenConst.about);
-              }),
-              _listTileFaIcon(FontAwesomeIcons.signOutAlt, 'Log Out', () {
-                //TODO: LOG OUT ACCOUNT
-              }),
+              _listTileIcon(
+                Icons.help_outline,
+                'Help',
+                () {
+                  //TODO: HELP PAGE
+                },
+              ),
+              _listTileIcon(
+                Icons.info_outlined,
+                'About App',
+                () {
+                  inject<Navigate>().navigateTo(ScreenConst.about);
+                },
+              ),
+              _listTileFaIcon(
+                FontAwesomeIcons.signOutAlt,
+                'Log Out',
+                () => _showDialog(context),
+              ),
             ],
           ).toList(),
         ),
       ),
     );
   }
+}
+
+void _showDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(
+          'Log Out',
+          style: titleText16,
+        ),
+        content: const Text(
+          'Are you sure?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              inject<Navigate>().pop();
+            },
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              //TODO: TANDA KALAU UDAH KE LOGOUT
+              inject<Navigate>().pop();
+              inject<Navigate>()
+                  .navigateTo(ScreenConst.login, popPrevious: true);
+            },
+            child: const Text('Log Out'),
+          ),
+        ],
+      );
+    },
+  );
 }
 
 ListTile _listTileIcon(IconData icon, String title, void Function() ontap) {

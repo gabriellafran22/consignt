@@ -21,7 +21,7 @@ class ShowShippingPrice extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
+                  return const ListTile(
                     title: Text('Regular'),
                     trailing: Text('Rp. Harga'),
                   );

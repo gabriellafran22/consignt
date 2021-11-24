@@ -1,8 +1,8 @@
 import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/home/widget/filter_modal_bottom_sheet.dart';
 import 'package:consignt/screen/home/widget/sort_modal_bottom_sheet.dart';
-import 'package:consignt/widgets/product_grid_card.dart';
-import 'package:consignt/widgets/product_list_card.dart';
+import 'package:consignt/widget/product_grid_card.dart';
+import 'package:consignt/widget/product_list_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

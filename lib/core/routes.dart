@@ -1,10 +1,12 @@
 import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/screen/about/about_screen.dart';
+import 'package:consignt/screen/add_edit_product/add_edit_product_screen.dart';
 import 'package:consignt/screen/detail_product/detail_product_screen.dart';
 import 'package:consignt/screen/favorite/favorite_screen.dart';
 import 'package:consignt/screen/home/home_screen.dart';
 import 'package:consignt/screen/init_screen.dart';
 import 'package:consignt/screen/login/login_screen.dart';
+import 'package:consignt/screen/my_store/my_store_screen.dart';
 import 'package:consignt/screen/profile/profile_screen.dart';
 import 'package:consignt/screen/register/register_screen.dart';
 import 'package:consignt/screen/settings/settings_screen.dart';
@@ -14,7 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Route routes(RouteSettings settings) {
-  var args = (settings.arguments ?? {}) as Map;
+  // var args = (settings.arguments ?? {}) as Map;
   switch (settings.name) {
     case '/':
       return buildRoute(settings, const SplashScreen());
@@ -28,14 +30,18 @@ Route routes(RouteSettings settings) {
       return buildRoute(settings, const HomeScreen());
     case ScreenConst.favorite:
       return buildRoute(settings, const FavoriteScreen());
-    case ScreenConst.profile:
-      return buildRoute(settings, const ProfileScreen());
-    case ScreenConst.settings:
-      return buildRoute(settings, const SettingsScreen());
-    case ScreenConst.about:
-      return buildRoute(settings, const AboutScreen());
     case ScreenConst.shipping:
       return buildRoute(settings, const ShippingScreen());
+    case ScreenConst.settings:
+      return buildRoute(settings, const SettingsScreen());
+    case ScreenConst.profile:
+      return buildRoute(settings, const ProfileScreen());
+    case ScreenConst.myStore:
+      return buildRoute(settings, const MyStoreScreen());
+    case ScreenConst.addEditProduct:
+      return buildRoute(settings, const AddEditProductScreen());
+    case ScreenConst.about:
+      return buildRoute(settings, const AboutScreen());
     case ScreenConst.detailProduct:
       return buildRoute(settings, const DetailProductScreen());
     default:
