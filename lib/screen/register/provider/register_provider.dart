@@ -32,7 +32,9 @@ class RegisterProvider extends CustomChangeNotifier {
 
   var hiddenCity = true;
   var provinceId = 0;
+  var provinceName = '';
   var cityId = 0;
+  var cityName = '';
 
   static String status = '';
 
@@ -40,8 +42,12 @@ class RegisterProvider extends CustomChangeNotifier {
     final bool isValid = formKey.currentState!.validate();
     if (isValid) {
       User? user = await AuthenticationService.signUp(
-        emailController.text,
-        passwordController.text,
+        email: emailController.text,
+        password: passwordController.text,
+        name: nameController.text,
+        phoneNumber: phoneNumberController.text,
+        province: provinceName,
+        city: cityName,
       );
       if (user != null) {
         return true;
@@ -79,9 +85,11 @@ class RegisterProvider extends CustomChangeNotifier {
   Future setProvince(Province? province) async {
     if (province == null) {
       provinceId = 0;
+      provinceName = '';
       hiddenCity = true;
     } else {
       provinceId = int.parse(province.provinceId as String);
+      provinceName = province.province as String;
       await getCity(provinceId.toString());
       hiddenCity = false;
     }
@@ -91,8 +99,10 @@ class RegisterProvider extends CustomChangeNotifier {
   void setCity(City? city) {
     if (city == null) {
       cityId = 0;
+      cityName = '';
     } else {
       cityId = int.parse(city.cityId as String);
+      cityName = city.cityName as String;
     }
     notifyListeners();
   }
