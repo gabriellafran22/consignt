@@ -50,8 +50,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 'User Name',
                                 style: titleTextWhite,
                               ),
+                              const SizedBox(
+                                height: 5,
+                              ),
                               Text(
-                                'email',
+                                'email@mail.com',
                                 style: titleTextWhite,
                               ),
                             ],

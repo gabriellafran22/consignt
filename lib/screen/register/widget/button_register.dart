@@ -1,3 +1,4 @@
+import 'package:consignt/common/styles.dart';
 import 'package:consignt/screen/register/provider/register_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +16,9 @@ class ButtonRegister extends StatelessWidget {
       height: 40,
       width: double.infinity,
       child: ElevatedButton(
-        child: const Text(
+        child: Text(
           'REGISTER',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-          ),
+          style: titleText16,
         ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.white),

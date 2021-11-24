@@ -14,8 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // bool isListView = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +33,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(
-                                left: 10, top: 10, right: 10),
+                              left: 10,
+                              top: 10,
+                              right: 10,
+                            ),
                             width: double.infinity,
                             height: 40,
                             decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5)),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
                             child: Center(
                               child: TextField(
                                 decoration: const InputDecoration(

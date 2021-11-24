@@ -1,4 +1,5 @@
 import 'package:consignt/common/navigate.dart';
+import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/screen/login/provider/login_provider.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +20,9 @@ class ButtonLogin extends StatelessWidget {
       height: 40,
       width: double.infinity,
       child: ElevatedButton(
-        child: const Text(
+        child: Text(
           'LOG IN',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-          ),
+          style: titleText16,
         ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.white),
