@@ -51,7 +51,7 @@ class AllCityWidget extends StatelessWidget {
           ),
         );
       },
-      itemAsString: (item) => item.cityName as String,
+      itemAsString: (item) => "${item.type} ${item.cityName}",
     );
   }
 }

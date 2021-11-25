@@ -1,6 +1,7 @@
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/screen/shipping/provider/shipping_provider.dart';
 import 'package:consignt/screen/shipping/widget/shipping_price_card.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +15,6 @@ class ShippingScreen extends StatefulWidget {
 }
 
 class _ShippingScreenState extends State<ShippingScreen> {
-  bool checkPrice = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
       body: ChangeNotifierProvider<ShippingProvider>(
         create: (_) => ShippingProvider(),
         child: Consumer<ShippingProvider>(
-          builder: (context, provider, child) {
+          builder: (context, provider, _) {
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(10),
@@ -82,6 +81,46 @@ class _ShippingScreenState extends State<ShippingScreen> {
                     const SizedBox(
                       height: 10,
                     ),
+                    Text(
+                      'Courier',
+                      style: titleText16,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    DropdownSearch<Map<String, dynamic>>(
+                      mode: Mode.MENU,
+                      showClearButton: true,
+                      items: const [
+                        {"code": "jne", "name": "JNE"},
+                        {"code": "pos", "name": "POS Indonesia"},
+                        {"code": "tiki", "name": "TIKI"},
+                      ],
+                      label: "Courier",
+                      onChanged: (value) {
+                        if (value != null) {
+                          provider.courier = value["code"];
+                        } else {
+                          provider.courier = "";
+                        }
+                      },
+                      itemAsString: (item) => "${item['name']}",
+                      popupItemBuilder: (context, item, isSelected) {
+                        return Container(
+                          padding: const EdgeInsets.all(20),
+                          child: Text(
+                            "${item['name']}",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -98,16 +137,17 @@ class _ShippingScreenState extends State<ShippingScreen> {
                         ),
                         onPressed: () {
                           //TODO: CHECK ONGKIR
-                          setState(() {
-                            checkPrice = true;
-                          });
+                          provider.getCost();
+                          provider.checkPrice = true;
                         },
                       ),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    checkPrice ? const ShowShippingPrice() : Container(),
+                    provider.checkPrice
+                        ? ShippingPriceCard(result: provider.result.data)
+                        : Container(),
                   ],
                 ),
               ),

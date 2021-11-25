@@ -1,8 +1,8 @@
 import 'package:consignt/common/async.dart';
 import 'package:consignt/core/custom_change_notifier.dart';
 import 'package:consignt/core/model/city.dart';
-import 'package:consignt/core/model/cost.dart';
-import 'package:consignt/core/network/response/all_city_response.dart';
+import 'package:consignt/core/network/response/city_response.dart';
+import 'package:consignt/core/network/response/cost_response.dart';
 import 'package:consignt/core/network/service/api/raja_ongkir_service.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -20,16 +20,18 @@ class ShippingProvider extends CustomChangeNotifier {
   final _rajaOngkirService = inject.get<RajaOngkirService>();
 
   Async<List<City>> city = uninitialized<List<City>>();
-  Async<List<Cost>> cost = uninitialized<List<Cost>>();
+  Async<Result> result = uninitialized<Result>();
 
   var cityIdFrom = 0;
   var cityIdTo = 0;
+  var checkPrice = false;
+  String courier = '';
 
   Future getAllCity() async {
     customApi(
-      service: _rajaOngkirService.getAllCity(),
+      service: _rajaOngkirService.getCity(),
       object: city,
-      execute: (AllCityResponse response) {
+      execute: (CityResponse response) {
         city.success(
           response.rajaongkir?.results ?? [],
         );
@@ -56,22 +58,22 @@ class ShippingProvider extends CustomChangeNotifier {
     notifyListeners();
   }
 
-  Future getCostJNE() async {
-    // CostQuery costQuery = CostQuery(
-    //   origin: cityIdFrom.toString(),
-    //   destination: cityIdTo.toString(),
-    //   weight: int.parse(weightController.text),
-    //   courier: 'JNE',
-    // );
+  Future getCost() async {
+    CostQuery costQuery = CostQuery(
+      origin: cityIdFrom.toString(),
+      destination: cityIdTo.toString(),
+      weight: int.parse(weightController.text),
+      courier: courier,
+    );
 
-    // customApi(
-    //   service: _rajaOngkirService.getCost(costQuery),
-    //   object: cost,
-    //   execute: (CostResponse response) {
-    //     cost.success(
-    //       response.rajaongkir?.results[0].costs ?? [],
-    //     );
-    //   },
-    // );
+    customApi(
+      service: _rajaOngkirService.getCost(costQuery),
+      object: result,
+      execute: (CostResponse response) {
+        result.success(
+          response.rajaongkir?.results?[0] ?? Result(),
+        );
+      },
+    );
   }
 }

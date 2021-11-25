@@ -1,8 +1,14 @@
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/core/network/response/cost_response.dart';
 import 'package:flutter/material.dart';
 
-class ShowShippingPrice extends StatelessWidget {
-  const ShowShippingPrice({Key? key}) : super(key: key);
+class ShippingPriceCard extends StatelessWidget {
+  const ShippingPriceCard({
+    Key? key,
+    required this.result,
+  }) : super(key: key);
+
+  final Result? result;
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +22,37 @@ class ShowShippingPrice extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'JNE',
+                result?.name ?? '',
                 style: titleText20,
               ),
-              ListView.builder(
+              const SizedBox(height: 10),
+              ListView.separated(
                 shrinkWrap: true,
-                itemCount: 5,
+                itemCount: result?.costs?.length ?? 0,
                 itemBuilder: (BuildContext context, int index) {
-                  return const ListTile(
-                    title: Text('Regular'),
-                    trailing: Text('Rp. Harga'),
+                  var resultCost = result?.costs?[index];
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(resultCost?.service ?? 'Service'),
+                          Text(resultCost?.description ?? 'Description'),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text('Rp. ${resultCost?.cost?[0].value}'),
+                          Text('${resultCost?.cost?[0].etd} days'),
+                        ],
+                      ),
+                    ],
                   );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 5);
                 },
               ),
             ],

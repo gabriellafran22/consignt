@@ -72,7 +72,7 @@ class RegisterProvider extends CustomChangeNotifier {
 
   Future getCity(String provinceId) async {
     customApi(
-      service: _rajaOngkirService.getCity(provinceId),
+      service: _rajaOngkirService.getCity(provinceId: provinceId),
       object: city,
       execute: (CityResponse response) {
         city.success(

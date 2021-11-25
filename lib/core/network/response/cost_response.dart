@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:consignt/core/model/cost.dart';
+import 'package:consignt/core/model/result_cost.dart';
 
 CostResponse costResponseFromJson(String str) =>
     CostResponse.fromJson(json.decode(str));
@@ -34,16 +34,15 @@ class Rajaongkir {
 
   CostQuery? query;
   Status? status;
-  OriginDetails? originDetails;
-  DestinationDetails? destinationDetails;
+  NDetails? originDetails;
+  NDetails? destinationDetails;
   List<Result>? results;
 
   factory Rajaongkir.fromJson(Map<String, dynamic> json) => Rajaongkir(
         query: CostQuery.fromJson(json["query"]),
         status: Status.fromJson(json["status"]),
-        originDetails: OriginDetails.fromJson(json["origin_details"]),
-        destinationDetails:
-            DestinationDetails.fromJson(json["destination_details"]),
+        originDetails: NDetails.fromJson(json["origin_details"]),
+        destinationDetails: NDetails.fromJson(json["destination_details"]),
         results:
             List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
       );
@@ -57,8 +56,8 @@ class Rajaongkir {
       };
 }
 
-class OriginDetails {
-  OriginDetails({
+class NDetails {
+  NDetails({
     this.cityId,
     this.provinceId,
     this.province,
@@ -74,44 +73,7 @@ class OriginDetails {
   String? cityName;
   String? postalCode;
 
-  factory OriginDetails.fromJson(Map<String, dynamic> json) => OriginDetails(
-        cityId: json["city_id"],
-        provinceId: json["province_id"],
-        province: json["province"],
-        type: json["type"],
-        cityName: json["city_name"],
-        postalCode: json["postal_code"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "city_id": cityId,
-        "province_id": provinceId,
-        "province": province,
-        "type": type,
-        "city_name": cityName,
-        "postal_code": postalCode,
-      };
-}
-
-class DestinationDetails {
-  DestinationDetails({
-    this.cityId,
-    this.provinceId,
-    this.province,
-    this.type,
-    this.cityName,
-    this.postalCode,
-  });
-
-  String? cityId;
-  String? provinceId;
-  String? province;
-  String? type;
-  String? cityName;
-  String? postalCode;
-
-  factory DestinationDetails.fromJson(Map<String, dynamic> json) =>
-      DestinationDetails(
+  factory NDetails.fromJson(Map<String, dynamic> json) => NDetails(
         cityId: json["city_id"],
         provinceId: json["province_id"],
         province: json["province"],
@@ -132,16 +94,16 @@ class DestinationDetails {
 
 class CostQuery {
   CostQuery({
-    required this.origin,
-    required this.destination,
-    required this.weight,
-    required this.courier,
+    this.origin,
+    this.destination,
+    this.weight,
+    this.courier,
   });
 
-  String origin;
-  String destination;
-  int weight;
-  String courier;
+  String? origin;
+  String? destination;
+  int? weight;
+  String? courier;
 
   factory CostQuery.fromJson(Map<String, dynamic> json) => CostQuery(
         origin: json["origin"],
@@ -180,30 +142,6 @@ class Result {
         "code": code,
         "name": name,
         "costs": List<dynamic>.from(costs!.map((x) => x.toJson())),
-      };
-}
-
-class ResultCost {
-  ResultCost({
-    this.service,
-    this.description,
-    this.cost,
-  });
-
-  String? service;
-  String? description;
-  List<Cost>? cost;
-
-  factory ResultCost.fromJson(Map<String, dynamic> json) => ResultCost(
-        service: json["service"],
-        description: json["description"],
-        cost: List<Cost>.from(json["cost"].map((x) => Cost.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "service": service,
-        "description": description,
-        "cost": List<dynamic>.from(cost!.map((x) => x.toJson())),
       };
 }
 
