@@ -10,7 +10,9 @@ import '../../../di.dart';
 
 class ShippingProvider extends CustomChangeNotifier {
   TextEditingController weightController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey();
+  TextEditingController airwayBillController = TextEditingController();
+  final GlobalKey<FormState> formKeyShippingCost = GlobalKey();
+  final GlobalKey<FormState> formKeyAirwayBill = GlobalKey();
   String typeFrom = 'TYPE_FROM';
   String typeTo = 'TYPE_TO';
 
@@ -26,13 +28,25 @@ class ShippingProvider extends CustomChangeNotifier {
   var cityIdFrom = 0;
   var cityIdTo = 0;
   var checkPrice = false;
-  String courier = '';
+  var checkAirwayBill = false;
+  String courierCost = '';
+  String courierAirwaybill = '';
 
   bool checkPriceForm() {
-    final bool isValid = formKey.currentState!.validate();
+    final bool isValid = formKeyShippingCost.currentState!.validate();
     if (isValid) {
       return true;
     }
+    return false;
+  }
+
+  bool checkAirwayBillForm() {
+    final bool isValid = formKeyAirwayBill.currentState!.validate();
+    if (isValid) {
+      notifyListeners();
+      return true;
+    }
+    notifyListeners();
     return false;
   }
 
@@ -72,7 +86,7 @@ class ShippingProvider extends CustomChangeNotifier {
       origin: cityIdFrom.toString(),
       destination: cityIdTo.toString(),
       weight: int.parse(weightController.text),
-      courier: courier,
+      courier: courierCost,
     );
 
     customApi(

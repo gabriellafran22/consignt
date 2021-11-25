@@ -66,3 +66,9 @@ TextStyle titleText16 = const TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.bold,
 );
+
+TextStyle titleText14 = const TextStyle(
+  color: Colors.black,
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+);
