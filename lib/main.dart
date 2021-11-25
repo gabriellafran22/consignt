@@ -1,3 +1,4 @@
+import 'package:consignt/core/network/service/firebase/authentication_service.dart';
 import 'package:consignt/di.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
@@ -33,17 +34,21 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Consignt',
-        theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-          textTheme: GoogleFonts.ubuntuTextTheme(),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+      child: StreamProvider.value(
+        initialData: null,
+        value: AuthenticationService.userStream,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Consignt',
+          theme: ThemeData(
+            primarySwatch: Colors.blueGrey,
+            textTheme: GoogleFonts.ubuntuTextTheme(),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          onGenerateRoute: routes,
+          navigatorKey: inject<Navigate>().navigatorKey,
+          home: const SplashScreen(),
         ),
-        onGenerateRoute: routes,
-        navigatorKey: inject<Navigate>().navigatorKey,
-        home: const SplashScreen(),
       ),
     );
   }

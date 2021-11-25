@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../di.dart';
 
@@ -20,7 +22,12 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       const Duration(seconds: 3),
-      () => inject<Navigate>().navigateTo(ScreenConst.login, replace: true),
+      () {
+        User? user = Provider.of<User?>(context, listen: false);
+        (user == null)
+            ? inject<Navigate>().navigateTo(ScreenConst.login, replace: true)
+            : inject<Navigate>().navigateTo(ScreenConst.init, replace: true);
+      },
     );
   }
 

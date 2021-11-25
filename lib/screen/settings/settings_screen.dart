@@ -1,6 +1,7 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/core/network/service/firebase/authentication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -142,9 +143,9 @@ void _showDialog(BuildContext context) {
           TextButton(
             onPressed: () {
               //TODO: TANDA KALAU UDAH KE LOGOUT
-              inject<Navigate>().pop();
+              AuthenticationService.signOut();
               inject<Navigate>()
-                  .navigateTo(ScreenConst.login, popPrevious: true);
+                  .navigateToRemoveUntil(ScreenConst.login, ScreenConst.login);
             },
             child: const Text('Log Out'),
           ),
