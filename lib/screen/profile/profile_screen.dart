@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../di.dart';
 
@@ -73,6 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Center(
                 child: InkWell(
                   onTap: () async {
+                    XFile? file = await getImage();
                     //TODO: OPEN GALLERY & CHANGE PROFILE PICTURE
                   },
                   child: const CircleAvatar(
@@ -101,6 +105,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+}
+
+Future<XFile?> getImage() async {
+  final ImagePicker _picker = ImagePicker();
+  return await _picker.pickImage(source: ImageSource.gallery);
 }
 
 Widget _listTile(String leading, String title, void Function() ontap) {

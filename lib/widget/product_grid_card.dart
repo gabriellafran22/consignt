@@ -27,13 +27,13 @@ Widget productGridCard() {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Product Name'),
+                const Text('Product Name', overflow: TextOverflow.ellipsis, maxLines: 2,),
                 const Text('Product Price'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     Expanded(
-                      child: Text('Product Seller Location'),
+                      child: Text('Product Seller Location', overflow: TextOverflow.ellipsis, maxLines: 1,),
                     ),
                     Icon(Icons.favorite_border),
                   ],
@@ -79,7 +79,7 @@ Widget productGridCard2() {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     Expanded(
-                      child: Text('Product Seller Location'),
+                      child: Text('Product Seller Location', overflow: TextOverflow.ellipsis, maxLines: 1,),
                     ),
                     Icon(Icons.favorite_border),
                   ],
