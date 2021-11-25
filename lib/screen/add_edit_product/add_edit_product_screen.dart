@@ -38,96 +38,88 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
           )
         ],
       ),
-      body: Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('Product Name'),
-                      Text('$productNameChar/255'),
-                    ],
-                  ),
-                  TextFormField(
-                    controller: productNameController,
-                    decoration: const InputDecoration(
-                      hintText: 'Product Name',
-                      border: InputBorder.none,
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        productNameChar = value.length;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const Divider(
-              thickness: 10,
-              height: 10,
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Product Description'),
-                  TextFormField(
-                    controller: productDescController,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration: const InputDecoration(
-                      hintText: 'Product Description',
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Divider(
-              thickness: 10,
-              height: 10,
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Price'),
-                  TextFormField(
-                    controller: priceDescController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      prefix: Text('Rp. '),
-                      hintText: 'Price',
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            isAddProduct
-                ? Container()
-                : Container(
-                    padding: const EdgeInsets.all(10),
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      child: Text(
-                        'Delete Product',
-                        style: titleTextWhite,
+      body: SingleChildScrollView(
+        child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Product Name'),
+                    TextFormField(
+                      controller: productNameController,
+                      maxLength: 100,
+                      decoration: const InputDecoration(
+                        hintText: 'Product Name',
+                        border: InputBorder.none,
                       ),
-                      onPressed: () => _showDialogDelete(context),
                     ),
+                  ],
+                ),
+              ),
+              const Divider(
+                thickness: 10,
+                height: 10,
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Product Description'),
+                    TextFormField(
+                      controller: productDescController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      decoration: const InputDecoration(
+                        hintText: 'Product Description',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
+                thickness: 10,
+                height: 10,
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Price'),
+                    TextFormField(
+                      controller: priceDescController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        prefix: Text('Rp. '),
+                        hintText: 'Price',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              isAddProduct
+                  ? Container()
+                  : Container(
+                padding: const EdgeInsets.all(10),
+                width: double.infinity,
+                child: ElevatedButton(
+                  child: Text(
+                    'Delete Product',
+                    style: titleTextWhite,
                   ),
-          ],
+                  onPressed: () => _showDialogDelete(context),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

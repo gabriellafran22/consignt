@@ -43,3 +43,20 @@ String? phoneNumberValidation(String? phoneNumber) {
 
   return null;
 }
+
+String? isEmptyFieldValidation(String? value) {
+  value ??= '';
+  if (value.isEmpty) {
+    return 'Must not be empty';
+  }
+
+  return null;
+}
+
+String? dropdownValidation(var item) {
+  if (item == null) {
+    return 'An item from dropdown must be selected';
+  }
+
+  return null;
+}

@@ -10,6 +10,7 @@ import '../../../di.dart';
 
 class ShippingProvider extends CustomChangeNotifier {
   TextEditingController weightController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey();
   String typeFrom = 'TYPE_FROM';
   String typeTo = 'TYPE_TO';
 
@@ -26,6 +27,14 @@ class ShippingProvider extends CustomChangeNotifier {
   var cityIdTo = 0;
   var checkPrice = false;
   String courier = '';
+
+  bool checkPriceForm() {
+    final bool isValid = formKey.currentState!.validate();
+    if (isValid) {
+      return true;
+    }
+    return false;
+  }
 
   Future getAllCity() async {
     customApi(
@@ -75,5 +84,11 @@ class ShippingProvider extends CustomChangeNotifier {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    weightController.dispose();
+    super.dispose();
   }
 }

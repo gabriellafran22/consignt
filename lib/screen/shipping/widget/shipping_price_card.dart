@@ -25,30 +25,41 @@ class ShippingPriceCard extends StatelessWidget {
                 result?.name ?? '',
                 style: titleText20,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               ListView.separated(
                 shrinkWrap: true,
                 itemCount: result?.costs?.length ?? 0,
                 itemBuilder: (BuildContext context, int index) {
                   var resultCost = result?.costs?[index];
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(resultCost?.service ?? 'Service'),
-                          Text(resultCost?.description ?? 'Description'),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text('Rp. ${resultCost?.cost?[0].value}'),
-                          Text('${resultCost?.cost?[0].etd} days'),
-                        ],
-                      ),
-                    ],
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(resultCost?.service ?? 'Service'),
+                            Container(
+                                margin: const EdgeInsets.only(top: 5),
+                                child: Text(
+                                    resultCost?.description ?? 'Description'),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text('Rp. ${resultCost?.cost?[0].value}'),
+                            Container(
+                                margin: const EdgeInsets.only(top: 5),
+                                child:
+                                    Text('${resultCost?.cost?[0].etd} days'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   );
                 },
                 separatorBuilder: (context, index) {
