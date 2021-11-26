@@ -27,7 +27,7 @@ class _ShippingScreenState extends State<ShippingScreen>
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Check Shipping Fees',
+          'Shipping Information',
           style: titleTextWhite,
         ),
         bottom: TabBar(

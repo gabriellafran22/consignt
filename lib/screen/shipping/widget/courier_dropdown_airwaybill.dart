@@ -25,9 +25,9 @@ class CourierDropdownAirwaybill extends StatelessWidget {
       hint: "Courier",
       onChanged: (value) {
         if (value != null) {
-          provider.courierAirwaybill = value["code"];
+          provider.courierAirwayBill = value["code"];
         } else {
-          provider.courierAirwaybill = "";
+          provider.courierAirwayBill = "";
         }
       },
       itemAsString: (item) => "${item['name']}",

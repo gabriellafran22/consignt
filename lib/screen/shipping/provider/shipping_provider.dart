@@ -1,12 +1,16 @@
 import 'package:consignt/common/async.dart';
 import 'package:consignt/core/custom_change_notifier.dart';
 import 'package:consignt/core/model/city.dart';
+import 'package:consignt/core/network/response/airwaybill_response.dart';
 import 'package:consignt/core/network/response/city_response.dart';
 import 'package:consignt/core/network/response/cost_response.dart';
+import 'package:consignt/core/network/service/api/binder_byte_service.dart';
 import 'package:consignt/core/network/service/api/raja_ongkir_service.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../di.dart';
+
+enum ResultState { loading, noData, hasData, error }
 
 class ShippingProvider extends CustomChangeNotifier {
   TextEditingController weightController = TextEditingController();
@@ -21,6 +25,15 @@ class ShippingProvider extends CustomChangeNotifier {
   }
 
   final _rajaOngkirService = inject.get<RajaOngkirService>();
+  final _binderByteService = BinderByteService();
+
+  late String errorMessage;
+
+  Data? _airwayBillData;
+  Data? get airwayBillData => _airwayBillData;
+
+  late ResultState _state;
+  ResultState get state => _state;
 
   Async<List<City>> city = uninitialized<List<City>>();
   Async<Result> result = uninitialized<Result>();
@@ -30,7 +43,7 @@ class ShippingProvider extends CustomChangeNotifier {
   var checkPrice = false;
   var checkAirwayBill = false;
   String courierCost = '';
-  String courierAirwaybill = '';
+  String courierAirwayBill = '';
 
   bool checkPriceForm() {
     final bool isValid = formKeyShippingCost.currentState!.validate();
@@ -98,6 +111,29 @@ class ShippingProvider extends CustomChangeNotifier {
         );
       },
     );
+  }
+
+  Future<dynamic> getAirwayBill() async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+      final response = await _binderByteService.getAirwayBill(
+          courierAirwayBill, airwayBillController.text);
+
+      if (response.status == 200) {
+        _state = ResultState.hasData;
+        notifyListeners();
+        return _airwayBillData = response.data;
+      } else {
+        _state = ResultState.noData;
+        notifyListeners();
+        return errorMessage = 'No Data Found';
+      }
+    } catch (e) {
+      _state = ResultState.error;
+      notifyListeners();
+      return errorMessage = 'error $e';
+    }
   }
 
   @override

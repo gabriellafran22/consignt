@@ -1,7 +1,7 @@
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/common/validation.dart';
 import 'package:consignt/screen/shipping/provider/shipping_provider.dart';
-import 'package:consignt/screen/shipping/widget/airwaybill_result.dart';
+import 'package:consignt/screen/shipping/widget/airwaybill_result_card.dart';
 import 'package:consignt/screen/shipping/widget/courier_dropdown_airwaybill.dart';
 import 'package:consignt/widget/loading_indicator.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,7 @@ class AirwayBillScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const ScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: Form(
@@ -74,8 +75,8 @@ class AirwayBillScreen extends StatelessWidget {
                   onPressed: () {
                     if (provider.checkAirwayBillForm()) {
                       //TODO: ACCESS KE API
+                      provider.getAirwayBill();
                       provider.checkAirwayBill = true;
-                      print(provider.checkAirwayBill );
                     }
                   },
                 ),
@@ -83,16 +84,43 @@ class AirwayBillScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              provider.checkAirwayBill
-                  ? AirwayBillResult()
-                  // ? provider.result.isLoading
-                  //     ? loadingIndicator()
-                  //     : AirwayBillResult()
-                  : Container(),
+              _airwayBillHandler(provider),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+Widget _airwayBillHandler(ShippingProvider provider) {
+  if (provider.checkAirwayBill == true) {
+    if (provider.state == ResultState.loading) {
+      return loadingIndicator();
+    } else if (provider.state == ResultState.hasData) {
+      return AirwayBillResultCard(
+        airwayBillData: provider.airwayBillData,
+      );
+    } else if (provider.state == ResultState.noData) {
+      return Center(
+        child: Text(
+          'Invalid tracking number, \nplease check your airwayBill number again',
+          style: titleText16,
+          textAlign: TextAlign.center,
+        ),
+      );
+    } else if (provider.state == ResultState.error) {
+      return Center(
+        child: Text(
+          'Invalid tracking number, \nplease check your airwayBill number again',
+          style: titleText16,
+          textAlign: TextAlign.center,
+        ),
+      );
+    } else {
+      return Container();
+    }
+  } else {
+    return Container();
   }
 }
