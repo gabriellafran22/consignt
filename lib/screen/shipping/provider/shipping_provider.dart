@@ -103,6 +103,7 @@ class ShippingProvider extends CustomChangeNotifier {
   @override
   void dispose() {
     weightController.dispose();
+    airwayBillController.dispose();
     super.dispose();
   }
 }

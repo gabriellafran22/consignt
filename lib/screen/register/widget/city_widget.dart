@@ -1,4 +1,5 @@
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/common/validation.dart';
 import 'package:consignt/core/model/city.dart';
 import 'package:consignt/screen/register/provider/register_provider.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -15,6 +16,7 @@ class CityWidget extends StatelessWidget {
       dropdownSearchDecoration: textFormFieldDecoration('City'),
       showClearButton: true,
       showSearchBox: true,
+      validator: (value) => dropdownValidation(value),
       searchBoxDecoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           vertical: 10,

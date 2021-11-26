@@ -31,6 +31,7 @@ class FormLogin extends StatelessWidget {
                 ),
                 TextFormField(
                   controller: provider.emailController,
+                  keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     return emailValidation(value);
                   },

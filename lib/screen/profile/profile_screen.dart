@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
@@ -82,6 +81,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: const CircleAvatar(
                     backgroundImage: AssetImage('assets/consignt_logo.jpg'),
                     radius: 50,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          'Change',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

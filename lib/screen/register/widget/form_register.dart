@@ -51,6 +51,7 @@ class FormRegister extends StatelessWidget {
                 ),
                 TextFormField(
                   controller: provider.emailController,
+                  keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     return emailValidation(value);
                   },
@@ -97,7 +98,7 @@ class FormRegister extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'Phone Number (081234567890)',
+                  'Phone Number (08XXXXXXXXX)',
                   style: loginAndRegisterText,
                 ),
                 const SizedBox(

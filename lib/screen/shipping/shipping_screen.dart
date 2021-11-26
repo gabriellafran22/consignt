@@ -32,8 +32,7 @@ class _ShippingScreenState extends State<ShippingScreen>
         ),
         bottom: TabBar(
             controller: tabController,
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
+            indicatorColor: Colors.white,
             tabs: [
               Tab(
                 child: Text(

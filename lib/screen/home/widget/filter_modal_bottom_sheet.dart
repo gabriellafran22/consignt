@@ -17,7 +17,6 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
   TextEditingController minPriceController = TextEditingController();
   TextEditingController maxPriceController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return ActionChip(
@@ -42,15 +41,17 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                     'Location',
                     style: titleText16,
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                   const Divider(
-                    height: 5,
+                    height: 40,
                     thickness: 5,
                   ),
-                  const SizedBox(
-                    height: 10,
+                  Text(
+                    'Category',
+                    style: titleText16,
+                  ),
+                  const Divider(
+                    height: 40,
+                    thickness: 5,
                   ),
                   Text(
                     'Price',

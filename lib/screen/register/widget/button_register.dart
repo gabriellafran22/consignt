@@ -36,10 +36,16 @@ class ButtonRegister extends StatelessWidget {
               ),
             );
             Navigator.pop(context);
-          } else {
+          } else if (RegisterProvider.status.isNotEmpty){
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(RegisterProvider.status.split(']').last),
+              ),
+            );
+          } else{
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Data is not filled or Something went wrong'),
               ),
             );
           }

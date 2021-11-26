@@ -43,10 +43,16 @@ class ButtonLogin extends StatelessWidget {
               ScreenConst.init,
               popPrevious: true,
             );
-          } else {
+          } else if (LoginProvider.status.isNotEmpty){
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(LoginProvider.status.split(']').last),
+              ),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Data is not correct or Something went wrong'),
               ),
             );
           }
