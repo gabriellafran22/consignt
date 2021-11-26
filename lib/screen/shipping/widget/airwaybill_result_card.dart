@@ -35,7 +35,6 @@ class AirwayBillResultCard extends StatelessWidget {
                 style: titleText16,
               ),
               const SizedBox(height: 10),
-              //TODO: CEK DLU, KALO DATANYA KOSONG GAUSAH DI TAMPILIN
               _rowText(
                   'Courier',
                   airwayBillData!.summary!.courier!.isEmpty
@@ -111,7 +110,7 @@ class AirwayBillResultCard extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 15, bottom: 25),
                       child: Center(
                         child: Text(
-                          'History Data Unavailable',
+                          'History Data Not Available',
                           style: titleText16,
                           textAlign: TextAlign.center,
                         ),

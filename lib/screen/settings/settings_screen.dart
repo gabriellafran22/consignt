@@ -76,6 +76,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             tiles: [
               _listTileFaIcon(
                 FontAwesomeIcons.user,
+                Colors.blue,
                 'Profile',
                 () {
                   inject<Navigate>().navigateTo(ScreenConst.profile);
@@ -84,6 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               store
                   ? _listTileFaIcon(
                       FontAwesomeIcons.store,
+                      Colors.brown,
                       'My Store',
                       () {
                         inject<Navigate>().navigateTo(ScreenConst.myStore);
@@ -96,6 +98,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               _listTileIcon(
                 Icons.help_outline,
+                Colors.greenAccent,
                 'Help',
                 () {
                   //TODO: HELP PAGE
@@ -103,6 +106,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               _listTileIcon(
                 Icons.info_outlined,
+                Colors.orange,
                 'About App',
                 () {
                   inject<Navigate>().navigateTo(ScreenConst.about);
@@ -110,6 +114,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               _listTileFaIcon(
                 FontAwesomeIcons.signOutAlt,
+                Colors.black54,
                 'Log Out',
                 () => _showDialog(context),
               ),
@@ -155,18 +160,27 @@ void _showDialog(BuildContext context) {
   );
 }
 
-ListTile _listTileIcon(IconData icon, String title, void Function() ontap) {
+ListTile _listTileIcon(
+    IconData icon, Color color, String title, void Function() ontap) {
   return ListTile(
-    leading: Icon(icon),
+    leading: Icon(
+      icon,
+      color: color,
+      size: 28,
+    ),
     title: Text(title),
     trailing: const Icon(Icons.arrow_forward_ios),
     onTap: ontap,
   );
 }
 
-ListTile _listTileFaIcon(IconData icon, String title, void Function() ontap) {
+ListTile _listTileFaIcon(
+    IconData icon, Color color, String title, void Function() ontap) {
   return ListTile(
-    leading: FaIcon(icon),
+    leading: FaIcon(
+      icon,
+      color: color,
+    ),
     title: Text(title),
     trailing: const Icon(Icons.arrow_forward_ios),
     onTap: ontap,

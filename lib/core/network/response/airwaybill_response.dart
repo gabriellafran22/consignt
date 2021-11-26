@@ -76,10 +76,10 @@ class Detail {
   String? receiver;
 
   factory Detail.fromJson(Map<String, dynamic> json) => Detail(
-        origin: json["origin"],
-        destination: json["destination"],
-        shipper: json["shipper"],
-        receiver: json["receiver"],
+        origin: json["origin"] ?? "",
+        destination: json["destination"] ?? "",
+        shipper: json["shipper"] ?? "",
+        receiver: json["receiver"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -102,9 +102,9 @@ class History {
   String? location;
 
   factory History.fromJson(Map<String, dynamic> json) => History(
-        date: json["date"],
-        desc: json["desc"],
-        location: json["location"],
+        date: json["date"] ?? "",
+        desc: json["desc"] ?? "",
+        location: json["location"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -136,14 +136,14 @@ class Summary {
   String? weight;
 
   factory Summary.fromJson(Map<String, dynamic> json) => Summary(
-        awb: json["awb"],
-        courier: json["courier"],
-        service: json["service"],
-        status: json["status"],
-        date: json["date"],
-        desc: json["desc"],
-        amount: json["amount"],
-        weight: json["weight"],
+        awb: json["awb"] ?? "",
+        courier: json["courier"] ?? "",
+        service: json["service"] ?? "",
+        status: json["status"] ?? "",
+        date: json["date"] ?? "",
+        desc: json["desc"] ?? "",
+        amount: json["amount"] ?? "",
+        weight: json["weight"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
