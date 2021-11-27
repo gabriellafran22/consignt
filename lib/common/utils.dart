@@ -7,6 +7,7 @@ class Utils {
   ) {
     return UserModel(
       id: id,
+      email: data['email'],
       name: data['name'],
       phoneNumber: data['phoneNumber'],
       province: data['province'],

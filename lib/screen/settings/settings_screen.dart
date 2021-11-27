@@ -1,8 +1,10 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/core/model/user.dart';
 import 'package:consignt/core/network/service/firebase/authentication_service.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
+import 'package:consignt/widget/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/src/provider.dart';
@@ -31,40 +33,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
               pinned: false,
               flexibleSpace: FlexibleSpaceBar(
                 background: SafeArea(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    color: Colors.blueGrey,
-                    child: Row(
-                      children: [
-                        const CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/consignt_logo.jpg'),
-                          radius: 40,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                  child: FutureBuilder(
+                    future: context.read<PreferencesProvider>().getUser(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        UserModel user = snapshot.data as UserModel;
+                        return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          color: Colors.blueGrey,
+                          child: Row(
                             children: [
-                              Text(
-                                'User Name',
-                                style: titleTextWhite,
+                              CircleAvatar(
+                                backgroundImage: user.profilePicture == ''
+                                    ? const AssetImage(
+                                        'assets/consignt_logo.jpg',
+                                      )
+                                    : NetworkImage(user.profilePicture ?? '')
+                                        as ImageProvider,
+                                radius: 40,
                               ),
                               const SizedBox(
-                                height: 5,
+                                width: 10,
                               ),
-                              Text(
-                                'email@mail.com',
-                                style: titleTextWhite,
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      user.name ?? 'Name',
+                                      style: titleTextWhite,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      user.email ?? 'email@mail.com',
+                                      style: titleTextWhite,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
+                        );
+                      } else {
+                        return loadingIndicator();
+                      }
+                    },
                   ),
                 ),
               ),

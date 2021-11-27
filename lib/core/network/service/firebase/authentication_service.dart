@@ -16,7 +16,7 @@ class AuthenticationService {
     String phoneNumber = '',
     String province = '',
     String city = '',
-    String profilePicture = 'https://via.placeholder.com/150',
+    String profilePicture = '',
     bool isSeller = false,
   }) async {
     try {
@@ -26,6 +26,7 @@ class AuthenticationService {
 
       FirestoreService.createOrUpdateUser(
         user?.uid,
+        email: user?.email,
         name: name,
         phoneNumber: phoneNumber,
         province: province,

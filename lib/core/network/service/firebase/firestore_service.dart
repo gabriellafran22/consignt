@@ -6,6 +6,7 @@ class FirestoreService {
 
   static Future<void> createOrUpdateUser(
     String? id, {
+    String? email = '',
     String name = '',
     String phoneNumber = '',
     String province = '',
@@ -15,6 +16,7 @@ class FirestoreService {
   }) async {
     await userCollection.doc(id).set({
       'name': name,
+      'email': email,
       'phoneNumber': phoneNumber,
       'province': province,
       'city': city,
