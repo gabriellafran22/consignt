@@ -7,9 +7,9 @@ import 'package:consignt/widget/loading_indicator.dart';
 import 'package:flutter/material.dart';
 
 class AirwayBillScreen extends StatelessWidget {
-  ShippingProvider provider;
+  final ShippingProvider provider;
 
-  AirwayBillScreen({Key? key, required this.provider}) : super(key: key);
+  const AirwayBillScreen({Key? key, required this.provider}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

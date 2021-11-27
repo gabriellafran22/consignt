@@ -8,9 +8,10 @@ import 'package:consignt/widget/loading_indicator.dart';
 import 'package:flutter/material.dart';
 
 class ShippingCostScreen extends StatelessWidget {
-  ShippingProvider provider;
+  final ShippingProvider provider;
 
-  ShippingCostScreen({Key? key, required this.provider}) : super(key: key);
+  const ShippingCostScreen({Key? key, required this.provider})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

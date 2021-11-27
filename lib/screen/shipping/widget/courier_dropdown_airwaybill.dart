@@ -4,9 +4,10 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
 class CourierDropdownAirwaybill extends StatelessWidget {
-  ShippingProvider provider;
+  final ShippingProvider provider;
 
-  CourierDropdownAirwaybill({Key? key, required this.provider}) : super(key: key);
+  const CourierDropdownAirwaybill({Key? key, required this.provider})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

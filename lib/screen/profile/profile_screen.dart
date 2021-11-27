@@ -1,4 +1,3 @@
-
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:flutter/material.dart';
