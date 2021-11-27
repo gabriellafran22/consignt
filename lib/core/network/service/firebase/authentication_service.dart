@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:consignt/common/utils.dart';
+import 'package:consignt/core/model/user.dart';
 import 'package:consignt/core/network/service/firebase/firestore_service.dart';
 import 'package:consignt/screen/login/provider/login_provider.dart';
 import 'package:consignt/screen/register/provider/register_provider.dart';
@@ -13,6 +16,8 @@ class AuthenticationService {
     String phoneNumber = '',
     String province = '',
     String city = '',
+    String profilePicture = 'https://via.placeholder.com/150',
+    bool isSeller = false,
   }) async {
     try {
       UserCredential userCredential = await _auth
@@ -25,6 +30,8 @@ class AuthenticationService {
         phoneNumber: phoneNumber,
         province: province,
         city: city,
+        profilePicture: profilePicture,
+        isSeller: isSeller,
       );
 
       return user;
@@ -34,7 +41,7 @@ class AuthenticationService {
     }
   }
 
-  static Future<User?> signIn({
+  static Future<UserModel?> signIn({
     required String email,
     required String password,
   }) async {
@@ -42,7 +49,17 @@ class AuthenticationService {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = userCredential.user;
-      return user;
+
+      DocumentSnapshot? userSnapshot =
+          await FirestoreService.getUser(user?.uid);
+
+      Map<String, dynamic> userData =
+          userSnapshot.data() as Map<String, dynamic>;
+
+      UserModel userModel =
+          Utils.convertDocumentToUserModel(userData, user?.uid);
+
+      return userModel;
     } catch (error) {
       LoginProvider.status = error.toString();
       return null;

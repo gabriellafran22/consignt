@@ -39,26 +39,50 @@ class _InitScreenState extends State<InitScreen> {
         items: [
           BottomNavigationBarItem(
             icon: _bottomNavIndex == 0
-                ? const Icon(Icons.home, color: Colors.green,)
-                : const Icon(Icons.home_outlined, color: Colors.black54,),
+                ? const Icon(
+                    Icons.home,
+                    color: Colors.green,
+                  )
+                : const Icon(
+                    Icons.home_outlined,
+                    color: Colors.black54,
+                  ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: _bottomNavIndex == 1
-                ? const Icon(Icons.favorite, color: Colors.redAccent,)
-                : const Icon(Icons.favorite_border, color: Colors.black54,),
+                ? const Icon(
+                    Icons.favorite,
+                    color: Colors.redAccent,
+                  )
+                : const Icon(
+                    Icons.favorite_border,
+                    color: Colors.black54,
+                  ),
             label: 'Favorites',
           ),
           BottomNavigationBarItem(
             icon: _bottomNavIndex == 2
-                ? const FaIcon(FontAwesomeIcons.shippingFast, color: Colors.purple,)
-                : const FaIcon(FontAwesomeIcons.truck, color: Colors.black54,),
+                ? const FaIcon(
+                    FontAwesomeIcons.shippingFast,
+                    color: Colors.purple,
+                  )
+                : const FaIcon(
+                    FontAwesomeIcons.truck,
+                    color: Colors.black54,
+                  ),
             label: 'Shipping',
           ),
           BottomNavigationBarItem(
             icon: _bottomNavIndex == 3
-                ? const Icon(Icons.settings, color: Colors.deepOrange,)
-                : const Icon(Icons.settings_outlined, color: Colors.black54,),
+                ? const Icon(
+                    Icons.settings,
+                    color: Colors.deepOrange,
+                  )
+                : const Icon(
+                    Icons.settings_outlined,
+                    color: Colors.black54,
+                  ),
             label: 'Settings',
           ),
         ],
