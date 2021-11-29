@@ -9,7 +9,7 @@ void backDialog(BuildContext context, ProfileProvider provider) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Discard changes'),
+        title: const Text('Discard All Changes'),
         content: const Text('Are you sure?'),
         actions: [
           TextButton(

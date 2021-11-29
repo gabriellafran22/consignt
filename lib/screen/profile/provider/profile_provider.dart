@@ -12,11 +12,13 @@ class ProfileProvider extends ChangeNotifier {
   TextEditingController provinceTextField = TextEditingController();
   TextEditingController cityTextField = TextEditingController();
   TextEditingController passwordTextField = TextEditingController();
+  TextEditingController newPasswordTextField = TextEditingController();
 
   late String _userId;
   String profilePictureUrl = '';
   String initEmail = '';
   bool changeEmail = false;
+  bool changePassword = false;
   bool isDataChanged = false;
 
   ProfileProvider({required this.preferencesHelper}) {
@@ -68,25 +70,36 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setNewPassword(String tempNewPassword) {
+    newPasswordTextField.text = tempNewPassword;
+    changePassword = true;
+    isDataChanged = true;
+    notifyListeners();
+  }
+
   Future<bool> checkPassword(String tempPassword) async {
     passwordTextField.text = tempPassword;
     AuthenticationService as = AuthenticationService();
-    try{
-      if(await as.authenticatePassword(emailTextField.text, passwordTextField.text)){
+    try {
+      if (await as.authenticatePassword(initEmail, passwordTextField.text)) {
         return true;
-      }
-      else{
+      } else {
         return false;
       }
-    }
-    catch(e){
+    } catch (e) {
       return false;
     }
   }
 
   void updateData() {
-    if(changeEmail){
-      AuthenticationService.updateEmail(emailTextField.text, initEmail, passwordTextField.text);
+    if (changeEmail) {
+      AuthenticationService.updateEmail(
+          emailTextField.text, initEmail, passwordTextField.text);
+    }
+
+    if (changePassword) {
+      AuthenticationService.updatePassword(
+          newPasswordTextField.text, initEmail, passwordTextField.text);
     }
 
     FirestoreService.createOrUpdateUser(
@@ -124,6 +137,7 @@ class ProfileProvider extends ChangeNotifier {
     provinceTextField.dispose();
     cityTextField.dispose();
     passwordTextField.dispose();
+    newPasswordTextField.dispose();
     super.dispose();
   }
 }

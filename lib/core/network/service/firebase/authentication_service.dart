@@ -67,10 +67,9 @@ class AuthenticationService {
     }
   }
 
-  Future<bool> authenticatePassword(
-      String email, String password) async {
+  Future<bool> authenticatePassword(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       return true;
     } catch (error) {
       return false;
@@ -96,6 +95,18 @@ class AuthenticationService {
       return userModel;
     } catch (error) {
       return null;
+    }
+  }
+
+  static Future<void> updatePassword(
+      String newPassword, String currentEmail, String password) async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: currentEmail, password: password);
+      User? user = userCredential.user;
+      user!.updatePassword(newPassword);
+    } catch (error) {
+      print(error.toString());
     }
   }
 

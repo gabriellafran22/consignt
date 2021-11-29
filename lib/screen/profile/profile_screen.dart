@@ -1,4 +1,5 @@
 import 'package:consignt/common/navigate.dart';
+import 'package:consignt/common/snackbar.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/di.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
@@ -6,6 +7,7 @@ import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:consignt/screen/profile/widget_dialog/back_dialog.dart';
 import 'package:consignt/screen/profile/widget_dialog/email_dialog.dart';
 import 'package:consignt/screen/profile/widget_dialog/name_dialog.dart';
+import 'package:consignt/screen/profile/widget_dialog/password_dialog.dart';
 import 'package:consignt/screen/profile/widget_dialog/phone_number_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -41,6 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: const FaIcon(FontAwesomeIcons.check),
                 onPressed: () {
                   provider.updateData();
+                  showSnackbar(context, 'Data Updated');
                   inject<Navigate>().pop();
                 },
               ),
@@ -108,7 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   'Email',
                   provider.emailTextField.text,
                   () {
-                    passwordDialog(context, provider);
+                    checkPasswordInEmailDialog(context, provider);
                   },
                 ),
                 _listTile(
@@ -144,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   'Change Password',
                   '',
                   () {
-                    //TODO: DIALOG TO CHANGE PASSWORD
+                    checkPasswordInPasswordDialog(context, provider);
                   },
                 ),
               ],
