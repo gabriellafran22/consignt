@@ -23,7 +23,7 @@ class FirestoreService {
       'profilePicture': profilePicture,
       'isSeller': isSeller,
       'createdUpdatedAt': DateTime.now().toIso8601String(),
-    });
+    },SetOptions(merge: true));
   }
 
   static Future<DocumentSnapshot> getUser(String? id) async {

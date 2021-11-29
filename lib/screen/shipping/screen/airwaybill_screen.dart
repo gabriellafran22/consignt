@@ -74,7 +74,6 @@ class AirwayBillScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     if (provider.checkAirwayBillForm()) {
-                      //TODO: ACCESS KE API
                       provider.getAirwayBill();
                       provider.checkAirwayBill = true;
                     }
