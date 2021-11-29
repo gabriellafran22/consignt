@@ -67,6 +67,38 @@ class AuthenticationService {
     }
   }
 
+  Future<bool> authenticatePassword(
+      String email, String password) async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  static Future<UserModel?> updateEmail(
+      String newEmail, String currentEmail, String password) async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: currentEmail, password: password);
+      User? user = userCredential.user;
+      user!.updateEmail(newEmail);
+
+      DocumentSnapshot? userSnapshot = await FirestoreService.getUser(user.uid);
+
+      Map<String, dynamic> userData =
+          userSnapshot.data() as Map<String, dynamic>;
+
+      UserModel userModel =
+          Utils.convertDocumentToUserModel(userData, user.uid);
+
+      return userModel;
+    } catch (error) {
+      return null;
+    }
+  }
+
   static Future<void> signOut() async {
     _auth.signOut();
   }

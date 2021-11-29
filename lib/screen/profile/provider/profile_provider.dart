@@ -1,4 +1,5 @@
 import 'package:consignt/core/model/user.dart';
+import 'package:consignt/core/network/service/firebase/authentication_service.dart';
 import 'package:consignt/core/network/service/firebase/firestore_service.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,12 @@ class ProfileProvider extends ChangeNotifier {
   TextEditingController phoneNumberTextField = TextEditingController();
   TextEditingController provinceTextField = TextEditingController();
   TextEditingController cityTextField = TextEditingController();
+  TextEditingController passwordTextField = TextEditingController();
+
   late String _userId;
-  late String profilePictureUrl;
+  String profilePictureUrl = '';
+  String initEmail = '';
+  bool changeEmail = false;
   bool isDataChanged = false;
 
   ProfileProvider({required this.preferencesHelper}) {
@@ -27,6 +32,8 @@ class ProfileProvider extends ChangeNotifier {
     provinceTextField.text = user.province!;
     cityTextField.text = user.city!;
     profilePictureUrl = user.profilePicture!;
+
+    initEmail = user.email!;
     notifyListeners();
   }
 
@@ -38,6 +45,7 @@ class ProfileProvider extends ChangeNotifier {
 
   void setEmail(String tempEmail) {
     emailTextField.text = tempEmail;
+    changeEmail = true;
     isDataChanged = true;
     notifyListeners();
   }
@@ -60,8 +68,27 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<bool> checkPassword(String tempPassword) async {
+    passwordTextField.text = tempPassword;
+    AuthenticationService as = AuthenticationService();
+    try{
+      if(await as.authenticatePassword(emailTextField.text, passwordTextField.text)){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    catch(e){
+      return false;
+    }
+  }
+
   void updateData() {
-    //TODO: kalo change email pas authentication dia ga ke change
+    if(changeEmail){
+      AuthenticationService.updateEmail(emailTextField.text, initEmail, passwordTextField.text);
+    }
+
     FirestoreService.createOrUpdateUser(
       _userId,
       email: emailTextField.text,
@@ -96,6 +123,7 @@ class ProfileProvider extends ChangeNotifier {
     phoneNumberTextField.dispose();
     provinceTextField.dispose();
     cityTextField.dispose();
+    passwordTextField.dispose();
     super.dispose();
   }
 }

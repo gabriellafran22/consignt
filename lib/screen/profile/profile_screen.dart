@@ -75,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ? const AssetImage(
                                 'assets/consignt_logo.jpg',
                               )
-                            : NetworkImage(provider.profilePictureUrl ?? '')
+                            : NetworkImage(provider.profilePictureUrl)
                                 as ImageProvider,
                         radius: 50,
                         child: const Align(
@@ -108,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   'Email',
                   provider.emailTextField.text,
                   () {
-                    emailDialog(context, provider);
+                    passwordDialog(context, provider);
                   },
                 ),
                 _listTile(
