@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => PreferencesProvider(
             preferencesHelper: PreferencesHelper(
-                sharedPreferences: SharedPreferences.getInstance()),
+              sharedPreferences: SharedPreferences.getInstance(),
+            ),
           ),
         ),
       ],

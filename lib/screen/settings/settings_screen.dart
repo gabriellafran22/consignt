@@ -4,9 +4,12 @@ import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/core/model/user.dart';
 import 'package:consignt/core/network/service/firebase/authentication_service.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
+import 'package:consignt/screen/profile/provider/profile_provider.dart';
+import 'package:consignt/screen/settings/widget_dialog/logout_dialog.dart';
 import 'package:consignt/widget/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 
 import '../../di.dart';
@@ -20,6 +23,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool store = true;
+  bool fromProfile = false;
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +50,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               CircleAvatar(
                                 backgroundImage: user.profilePicture == ''
                                     ? const AssetImage(
-                                        'assets/consignt_logo.jpg',
-                                      )
+                                  'assets/consignt_logo.jpg',
+                                )
                                     : NetworkImage(user.profilePicture ?? '')
-                                        as ImageProvider,
+                                as ImageProvider,
                                 radius: 40,
                               ),
                               const SizedBox(
@@ -61,14 +65,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      user.name ?? 'Name',
+                                      user.name ?? 'Your Name',
                                       style: titleTextWhite,
                                     ),
                                     const SizedBox(
                                       height: 5,
                                     ),
                                     Text(
-                                      user.email ?? 'email@mail.com',
+                                      user.email ?? 'Your Email',
                                       style: titleTextWhite,
                                     ),
                                   ],
@@ -134,7 +138,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 FontAwesomeIcons.signOutAlt,
                 Colors.black54,
                 'Log Out',
-                () => _showDialog(context),
+                () => showLogoutDialog(context),
               ),
             ],
           ).toList(),
@@ -142,41 +146,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
   }
-}
-
-void _showDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text(
-          'Log Out',
-          style: titleText16,
-        ),
-        content: const Text(
-          'Are you sure?',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              inject<Navigate>().pop();
-            },
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              //TODO: TANDA KALAU UDAH KE LOGOUT
-              AuthenticationService.signOut();
-              context.read<PreferencesProvider>().removeUser();
-              inject<Navigate>()
-                  .navigateToRemoveUntil(ScreenConst.login, ScreenConst.login);
-            },
-            child: const Text('Log Out'),
-          ),
-        ],
-      );
-    },
-  );
 }
 
 ListTile _listTileIcon(

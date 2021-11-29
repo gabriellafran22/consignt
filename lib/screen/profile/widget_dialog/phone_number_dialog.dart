@@ -11,10 +11,10 @@ void phoneNumberDialog(BuildContext context, ProfileProvider provider) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Name'),
+        title: const Text('Phone Number'),
         content: TextField(
           controller: provider.phoneNumberTextField,
-          decoration: const InputDecoration(labelText: 'Name'),
+          decoration: const InputDecoration(labelText: 'Phone Number'),
           keyboardType: TextInputType.number,
         ),
         actions: [
