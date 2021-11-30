@@ -102,7 +102,7 @@ class RegisterProvider extends CustomChangeNotifier {
       cityName = '';
     } else {
       cityId = int.parse(city.cityId as String);
-      cityName = city.cityName as String;
+      cityName = '${city.type} ${city.cityName}';
     }
     notifyListeners();
   }

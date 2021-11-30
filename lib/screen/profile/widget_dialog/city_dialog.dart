@@ -5,35 +5,36 @@ import 'package:flutter/material.dart';
 
 import '../../../di.dart';
 
-void provinceDialog(BuildContext context, ProfileProvider provider) {
+void cityDialog(BuildContext context, ProfileProvider provider) {
   showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Province'),
+        title: const Text('City'),
         content: SizedBox(
           height: 300,
           width: 200,
-          child: provider.province.data == null
+          child: provider.city.data == null
               ? const Center(
                   child: Text(
-                      'Province data is still loading, please close and open it again'),
+                      'City data is still loading, please close and open it again'),
                 )
               : ListView.builder(
                   shrinkWrap: true,
-                  itemCount: provider.province.data!.length,
+                  itemCount: provider.city.data!.length,
                   itemBuilder: (BuildContext context, int index) {
-                    var province = provider.province.data![index];
-                    String provinceName = province.province ?? '';
+                    var city = provider.city.data![index];
+                    String cityType = city.type ?? '';
+                    String cityName = city.cityName ?? '';
                     return ListTile(
                       selectedTileColor: Colors.redAccent,
-                      title: Text(provinceName),
+                      title: Text('$cityType $cityName'),
                       onTap: () {
                         showSnackBar(
                           context,
-                          'Province changed to: $provinceName',
+                          'City changed to: $cityType $cityName',
                         );
-                        provider.setProvince(province);
+                        provider.setCity(city);
                         inject<Navigate>().pop();
                       },
                     );

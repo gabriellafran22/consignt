@@ -6,6 +6,7 @@ import 'package:consignt/di.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:consignt/screen/profile/widget_dialog/back_dialog.dart';
+import 'package:consignt/screen/profile/widget_dialog/city_dialog.dart';
 import 'package:consignt/screen/profile/widget_dialog/email_dialog.dart';
 import 'package:consignt/screen/profile/widget_dialog/name_dialog.dart';
 import 'package:consignt/screen/profile/widget_dialog/password_dialog.dart';
@@ -144,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   'City',
                   provider.cityTextField.text,
                   () {
-                    //TODO: MUNCULIN POP UP YG ISINYA CITY DARI API
+                    cityDialog(context, provider);
                   },
                 ),
                 const Divider(

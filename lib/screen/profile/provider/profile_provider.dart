@@ -2,6 +2,7 @@ import 'package:consignt/common/async.dart';
 import 'package:consignt/core/model/city.dart';
 import 'package:consignt/core/model/province.dart';
 import 'package:consignt/core/model/user.dart';
+import 'package:consignt/core/network/response/city_response.dart';
 import 'package:consignt/core/network/response/province_response.dart';
 import 'package:consignt/core/network/service/api/raja_ongkir_service.dart';
 import 'package:consignt/core/network/service/firebase/authentication_service.dart';
@@ -9,7 +10,6 @@ import 'package:consignt/core/network/service/firebase/firestore_service.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:consignt/core/custom_change_notifier.dart';
-
 
 import '../../../di.dart';
 
@@ -34,6 +34,7 @@ class ProfileProvider extends CustomChangeNotifier {
   bool changeEmail = false;
   bool changePassword = false;
   bool isDataChanged = false;
+  String provinceId = '0';
 
   ProfileProvider({required this.preferencesHelper}) {
     _getUserData();
@@ -66,6 +67,18 @@ class ProfileProvider extends CustomChangeNotifier {
     );
   }
 
+  Future getCity() async {
+    customApi(
+      service: _rajaOngkirService.getCity(provinceId: provinceId),
+      object: province,
+      execute: (CityResponse response) {
+        city.success(
+          response.rajaongkir?.results ?? [],
+        );
+      },
+    );
+  }
+
   void setName(String tempName) {
     nameTextField.text = tempName;
     isDataChanged = true;
@@ -85,14 +98,16 @@ class ProfileProvider extends CustomChangeNotifier {
     notifyListeners();
   }
 
-  void setProvince(String tempProvince) {
-    provinceTextField.text = tempProvince;
+  void setProvince(Province tempProvince) {
+    provinceTextField.text = tempProvince.province ?? '';
+    provinceId = tempProvince.provinceId ?? '0';
     isDataChanged = true;
+    getCity();
     notifyListeners();
   }
 
-  void setCity(String tempCity) {
-    cityTextField.text = tempCity;
+  void setCity(City tempCity) {
+    cityTextField.text = '${tempCity.type} ${tempCity.cityName}';
     isDataChanged = true;
     notifyListeners();
   }
@@ -128,7 +143,7 @@ class ProfileProvider extends CustomChangeNotifier {
       AuthenticationService.updatePassword(
           newPasswordTextField.text, initEmail, passwordTextField.text);
     }
-    print(provinceTextField.text);
+
     FirestoreService.createOrUpdateUser(
       _userId,
       email: emailTextField.text,
