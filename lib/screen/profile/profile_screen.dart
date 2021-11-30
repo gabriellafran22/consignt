@@ -41,18 +41,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
               style: titleTextWhite,
             ),
             actions: [
-              IconButton(
-                icon: const FaIcon(FontAwesomeIcons.check),
-                onPressed: () {
-                  provider.updateData();
-                  showSnackBar(context, 'Data Updated');
-                  inject<Navigate>().pop();
-                  inject<Navigate>().navigateTo(
-                    ScreenConst.init,
-                    popPrevious: true,
-                  );
-                },
-              ),
+              provider.isDataChanged
+                  ? IconButton(
+                      icon: const FaIcon(FontAwesomeIcons.check),
+                      onPressed: () {
+                        provider.updateData();
+                        showSnackBar(context, 'Data Updated');
+                        inject<Navigate>().pop();
+                        inject<Navigate>().navigateTo(
+                          ScreenConst.init,
+                          popPrevious: true,
+                        );
+                      },
+                    )
+                  : const SizedBox(),
             ],
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

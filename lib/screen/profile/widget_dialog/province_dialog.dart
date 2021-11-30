@@ -29,8 +29,8 @@ void provinceDialog(BuildContext context, ProfileProvider provider) {
                       title: Text(provinceName),
                       onTap: () {
                         showSnackBar(context,
-                            'Province changed to: ${provinceName ?? ''}');
-                        provider.setProvince(provinceName ?? '');
+                            'Province changed to: $provinceName');
+                        provider.setProvince(provinceName);
                         inject<Navigate>().pop();
                       },
                     );

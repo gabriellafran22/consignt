@@ -1,3 +1,4 @@
+import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
@@ -43,15 +44,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           color: Colors.blueGrey,
                           child: Row(
                             children: [
-                              CircleAvatar(
-                                backgroundImage: user.profilePicture == ''
-                                    ? const AssetImage(
-                                  'assets/consignt_logo.jpg',
-                                )
-                                    : NetworkImage(user.profilePicture ?? '')
-                                as ImageProvider,
-                                radius: 40,
-                              ),
+                              user.profilePicture == ''
+                                  ? Container(
+                                      width: 80,
+                                      height: 80,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: darkGrey,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '${user.name?.substring(0, 1)}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 40,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                        user.profilePicture ?? '',
+                                      ),
+                                      radius: 40,
+                                    ),
                               const SizedBox(
                                 width: 10,
                               ),
