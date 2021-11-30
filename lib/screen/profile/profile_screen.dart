@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: const FaIcon(FontAwesomeIcons.check),
                 onPressed: () {
                   provider.updateData();
-                  showSnackbar(context, 'Data Updated');
+                  showSnackBar(context, 'Data Updated');
                   inject<Navigate>().pop();
                 },
               ),

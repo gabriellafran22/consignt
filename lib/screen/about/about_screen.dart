@@ -1,3 +1,4 @@
+import 'package:consignt/common/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,10 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About'),
+        title: Text(
+          'About',
+          style: titleTextWhite,
+        ),
       ),
       body: Center(
         child: Padding(
