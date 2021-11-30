@@ -4,7 +4,7 @@ import 'package:consignt/screen/add_edit_product/add_edit_product_screen.dart';
 import 'package:consignt/screen/detail_product/detail_product_screen.dart';
 import 'package:consignt/screen/favorite/favorite_screen.dart';
 import 'package:consignt/screen/home/home_screen.dart';
-import 'package:consignt/screen/init_screen.dart';
+import 'package:consignt/screen/init/init_screen.dart';
 import 'package:consignt/screen/login/login_screen.dart';
 import 'package:consignt/screen/my_store/my_store_screen.dart';
 import 'package:consignt/screen/profile/profile_screen.dart';

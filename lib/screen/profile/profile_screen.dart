@@ -1,6 +1,7 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/snackbar.dart';
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/di.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
@@ -45,6 +46,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   provider.updateData();
                   showSnackbar(context, 'Data Updated');
                   inject<Navigate>().pop();
+                  inject<Navigate>().navigateTo(
+                    ScreenConst.init,
+                    popPrevious: true,
+                  );
                 },
               ),
             ],

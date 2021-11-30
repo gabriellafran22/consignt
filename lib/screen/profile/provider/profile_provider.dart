@@ -109,7 +109,7 @@ class ProfileProvider extends ChangeNotifier {
       phoneNumber: phoneNumberTextField.text,
       province: provinceTextField.text,
       city: cityTextField.text,
-      profilePicture: 'https://via.placeholder.com/150',
+      profilePicture: '',
       isSeller: false,
     );
 
@@ -120,7 +120,7 @@ class ProfileProvider extends ChangeNotifier {
       phoneNumber: phoneNumberTextField.text,
       province: provinceTextField.text,
       city: cityTextField.text,
-      profilePicture: 'https://via.placeholder.com/150',
+      profilePicture: '',
       isSeller: false,
       createdUpdatedAt: DateTime.now().toIso8601String(),
     );

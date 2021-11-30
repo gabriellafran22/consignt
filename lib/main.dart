@@ -2,6 +2,7 @@ import 'package:consignt/core/network/service/firebase/authentication_service.da
 import 'package:consignt/di.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
+import 'package:consignt/screen/init/provider/init_provider.dart';
 import 'package:consignt/screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        ChangeNotifierProvider(create: (_) => InitProvider()),
       ],
       child: StreamProvider.value(
         initialData: null,
