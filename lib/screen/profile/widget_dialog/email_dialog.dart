@@ -31,7 +31,7 @@ void checkPasswordInEmailDialog(
                 inject<Navigate>().pop();
                 _emailDialog(context, provider);
               } else {
-                showSnackbar(context, 'Wrong Password');
+                showSnackBar(context, 'Wrong Password');
               }
             },
             child: const Text('Continue'),

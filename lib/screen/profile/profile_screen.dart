@@ -10,6 +10,7 @@ import 'package:consignt/screen/profile/widget_dialog/email_dialog.dart';
 import 'package:consignt/screen/profile/widget_dialog/name_dialog.dart';
 import 'package:consignt/screen/profile/widget_dialog/password_dialog.dart';
 import 'package:consignt/screen/profile/widget_dialog/phone_number_dialog.dart';
+import 'package:consignt/screen/profile/widget_dialog/province_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -44,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: const FaIcon(FontAwesomeIcons.check),
                 onPressed: () {
                   provider.updateData();
-                  showSnackbar(context, 'Data Updated');
+                  showSnackBar(context, 'Data Updated');
                   inject<Navigate>().pop();
                   inject<Navigate>().navigateTo(
                     ScreenConst.init,
@@ -134,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   'Province',
                   provider.provinceTextField.text,
                   () {
-                    //TODO: MUNCULIN POP UP YG ISINYA PROVINCE DARI API
+                    provinceDialog(context, provider);
                   },
                 ),
                 _listTile(
