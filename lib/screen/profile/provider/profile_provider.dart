@@ -31,6 +31,7 @@ class ProfileProvider extends CustomChangeNotifier {
   late String _userId;
   String profilePictureUrl = '';
   String initEmail = '';
+  bool isSeller = false;
   bool changeEmail = false;
   bool changePassword = false;
   bool isDataChanged = false;
@@ -50,6 +51,7 @@ class ProfileProvider extends CustomChangeNotifier {
     provinceTextField.text = user.province!;
     cityTextField.text = user.city!;
     profilePictureUrl = user.profilePicture!;
+    isSeller = user.isSeller!;
 
     initEmail = user.email!;
     notifyListeners();
@@ -158,7 +160,7 @@ class ProfileProvider extends CustomChangeNotifier {
       province: provinceTextField.text,
       city: cityTextField.text,
       profilePicture: profilePictureUrl,
-      isSeller: false,
+      isSeller: isSeller,
     );
 
     UserModel user = UserModel(
@@ -169,7 +171,7 @@ class ProfileProvider extends CustomChangeNotifier {
       province: provinceTextField.text,
       city: cityTextField.text,
       profilePicture: profilePictureUrl,
-      isSeller: false,
+      isSeller: isSeller,
       createdUpdatedAt: DateTime.now().toIso8601String(),
     );
 

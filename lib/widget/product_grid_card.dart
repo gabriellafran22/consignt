@@ -1,94 +1,82 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:consignt/common/navigate.dart';
+import 'package:consignt/constant/screen_const.dart';
 import 'package:flutter/material.dart';
 
-Widget productGridCard() {
-  return InkWell(
-    onTap: () {},
-    child: Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              child: Image.asset(
-                'assets/consignt_logo.jpg',
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Product Name', overflow: TextOverflow.ellipsis, maxLines: 2,),
-                const Text('Product Price'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Expanded(
-                      child: Text('Product Seller Location', overflow: TextOverflow.ellipsis, maxLines: 1,),
-                    ),
-                    Icon(Icons.favorite_border),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
+import '../di.dart';
 
-///ini cuman buat test kalau ukuran gambar yang di input beda
-Widget productGridCard2() {
-  return InkWell(
-    onTap: () {},
-    child: Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
+dynamic productGridCard(AsyncSnapshot<QuerySnapshot> snapshot) {
+  return snapshot.data!.docs
+      .map((doc) => InkWell(
+            onTap: () {
+              //TODO: LEMPAR DATA ID PRODUCT
+              inject<Navigate>().navigateTo(ScreenConst.detailProduct);
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: Image.asset(
-                'assets/consignt_logo_cropped.jpg',
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Product Name', maxLines: 2, overflow: TextOverflow.ellipsis,),
-                const Text('Product Price'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Expanded(
-                      child: Text('Product Seller Location', overflow: TextOverflow.ellipsis, maxLines: 1,),
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                      child: Image.network(
+                        doc['productPictureUrl'],
+                      ),
                     ),
-                    Icon(Icons.favorite_border),
-                  ],
-                )
-              ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 15,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          doc['productName'],
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          'Rp. ${doc['productPrice']}',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Icon(
+                              Icons.location_on_sharp,
+                              size: 16,
+                            ),
+                            Expanded(
+                              child: Text(
+                                '${doc['productProvince']}, ${doc['productCity']}',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    ),
-  );
+          ))
+      .toList();
 }

@@ -60,10 +60,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     backDialog(context, provider);
                   } else {
                     inject<Navigate>().pop();
-                    inject<Navigate>().navigateTo(
-                      ScreenConst.init,
-                      popPrevious: true,
-                    );
                   }
                 },
               ),
