@@ -46,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Center(
                               child: TextField(
                                 decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.only(top: 8),
                                   prefixIcon: Icon(Icons.search),
                                   hintText: 'Search a product',
                                   border: InputBorder.none,

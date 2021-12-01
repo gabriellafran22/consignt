@@ -151,7 +151,7 @@ class ProfileProvider extends CustomChangeNotifier {
       phoneNumber: phoneNumberTextField.text,
       province: provinceTextField.text,
       city: cityTextField.text,
-      profilePicture: '',
+      profilePicture: profilePictureUrl,
       isSeller: false,
     );
 
@@ -162,13 +162,19 @@ class ProfileProvider extends CustomChangeNotifier {
       phoneNumber: phoneNumberTextField.text,
       province: provinceTextField.text,
       city: cityTextField.text,
-      profilePicture: '',
+      profilePicture: profilePictureUrl,
       isSeller: false,
       createdUpdatedAt: DateTime.now().toIso8601String(),
     );
 
     preferencesHelper.setUser(user);
     _getUserData();
+  }
+
+  void setProfilePicture(String imagePath) {
+    profilePictureUrl = imagePath;
+    updateData();
+    notifyListeners();
   }
 
   @override
