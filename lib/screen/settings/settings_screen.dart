@@ -20,10 +20,9 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool store = true;
-
   @override
   Widget build(BuildContext context) {
+    UserModel dataUser = UserModel();
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -39,6 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         UserModel user = snapshot.data as UserModel;
+                        dataUser = user;
                         return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           color: Colors.blueGrey,
@@ -116,7 +116,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   inject<Navigate>().navigateTo(ScreenConst.profile);
                 },
               ),
-              store
+              dataUser.isSeller ?? false
                   ? _listTileFaIcon(
                       FontAwesomeIcons.store,
                       Colors.brown,
@@ -125,7 +125,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         inject<Navigate>().navigateTo(ScreenConst.myStore);
                       },
                     )
-                  : Container(),
+                  : _listTileFaIcon(
+                      FontAwesomeIcons.store,
+                      Colors.brown,
+                      'Create Store',
+                      () {
+                        inject<Navigate>().navigateTo(ScreenConst.createStore);
+                      },
+                    ),
               const Divider(
                 height: 10,
                 thickness: 10,

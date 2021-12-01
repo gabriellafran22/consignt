@@ -6,12 +6,13 @@ import 'package:consignt/screen/favorite/favorite_screen.dart';
 import 'package:consignt/screen/home/home_screen.dart';
 import 'package:consignt/screen/init/init_screen.dart';
 import 'package:consignt/screen/login/login_screen.dart';
-import 'package:consignt/screen/my_store/my_store_screen.dart';
 import 'package:consignt/screen/profile/profile_screen.dart';
 import 'package:consignt/screen/register/register_screen.dart';
 import 'package:consignt/screen/settings/settings_screen.dart';
 import 'package:consignt/screen/shipping/shipping_screen.dart';
 import 'package:consignt/screen/splash_screen.dart';
+import 'package:consignt/screen/store/create_store_screen.dart';
+import 'package:consignt/screen/store/my_store_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,12 +39,14 @@ Route routes(RouteSettings settings) {
       return buildRoute(settings, const ProfileScreen());
     case ScreenConst.myStore:
       return buildRoute(settings, const MyStoreScreen());
+    case ScreenConst.createStore:
+      return buildRoute(settings, const CreateStoreScreen());
     case ScreenConst.addEditProduct:
       return buildRoute(settings, const AddEditProductScreen());
-    case ScreenConst.about:
-      return buildRoute(settings, const AboutScreen());
     case ScreenConst.detailProduct:
       return buildRoute(settings, const DetailProductScreen());
+    case ScreenConst.about:
+      return buildRoute(settings, const AboutScreen());
     default:
       return buildRoute(settings, const SplashScreen());
   }
