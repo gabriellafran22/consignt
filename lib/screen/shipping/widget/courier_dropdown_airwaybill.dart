@@ -3,10 +3,10 @@ import 'package:consignt/screen/shipping/provider/shipping_provider.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
-class CourierDropdownAirwaybill extends StatelessWidget {
+class CourierDropdownAirwayBill extends StatelessWidget {
   final ShippingProvider provider;
 
-  const CourierDropdownAirwaybill({Key? key, required this.provider})
+  const CourierDropdownAirwayBill({Key? key, required this.provider})
       : super(key: key);
 
   @override

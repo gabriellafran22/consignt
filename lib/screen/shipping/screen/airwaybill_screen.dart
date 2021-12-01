@@ -29,7 +29,7 @@ class AirwayBillScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              CourierDropdownAirwaybill(
+              CourierDropdownAirwayBill(
                 provider: provider,
               ),
               const SizedBox(

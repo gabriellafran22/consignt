@@ -1,8 +1,4 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:path/path.dart';
 
 class FirestoreUserService {
   static CollectionReference userCollection =
@@ -32,15 +28,5 @@ class FirestoreUserService {
 
   static Future<DocumentSnapshot> getUser(String? id) async {
     return await userCollection.doc(id).get();
-  }
-
-  static Future<String> uploadImage(File imageFile) async {
-    String fileName = basename(imageFile.path);
-
-    Reference reference = FirebaseStorage.instance.ref().child(fileName);
-    UploadTask task = reference.putFile(imageFile);
-    TaskSnapshot snapshot = await task;
-
-    return await snapshot.ref.getDownloadURL();
   }
 }

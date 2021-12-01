@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:consignt/core/network/service/firebase/firestore/firestore_user_service.dart';
+import 'package:consignt/core/network/service/firebase/firestore/upload_image.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,8 +20,8 @@ class _ProfilePictureState extends State<ProfilePicture> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        XFile? file = await getImage();
-        String imagePath = await FirestoreUserService.uploadImage(
+        XFile? file = await getImageFromGallery();
+        String imagePath = await uploadImage(
           File(file?.path ?? ''),
         );
         widget.provider.setProfilePicture(imagePath);
@@ -53,49 +53,45 @@ class _ProfilePictureState extends State<ProfilePicture> {
           : Align(
               alignment: Alignment.center,
               child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.grey,
-                  ),
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Text(
-                          widget.provider.nameTextField.text.substring(0, 1),
-                          style: const TextStyle(
+                width: 100,
+                height: 100,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey,
+                ),
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Text(
+                        widget.provider.nameTextField.text.substring(0, 1),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.indigo,
+                        ),
+                        child: const Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.camera,
+                            size: 18,
                             color: Colors.white,
-                            fontSize: 40,
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Container(
-                          width: 35,
-                          height: 35,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.indigo,
-                          ),
-                          child: const Center(
-                            child: FaIcon(
-                              FontAwesomeIcons.camera,
-                              size: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ),
     );
   }
-}
-
-Future<XFile?> getImage() async {
-  final ImagePicker _picker = ImagePicker();
-  return await _picker.pickImage(source: ImageSource.gallery);
 }

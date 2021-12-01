@@ -15,11 +15,11 @@ class CreateStoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => CreateStoreProvider(
-          preferencesHelper: PreferencesHelper(
-            sharedPreferences: SharedPreferences.getInstance(),
-          ),
+      create: (_) => CreateStoreProvider(
+        preferencesHelper: PreferencesHelper(
+          sharedPreferences: SharedPreferences.getInstance(),
         ),
+      ),
       child: Consumer<CreateStoreProvider>(
         builder: (context, provider, child) {
           return Scaffold(
@@ -91,4 +91,3 @@ void confirmOpenStore(BuildContext context, CreateStoreProvider provider) {
     },
   );
 }
-

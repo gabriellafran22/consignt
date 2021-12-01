@@ -1,11 +1,10 @@
 import 'package:consignt/common/navigate.dart';
-import 'package:consignt/common/snackbar.dart';
-import 'package:consignt/screen/profile/provider/profile_provider.dart';
+import 'package:consignt/screen/add_edit_product/provider/add_edit_product_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../di.dart';
 
-void cityDialog(BuildContext context, ProfileProvider provider) {
+void productCityDialog(BuildContext context, AddEditProductProvider provider) {
   showDialog(
     context: context,
     builder: (context) {
@@ -36,11 +35,7 @@ void cityDialog(BuildContext context, ProfileProvider provider) {
                         return ListTile(
                           title: Text('$cityType $cityName'),
                           onTap: () {
-                            showSnackBar(
-                              context,
-                              'City changed to: $cityType $cityName',
-                            );
-                            provider.setCity(city);
+                            provider.setProductCity(city);
                             inject<Navigate>().pop();
                           },
                         );
