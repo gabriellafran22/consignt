@@ -14,32 +14,39 @@ void cityDialog(BuildContext context, ProfileProvider provider) {
         content: SizedBox(
           height: 300,
           width: 200,
-          child: provider.city.data == null
+          child: provider.provinceId == '0'
               ? const Center(
                   child: Text(
-                      'City data is still loading, please close and open it again'),
+                    'Please click a province first',
+                  ),
                 )
-              : ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: provider.city.data!.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    var city = provider.city.data![index];
-                    String cityType = city.type ?? '';
-                    String cityName = city.cityName ?? '';
-                    return ListTile(
-                      selectedTileColor: Colors.redAccent,
-                      title: Text('$cityType $cityName'),
-                      onTap: () {
-                        showSnackBar(
-                          context,
-                          'City changed to: $cityType $cityName',
+              : provider.city.data == null
+                  ? const Center(
+                      child: Text(
+                        'City data is still loading, please close and open it again',
+                      ),
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: provider.city.data!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        var city = provider.city.data![index];
+                        String cityType = city.type ?? '';
+                        String cityName = city.cityName ?? '';
+                        return ListTile(
+                          selectedTileColor: Colors.redAccent,
+                          title: Text('$cityType $cityName'),
+                          onTap: () {
+                            showSnackBar(
+                              context,
+                              'City changed to: $cityType $cityName',
+                            );
+                            provider.setCity(city);
+                            inject<Navigate>().pop();
+                          },
                         );
-                        provider.setCity(city);
-                        inject<Navigate>().pop();
                       },
-                    );
-                  },
-                ),
+                    ),
         ),
       );
     },

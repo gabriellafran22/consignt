@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:consignt/common/colors.dart';
 import 'package:consignt/core/network/service/firebase/firestore_service.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilePicture extends StatefulWidget {
@@ -32,59 +32,64 @@ class _ProfilePictureState extends State<ProfilePicture> {
           ? CircleAvatar(
               backgroundImage: NetworkImage(widget.provider.profilePictureUrl),
               radius: 50,
-              child: const Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    'Change',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  width: 35,
+                  height: 35,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.indigo,
+                  ),
+                  child: const Center(
+                    child: FaIcon(
+                      FontAwesomeIcons.camera,
+                      size: 18,
                     ),
                   ),
                 ),
               ),
             )
-          : Stack(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: darkGrey,
-                    ),
-                    child: Center(
-                      child: Text(
-                        widget.provider.nameTextField.text.substring(0, 1),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
+          : Align(
+              alignment: Alignment.center,
+              child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey,
+                  ),
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Text(
+                          widget.provider.nameTextField.text.substring(0, 1),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                const Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 35),
-                    child: Text(
-                      'Change',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                          width: 35,
+                          height: 35,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.indigo,
+                          ),
+                          child: const Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.camera,
+                              size: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ],
+                    ],
+                  )),
             ),
     );
   }

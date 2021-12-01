@@ -1,4 +1,3 @@
-import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
@@ -50,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       height: 80,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: darkGrey,
+                                        color: Colors.grey,
                                       ),
                                       child: Center(
                                         child: Text(
