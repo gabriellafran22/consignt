@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:consignt/core/network/service/firebase/firestore_service.dart';
+import 'package:consignt/core/network/service/firebase/firestore/firestore_user_service.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,7 +21,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
     return InkWell(
       onTap: () async {
         XFile? file = await getImage();
-        String imagePath = await FirestoreService.uploadImage(
+        String imagePath = await FirestoreUserService.uploadImage(
           File(file?.path ?? ''),
         );
         widget.provider.setProfilePicture(imagePath);

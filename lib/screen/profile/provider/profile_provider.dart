@@ -6,7 +6,7 @@ import 'package:consignt/core/network/response/city_response.dart';
 import 'package:consignt/core/network/response/province_response.dart';
 import 'package:consignt/core/network/service/api/raja_ongkir_service.dart';
 import 'package:consignt/core/network/service/firebase/authentication_service.dart';
-import 'package:consignt/core/network/service/firebase/firestore_service.dart';
+import 'package:consignt/core/network/service/firebase/firestore/firestore_user_service.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:consignt/core/custom_change_notifier.dart';
@@ -79,6 +79,12 @@ class ProfileProvider extends CustomChangeNotifier {
     );
   }
 
+  void setProfilePicture(String imagePath) {
+    profilePictureUrl = imagePath;
+    isDataChanged = true;
+    notifyListeners();
+  }
+
   void setName(String tempName) {
     nameTextField.text = tempName;
     isDataChanged = true;
@@ -144,7 +150,7 @@ class ProfileProvider extends CustomChangeNotifier {
           newPasswordTextField.text, initEmail, passwordTextField.text);
     }
 
-    FirestoreService.createOrUpdateUser(
+    FirestoreUserService.createOrUpdateUser(
       _userId,
       email: emailTextField.text,
       name: nameTextField.text,
@@ -169,12 +175,6 @@ class ProfileProvider extends CustomChangeNotifier {
 
     preferencesHelper.setUser(user);
     _getUserData();
-  }
-
-  void setProfilePicture(String imagePath) {
-    profilePictureUrl = imagePath;
-    updateData();
-    notifyListeners();
   }
 
   @override

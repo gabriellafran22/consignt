@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/utils.dart';
 import 'package:consignt/core/model/user.dart';
-import 'package:consignt/core/network/service/firebase/firestore_service.dart';
+import 'package:consignt/core/network/service/firebase/firestore/firestore_user_service.dart';
 import 'package:consignt/screen/login/provider/login_provider.dart';
 import 'package:consignt/screen/register/provider/register_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +24,7 @@ class AuthenticationService {
           .createUserWithEmailAndPassword(email: email, password: password);
       User? user = userCredential.user;
 
-      FirestoreService.createOrUpdateUser(
+      FirestoreUserService.createOrUpdateUser(
         user?.uid,
         email: user?.email,
         name: name,
@@ -52,7 +52,7 @@ class AuthenticationService {
       User? user = userCredential.user;
 
       DocumentSnapshot? userSnapshot =
-          await FirestoreService.getUser(user?.uid);
+          await FirestoreUserService.getUser(user?.uid);
 
       Map<String, dynamic> userData =
           userSnapshot.data() as Map<String, dynamic>;
@@ -84,7 +84,7 @@ class AuthenticationService {
       User? user = userCredential.user;
       user!.updateEmail(newEmail);
 
-      DocumentSnapshot? userSnapshot = await FirestoreService.getUser(user.uid);
+      DocumentSnapshot? userSnapshot = await FirestoreUserService.getUser(user.uid);
 
       Map<String, dynamic> userData =
           userSnapshot.data() as Map<String, dynamic>;
