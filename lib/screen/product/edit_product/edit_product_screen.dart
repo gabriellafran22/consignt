@@ -4,18 +4,18 @@ import 'package:consignt/common/snackbar.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/common/validation.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
-import 'package:consignt/screen/edit_product/widget/edit_picture_dialog.dart';
-import 'package:consignt/screen/edit_product/widget_dialog/edit_category_dialog.dart';
-import 'package:consignt/screen/edit_product/widget_dialog/edit_delete_dialog.dart';
-import 'package:consignt/screen/edit_product/widget_dialog/edit_product_city_dialog.dart';
-import 'package:consignt/screen/edit_product/widget_dialog/edit_product_province_dialog.dart';
+import 'package:consignt/screen/product/edit_product/widget/edit_picture_dialog.dart';
+import 'package:consignt/screen/product/edit_product/widget_dialog/edit_category_dialog.dart';
+import 'package:consignt/screen/product/edit_product/widget_dialog/edit_delete_dialog.dart';
+import 'package:consignt/screen/product/edit_product/widget_dialog/edit_product_city_dialog.dart';
+import 'package:consignt/screen/product/edit_product/widget_dialog/edit_product_province_dialog.dart';
 import 'package:consignt/widget/back_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../di.dart';
+import '../../../di.dart';
 import 'edit_product_provider/edit_product_provider.dart';
 
 class EditProductScreen extends StatefulWidget {

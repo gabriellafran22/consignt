@@ -1,8 +1,8 @@
 import 'package:consignt/common/navigate.dart';
-import 'package:consignt/screen/add_product/provider/add_product_provider.dart';
+import 'package:consignt/screen/product/add_product/provider/add_product_provider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../di.dart';
+import '../../../../di.dart';
 
 void addProductProvinceDialog(
     BuildContext context, AddProductProvider provider) {

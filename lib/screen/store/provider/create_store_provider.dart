@@ -3,7 +3,7 @@ import 'package:consignt/core/network/service/firebase/firestore/firestore_user_
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:flutter/cupertino.dart';
 
-class CreateStoreProvider extends ChangeNotifier{
+class CreateStoreProvider extends ChangeNotifier {
   PreferencesHelper preferencesHelper;
   String _userId = '';
   String _name = '';
@@ -29,15 +29,10 @@ class CreateStoreProvider extends ChangeNotifier{
     _profilePictureUrl = user.profilePicture!;
     _isSeller = user.isSeller!;
 
-    print('------- data ---------');
-    print(_userId);
-    print(_province);
-    print(_isSeller);
-
     notifyListeners();
   }
 
-  void setIsSeller(bool tempIsSeller){
+  void setIsSeller(bool tempIsSeller) {
     _isSeller = tempIsSeller;
     updateData();
     notifyListeners();
@@ -70,5 +65,4 @@ class CreateStoreProvider extends ChangeNotifier{
     preferencesHelper.setUser(user);
     _getUserInformation();
   }
-
 }

@@ -3,17 +3,17 @@ import 'package:consignt/common/snackbar.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/common/validation.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
-import 'package:consignt/screen/add_product/provider/add_product_provider.dart';
-import 'package:consignt/screen/add_product/widget/add_product_picture.dart';
-import 'package:consignt/screen/add_product/widget_dialog/add_category_dialog.dart';
-import 'package:consignt/screen/add_product/widget_dialog/add_product_city_dialog.dart';
-import 'package:consignt/screen/add_product/widget_dialog/add_product_province_dialog.dart';
+import 'package:consignt/screen/product/add_product/provider/add_product_provider.dart';
+import 'package:consignt/screen/product/add_product/widget/add_product_picture.dart';
+import 'package:consignt/screen/product/add_product/widget_dialog/add_category_dialog.dart';
+import 'package:consignt/screen/product/add_product/widget_dialog/add_product_city_dialog.dart';
+import 'package:consignt/screen/product/add_product/widget_dialog/add_product_province_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../di.dart';
+import '../../../di.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({Key? key}) : super(key: key);

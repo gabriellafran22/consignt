@@ -115,14 +115,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   inject<Navigate>().navigateTo(ScreenConst.profile);
                 },
               ),
-              //TODO: ANEH BAGIAN INI MALAH SLALU KE ELSE
+              //TODO: bug isSeller
               dataUser.isSeller == true
                   ? _listTileFaIcon(
                       FontAwesomeIcons.store,
                       Colors.brown,
                       'Create Store',
                       () {
-                        print('check ${dataUser.isSeller}');
                         inject<Navigate>().navigateTo(ScreenConst.createStore);
                       },
                     )

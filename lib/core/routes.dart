@@ -1,12 +1,12 @@
 import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/screen/about/about_screen.dart';
-import 'package:consignt/screen/add_product/add_product_screen.dart';
-import 'package:consignt/screen/detail_product/detail_product_screen.dart';
-import 'package:consignt/screen/edit_product/edit_product_screen.dart';
 import 'package:consignt/screen/favorite/favorite_screen.dart';
 import 'package:consignt/screen/home/home_screen.dart';
 import 'package:consignt/screen/init/init_screen.dart';
 import 'package:consignt/screen/login/login_screen.dart';
+import 'package:consignt/screen/product/add_product/add_product_screen.dart';
+import 'package:consignt/screen/product/detail_product/detail_product_screen.dart';
+import 'package:consignt/screen/product/edit_product/edit_product_screen.dart';
 import 'package:consignt/screen/profile/profile_screen.dart';
 import 'package:consignt/screen/register/register_screen.dart';
 import 'package:consignt/screen/settings/settings_screen.dart';

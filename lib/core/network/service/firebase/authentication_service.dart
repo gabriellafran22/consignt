@@ -84,7 +84,8 @@ class AuthenticationService {
       User? user = userCredential.user;
       user!.updateEmail(newEmail);
 
-      DocumentSnapshot? userSnapshot = await FirestoreUserService.getUser(user.uid);
+      DocumentSnapshot? userSnapshot =
+          await FirestoreUserService.getUser(user.uid);
 
       Map<String, dynamic> userData =
           userSnapshot.data() as Map<String, dynamic>;
