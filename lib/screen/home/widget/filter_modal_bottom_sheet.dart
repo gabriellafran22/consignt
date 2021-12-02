@@ -88,13 +88,7 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                     width: double.infinity,
                     child: ElevatedButton(
                       child: const Text('Apply Filter'),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                      ),
+                      style: fullyRoundedButton(),
                       onPressed: () {
                         //TODO: APPLY THE FILTER BASED ON DATABASE
                         inject<Navigate>().pop();

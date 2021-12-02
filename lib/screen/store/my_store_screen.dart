@@ -4,6 +4,7 @@ import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/screen/store/provider/my_store_provider.dart';
+import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -44,14 +45,16 @@ class _MyStoreScreenState extends State<MyStoreScreen> {
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshots) {
                 if (snapshots.hasData) {
+                  if (snapshots.data!.docs.isEmpty) {
+                    return noProductsAdded();
+                  }
                   return ListView(
                     padding: EdgeInsets.zero,
                     children: _myProductsList(snapshots),
                   );
                 }
-                return const Center(
-                  child: Text('You Have No Products'),
-                );
+
+                return Container();
               },
             );
           },
@@ -60,8 +63,7 @@ class _MyStoreScreenState extends State<MyStoreScreen> {
       floatingActionButton: FloatingActionButton(
         child: const FaIcon(FontAwesomeIcons.plus),
         onPressed: () {
-          //TODO: ADD PRODUCT (GA BUTUH PARAMETER DATA DARI PRODUCT)
-          inject<Navigate>().navigateTo(ScreenConst.addEditProduct);
+          inject<Navigate>().navigateTo(ScreenConst.addProduct);
         },
       ),
     );
@@ -72,8 +74,8 @@ dynamic _myProductsList(AsyncSnapshot<QuerySnapshot> snapshot) {
   return snapshot.data!.docs
       .map((doc) => InkWell(
             onTap: () {
-              //TODO: LEMPAR DATA PRODUCT ID KE ADD EDIT PRODUCT
-              inject<Navigate>().navigateTo(ScreenConst.addEditProduct);
+              //TODO: LEMPAR DATA PRODUCT ID KE EDIT PRODUCT
+              inject<Navigate>().navigateTo(ScreenConst.editProduct);
             },
             child: Card(
               shape: RoundedRectangleBorder(

@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../../../di.dart';
 
-class AddEditProductProvider extends CustomChangeNotifier {
+class AddProductProvider extends CustomChangeNotifier {
   PreferencesHelper preferencesHelper;
   TextEditingController productNameController = TextEditingController();
   TextEditingController productDescController = TextEditingController();
@@ -25,7 +25,7 @@ class AddEditProductProvider extends CustomChangeNotifier {
   String productPictureUrl = '';
   String provinceId = '0';
 
-  AddEditProductProvider({required this.preferencesHelper}) {
+  AddProductProvider({required this.preferencesHelper}) {
     _getUserId();
     getProvince();
   }
@@ -35,12 +35,23 @@ class AddEditProductProvider extends CustomChangeNotifier {
   Async<List<Province>> province = uninitialized<List<Province>>();
   Async<List<City>> city = uninitialized<List<City>>();
 
+  Future<bool> saveForm() async {
+    final bool isValid = formKey.currentState!.validate();
+    if (isValid &&
+        productPictureUrl.isNotEmpty &&
+        productCategory.isNotEmpty &&
+        productProvince.isNotEmpty &&
+        productCity.isNotEmpty) {
+      addProduct();
+    }
+    return false;
+  }
+
   Future<void> _getUserId() async {
     final user = await preferencesHelper.user;
     _userId = user!.id!;
     notifyListeners();
   }
-
 
   Future getProvince() async {
     customApi(
@@ -88,8 +99,8 @@ class AddEditProductProvider extends CustomChangeNotifier {
     notifyListeners();
   }
 
-  void addOrUpdateProduct() {
-    //TODO: PICTURE BELUM, product id blm nemu carane auto generate/increment (udah bisa edit & add)
+  void addProduct() {
+    //TODO: product id blm nemu carane auto generate/increment (udah bisa edit & add)
     FirestoreProductService.createOrUpdateProduct(
         productId: 'D3NMcZTUw3hfw9Z2lFv8',
         userId: _userId,
@@ -99,8 +110,7 @@ class AddEditProductProvider extends CustomChangeNotifier {
         productCategory: productCategory,
         productPicture: productPictureUrl,
         productProvince: productProvince,
-        productCity: productCity
-    );
+        productCity: productCity);
   }
 
   @override

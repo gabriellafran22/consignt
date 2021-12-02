@@ -1,21 +1,22 @@
 import 'dart:io';
 
 import 'package:consignt/core/network/service/firebase/firestore/upload_image.dart';
-import 'package:consignt/screen/add_edit_product/provider/add_edit_product_provider.dart';
+import 'package:consignt/screen/edit_product/edit_product_provider/edit_product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProductPicture extends StatefulWidget {
-  const ProductPicture({Key? key, required this.provider}) : super(key: key);
+class EditProductPicture extends StatefulWidget {
+  const EditProductPicture({Key? key, required this.provider})
+      : super(key: key);
 
-  final AddEditProductProvider provider;
+  final EditProductProvider provider;
 
   @override
-  State<ProductPicture> createState() => _ProductPictureState();
+  State<EditProductPicture> createState() => _EditProductPictureState();
 }
 
-class _ProductPictureState extends State<ProductPicture> {
+class _EditProductPictureState extends State<EditProductPicture> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -88,9 +89,4 @@ class _ProductPictureState extends State<ProductPicture> {
       ),
     );
   }
-}
-
-Future<XFile?> getImage() async {
-  final ImagePicker _picker = ImagePicker();
-  return await _picker.pickImage(source: ImageSource.gallery);
 }

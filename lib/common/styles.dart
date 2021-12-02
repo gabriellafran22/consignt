@@ -22,6 +22,31 @@ TextStyle textFormFieldStyle = const TextStyle(
   fontSize: 14,
 );
 
+
+TextStyle titleTextWhite = const TextStyle(
+  color: Colors.white,
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle titleText20 = const TextStyle(
+  color: Colors.black,
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle titleText16 = const TextStyle(
+  color: Colors.black,
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle titleText14 = const TextStyle(
+  color: Colors.black,
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+);
+
 InputDecoration textFormFieldDecoration(String hintText) => InputDecoration(
       fillColor: Colors.white,
       filled: true,
@@ -49,26 +74,10 @@ InputDecoration textFormFieldDecorationWithLabel(String labelText) =>
       ),
     );
 
-TextStyle titleTextWhite = const TextStyle(
-  color: Colors.white,
-  fontSize: 16,
-  fontWeight: FontWeight.bold,
-);
-
-TextStyle titleText20 = const TextStyle(
-  color: Colors.black,
-  fontSize: 20,
-  fontWeight: FontWeight.bold,
-);
-
-TextStyle titleText16 = const TextStyle(
-  color: Colors.black,
-  fontSize: 16,
-  fontWeight: FontWeight.bold,
-);
-
-TextStyle titleText14 = const TextStyle(
-  color: Colors.black,
-  fontSize: 14,
-  fontWeight: FontWeight.bold,
+ButtonStyle fullyRoundedButton() => ButtonStyle(
+  shape: MaterialStateProperty.all(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+  ),
 );

@@ -1,54 +1,57 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/snackbar.dart';
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/common/validation.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
-import 'package:consignt/screen/add_edit_product/provider/add_edit_product_provider.dart';
-import 'package:consignt/screen/add_edit_product/widget/product_picture.dart';
-import 'package:consignt/screen/add_edit_product/widget_dialog/category_dialog.dart';
-import 'package:consignt/screen/add_edit_product/widget_dialog/city_product_dialog.dart';
-import 'package:consignt/screen/add_edit_product/widget_dialog/city_province_dialog.dart';
+import 'package:consignt/screen/edit_product/widget/edit_picture_dialog.dart';
+import 'package:consignt/screen/edit_product/widget_dialog/edit_category_dialog.dart';
+import 'package:consignt/screen/edit_product/widget_dialog/edit_delete_dialog.dart';
+import 'package:consignt/screen/edit_product/widget_dialog/edit_product_city_dialog.dart';
+import 'package:consignt/screen/edit_product/widget_dialog/edit_product_province_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../di.dart';
+import 'edit_product_provider/edit_product_provider.dart';
 
-class AddEditProductScreen extends StatefulWidget {
-  const AddEditProductScreen({Key? key}) : super(key: key);
+//TODO: EDIT BLM AMBIL DATA
+class EditProductScreen extends StatefulWidget {
+  const EditProductScreen({Key? key}) : super(key: key);
 
   @override
-  _AddEditProductScreenState createState() => _AddEditProductScreenState();
+  _EditProductScreenState createState() => _EditProductScreenState();
 }
 
-class _AddEditProductScreenState extends State<AddEditProductScreen> {
-  //TODO: KASIH CEK INI YANG MASUK TU EDIT (EDIT, FIELD" DI ISI SAMA DATA) ATAU ADD PRODUCT (ADD BLANK SEMUA)
-  bool isAddProduct = true;
-
+class _EditProductScreenState extends State<EditProductScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => AddEditProductProvider(
+      create: (_) => EditProductProvider(
         preferencesHelper: PreferencesHelper(
           sharedPreferences: SharedPreferences.getInstance(),
         ),
       ),
-      child: Consumer<AddEditProductProvider>(
+      child: Consumer<EditProductProvider>(
         builder: (context, provider, child) {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                isAddProduct ? 'Add Product' : 'Edit Product',
+                'Edit Product',
                 style: titleTextWhite,
               ),
               actions: [
                 IconButton(
                   icon: const FaIcon(FontAwesomeIcons.check),
-                  onPressed: () {
-                    //TODO: KALAU ADD PRODUCT BRARTI ADD, KALAU EDIT BRARTI EDIT
-                    provider.addOrUpdateProduct();
-                    inject<Navigate>().pop();
-                    showSnackBar(context, 'Your Product is added');
+                  onPressed: () async {
+                    if (await provider.saveForm()) {
+                      inject<Navigate>().pop();
+                      showSnackBar(
+                          context, 'Product Information has been Changed');
+                    } else {
+                      showSnackBar(context, 'All Fields Must be Filled');
+                    }
                   },
                 )
               ],
@@ -59,8 +62,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //TODO: CHECK DLU INI ADD APA EDIT, KALO ADD KLUARNYA INI, KALO EDIT YG KLUAR MIRIP YG D PROFILE PICTURE
-                    ProductPicture(provider: provider),
+                    EditProductPicture(provider: provider),
                     Container(
                       padding: const EdgeInsets.all(10),
                       child: Column(
@@ -68,6 +70,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                         children: [
                           const Text('Product Name'),
                           TextFormField(
+                            validator: (value) => isEmptyFieldValidation(value),
                             controller: provider.productNameController,
                             maxLength: 100,
                             decoration: const InputDecoration(
@@ -89,6 +92,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                         children: [
                           const Text('Product Description'),
                           TextFormField(
+                            validator: (value) => isEmptyFieldValidation(value),
                             controller: provider.productDescController,
                             keyboardType: TextInputType.multiline,
                             maxLines: null,
@@ -111,6 +115,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                         children: [
                           const Text('Price'),
                           TextFormField(
+                            validator: (value) => isEmptyFieldValidation(value),
                             controller: provider.productPriceController,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
@@ -141,7 +146,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                             trailing: const Icon(
                               Icons.arrow_forward_ios,
                             ),
-                            onTap: () => categoryDialog(context, provider),
+                            onTap: () => editCategoryDialog(context, provider),
                           ),
                         ],
                       ),
@@ -162,7 +167,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                                 : Text(provider.productProvince),
                             trailing: const Icon(Icons.arrow_forward_ios),
                             onTap: () =>
-                                productProvinceDialog(context, provider),
+                                editProductProvinceDialog(context, provider),
                           ),
                           provider.productProvince.isEmpty
                               ? Container()
@@ -172,14 +177,12 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                                       : Text(provider.productCity),
                                   trailing: const Icon(Icons.arrow_forward_ios),
                                   onTap: () =>
-                                      productCityDialog(context, provider),
+                                      editProductCityDialog(context, provider),
                                 ),
-                        ],
-                      ),
-                    ),
-                    isAddProduct
-                        ? Container()
-                        : Container(
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
                             padding: const EdgeInsets.all(10),
                             width: double.infinity,
                             child: ElevatedButton(
@@ -187,9 +190,13 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                                 'Delete Product',
                                 style: titleTextWhite,
                               ),
-                              onPressed: () => _showDialogDelete(context),
+                              style: fullyRoundedButton(),
+                              onPressed: () => showDialogDelete(context),
                             ),
                           ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -200,38 +207,3 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
     );
   }
 }
-
-void _showDialogDelete(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text(
-          'Delete Product',
-          style: titleText16,
-        ),
-        content: const Text(
-          'Are you sure, you want to delete this product?',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              inject<Navigate>().pop();
-            },
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              //TODO: DELETE PRODUCT
-              inject<Navigate>().pop();
-              inject<Navigate>().pop();
-            },
-            child: const Text('Delete Product'),
-          ),
-        ],
-      );
-    },
-  );
-}
-
-

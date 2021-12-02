@@ -65,13 +65,7 @@ class AirwayBillScreen extends StatelessWidget {
                     'Track Package',
                     style: titleTextWhite,
                   ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
+                  style: fullyRoundedButton(),
                   onPressed: () {
                     if (provider.checkAirwayBillForm()) {
                       provider.getAirwayBill();

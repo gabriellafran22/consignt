@@ -4,6 +4,7 @@ import 'package:consignt/screen/home/widget/filter_modal_bottom_sheet.dart';
 import 'package:consignt/screen/home/widget/sort_modal_bottom_sheet.dart';
 import 'package:consignt/widget/product_grid_card.dart';
 import 'package:consignt/widget/product_list_card.dart';
+import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -98,6 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshots) {
                 if (snapshots.hasData) {
+                  if(snapshots.data!.docs.isEmpty){
+                    return noProductsFound();
+                  }
                   return prefProvider.isListView
                       ? ListView(
                           padding: EdgeInsets.zero,

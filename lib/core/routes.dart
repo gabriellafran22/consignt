@@ -1,7 +1,8 @@
 import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/screen/about/about_screen.dart';
-import 'package:consignt/screen/add_edit_product/add_edit_product_screen.dart';
+import 'package:consignt/screen/add_product/add_product_screen.dart';
 import 'package:consignt/screen/detail_product/detail_product_screen.dart';
+import 'package:consignt/screen/edit_product/edit_product_screen.dart';
 import 'package:consignt/screen/favorite/favorite_screen.dart';
 import 'package:consignt/screen/home/home_screen.dart';
 import 'package:consignt/screen/init/init_screen.dart';
@@ -41,8 +42,10 @@ Route routes(RouteSettings settings) {
       return buildRoute(settings, const MyStoreScreen());
     case ScreenConst.createStore:
       return buildRoute(settings, const CreateStoreScreen());
-    case ScreenConst.addEditProduct:
-      return buildRoute(settings, const AddEditProductScreen());
+    case ScreenConst.addProduct:
+      return buildRoute(settings, const AddProductScreen());
+    case ScreenConst.editProduct:
+      return buildRoute(settings, EditProductScreen());
     case ScreenConst.detailProduct:
       return buildRoute(settings, const DetailProductScreen());
     case ScreenConst.about:

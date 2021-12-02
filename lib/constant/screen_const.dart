@@ -10,7 +10,8 @@ class ScreenConst {
   static const String profile = '/profile';
   static const String myStore = '/myStore';
   static const String createStore = '/createStore';
-  static const String addEditProduct = '/addEditProduct';
+  static const String addProduct = '/addProduct';
+  static const String editProduct = '/editProduct';
   static const String detailProduct = '/detail_product';
   static const String about = '/about';
 }

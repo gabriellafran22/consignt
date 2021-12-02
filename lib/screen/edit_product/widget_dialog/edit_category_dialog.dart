@@ -1,11 +1,11 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/constant/product_category_const.dart';
-import 'package:consignt/screen/add_edit_product/provider/add_edit_product_provider.dart';
+import 'package:consignt/screen/edit_product/edit_product_provider/edit_product_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../di.dart';
 
-void categoryDialog(BuildContext context, AddEditProductProvider provider) {
+void editCategoryDialog(BuildContext context, EditProductProvider provider) {
   showDialog(
     context: context,
     builder: (context) {

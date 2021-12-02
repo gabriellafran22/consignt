@@ -91,13 +91,7 @@ class ShippingCostScreen extends StatelessWidget {
                     'Check Price',
                     style: titleTextWhite,
                   ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
+                  style: fullyRoundedButton(),
                   onPressed: () {
                     if (provider.checkPriceForm()) {
                       provider.getCost();

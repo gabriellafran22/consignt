@@ -39,13 +39,7 @@ class CreateStoreScreen extends StatelessWidget {
                       'Open My Own Store',
                       style: titleTextWhite,
                     ),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
+                    style: fullyRoundedButton(),
                     onPressed: () {
                       confirmOpenStore(context, provider);
                     },
