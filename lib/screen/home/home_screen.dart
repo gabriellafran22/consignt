@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/home/widget/filter_modal_bottom_sheet.dart';
 import 'package:consignt/screen/home/widget/sort_modal_bottom_sheet.dart';
@@ -95,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             body: StreamBuilder(
               stream:
-                  FirebaseFirestore.instance.collection('products').snapshots(),
+                  FirestoreProductService.getAllProducts(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshots) {
                 if (snapshots.hasData) {

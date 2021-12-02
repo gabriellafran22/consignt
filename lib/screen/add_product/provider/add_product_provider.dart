@@ -106,7 +106,7 @@ class AddProductProvider extends CustomChangeNotifier {
         userId: _userId,
         productName: productNameController.text,
         productDescription: productDescController.text,
-        productPrice: productPriceController.text,
+        productPrice: int.parse(productPriceController.text),
         productCategory: productCategory,
         productPicture: productPictureUrl,
         productProvince: productProvince,

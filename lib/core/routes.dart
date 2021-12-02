@@ -18,7 +18,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Route routes(RouteSettings settings) {
-  // var args = (settings.arguments ?? {}) as Map;
+  var args = (settings.arguments ?? {}) as Map;
   switch (settings.name) {
     case '/':
       return buildRoute(settings, const SplashScreen());
@@ -45,9 +45,14 @@ Route routes(RouteSettings settings) {
     case ScreenConst.addProduct:
       return buildRoute(settings, const AddProductScreen());
     case ScreenConst.editProduct:
-      return buildRoute(settings, EditProductScreen());
+      return buildRoute(settings, const EditProductScreen());
     case ScreenConst.detailProduct:
-      return buildRoute(settings, const DetailProductScreen());
+      return buildRoute(
+        settings,
+        DetailProductScreen(
+          productId: args['productId'],
+        ),
+      );
     case ScreenConst.about:
       return buildRoute(settings, const AboutScreen());
     default:

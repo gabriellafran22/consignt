@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/navigate.dart';
+import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/widget/price_format.dart';
 import 'package:flutter/material.dart';
 
 import '../di.dart';
@@ -9,7 +11,12 @@ dynamic productListCard(AsyncSnapshot<QuerySnapshot> snapshot) {
   return snapshot.data!.docs
       .map((doc) => InkWell(
             onTap: () {
-              inject<Navigate>().navigateTo(ScreenConst.detailProduct);
+              inject<Navigate>().navigateTo(
+                ScreenConst.detailProduct,
+                arguments: {
+                  'productId': doc['productId'],
+                },
+              );
             },
             child: Card(
               shape: RoundedRectangleBorder(
@@ -36,14 +43,16 @@ dynamic productListCard(AsyncSnapshot<QuerySnapshot> snapshot) {
                             doc['productName'],
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
+                            style: contentText16,
                           ),
                           const SizedBox(
                             height: 5,
                           ),
                           Text(
-                            'Rp. ${doc['productPrice']}',
+                            formatPrice(doc['productPrice']),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
+                            style: contentText16,
                           ),
                           const SizedBox(
                             height: 5,

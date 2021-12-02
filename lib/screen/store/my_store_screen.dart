@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/screen/store/provider/my_store_provider.dart';
+import 'package:consignt/widget/price_format.dart';
 import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,10 +40,7 @@ class _MyStoreScreenState extends State<MyStoreScreen> {
         child: Consumer<MyStoreProvider>(
           builder: (context, provider, child) {
             return StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('products')
-                  .where('userId', isEqualTo: provider.userId)
-                  .snapshots(),
+              stream: FirestoreProductService.getAllUsersProducts(provider.userId),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshots) {
                 if (snapshots.hasData) {
@@ -107,7 +106,7 @@ dynamic _myProductsList(AsyncSnapshot<QuerySnapshot> snapshot) {
                             height: 5,
                           ),
                           Text(
-                            'Rp. ${doc['productPrice']}',
+                            formatPrice(doc['productPrice']),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),

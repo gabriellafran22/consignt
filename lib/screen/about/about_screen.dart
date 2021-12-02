@@ -36,7 +36,6 @@ class AboutScreen extends StatelessWidget {
                 'Consignt is a marketplace for used electronic products that people want to sell easily.',
                 textAlign: TextAlign.center,
               ),
-              //TODO: IF POSSIBLE, CLEAR CACHE BUTTON
             ],
           ),
         ),

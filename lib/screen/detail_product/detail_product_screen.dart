@@ -1,9 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
+import 'package:consignt/widget/loading_indicator.dart';
+import 'package:consignt/widget/price_format.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DetailProductScreen extends StatefulWidget {
-  const DetailProductScreen({Key? key}) : super(key: key);
+  final String productId;
+
+  const DetailProductScreen({Key? key, required this.productId})
+      : super(key: key);
 
   @override
   _DetailProductScreenState createState() => _DetailProductScreenState();
@@ -34,53 +41,16 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Image.asset('assets/consignt_logo.jpg'),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Harga Produk',
-                        style: titleText20,
-                      ),
-                      const Icon(Icons.favorite_border),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text('Nama Produk'),
-                ],
-              ),
-            ),
-            const Divider(
-              height: 5,
-              thickness: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Description',
-                    style: titleText20,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text('Description Produk'),
-                ],
-              ),
-            ),
-          ],
+        child: StreamBuilder(
+          stream:
+              FirestoreProductService.getProductDataWithId(widget.productId),
+          builder:
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return loadingIndicator();
+            }
+            return productDetail(snapshot.data);
+          },
         ),
       ),
       bottomNavigationBar: Padding(
@@ -117,4 +87,109 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
       ),
     );
   }
+}
+
+dynamic productDetail(DocumentSnapshot? data) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Center(
+        child: data?["productPictureUrl"] == null
+            ? Image.asset('assets/consignt_logo_cropped')
+            : Image.network(data?["productPictureUrl"]),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  formatPrice(data?["productPrice"]),
+                  style: titleText20,
+                ),
+                const Icon(Icons.favorite_border),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              data?["productName"] ?? 'Product Name Not Set',
+              style: contentText18,
+            ),
+          ],
+        ),
+      ),
+      const Divider(
+        height: 5,
+        thickness: 10,
+      ),
+      Padding(
+        padding: const EdgeInsets.all(20),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.location_on_sharp,
+              size: 18,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Text(
+                '${data?['productProvince']}, ${data?['productCity']}',
+                style: contentText18,
+              ),
+            ),
+          ],
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.category_rounded,
+              size: 18,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Text(
+                '${data?['productCategory']}',
+                style: contentText18,
+              ),
+            ),
+          ],
+        ),
+      ),
+      const Divider(
+        height: 15,
+        thickness: 10,
+      ),
+      Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Description',
+              style: titleText20,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              data?["productDescription"] ?? 'Product Description Not Set',
+              style: contentText18,
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 }

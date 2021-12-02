@@ -47,6 +47,17 @@ TextStyle titleText14 = const TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle contentText18 = const TextStyle(
+  color: Colors.black,
+  fontSize: 16,
+  height: 1.5,
+);
+
+TextStyle contentText16 = const TextStyle(
+  color: Colors.black,
+  fontSize: 16,
+);
+
 InputDecoration textFormFieldDecoration(String hintText) => InputDecoration(
       fillColor: Colors.white,
       filled: true,

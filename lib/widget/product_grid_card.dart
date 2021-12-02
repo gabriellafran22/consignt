@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/widget/price_format.dart';
 import 'package:flutter/material.dart';
 
 import '../di.dart';
@@ -9,8 +10,12 @@ dynamic productGridCard(AsyncSnapshot<QuerySnapshot> snapshot) {
   return snapshot.data!.docs
       .map((doc) => InkWell(
             onTap: () {
-              //TODO: LEMPAR DATA ID PRODUCT
-              inject<Navigate>().navigateTo(ScreenConst.detailProduct);
+              inject<Navigate>().navigateTo(
+                ScreenConst.detailProduct,
+                arguments: {
+                  'productId': doc['productId'],
+                },
+              );
             },
             child: Card(
               shape: RoundedRectangleBorder(
@@ -48,7 +53,7 @@ dynamic productGridCard(AsyncSnapshot<QuerySnapshot> snapshot) {
                           height: 5,
                         ),
                         Text(
-                          'Rp. ${doc['productPrice']}',
+                          formatPrice(doc['productPrice']),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
