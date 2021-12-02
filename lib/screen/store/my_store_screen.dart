@@ -40,7 +40,8 @@ class _MyStoreScreenState extends State<MyStoreScreen> {
         child: Consumer<MyStoreProvider>(
           builder: (context, provider, child) {
             return StreamBuilder(
-              stream: FirestoreProductService.getAllUsersProducts(provider.userId),
+              stream:
+                  FirestoreProductService.getAllUsersProducts(provider.userId),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshots) {
                 if (snapshots.hasData) {
@@ -73,8 +74,12 @@ dynamic _myProductsList(AsyncSnapshot<QuerySnapshot> snapshot) {
   return snapshot.data!.docs
       .map((doc) => InkWell(
             onTap: () {
-              //TODO: LEMPAR DATA PRODUCT ID KE EDIT PRODUCT
-              inject<Navigate>().navigateTo(ScreenConst.editProduct);
+              inject<Navigate>().navigateTo(
+                ScreenConst.editProduct,
+                arguments: {
+                  'productId': doc.id,
+                },
+              );
             },
             child: Card(
               shape: RoundedRectangleBorder(

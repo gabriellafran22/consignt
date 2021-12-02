@@ -1,3 +1,4 @@
+import 'package:consignt/core/model/product.dart';
 import 'package:consignt/core/model/user.dart';
 
 class Utils {
@@ -15,6 +16,22 @@ class Utils {
       profilePicture: data['profilePicture'],
       isSeller: data['isSeller'],
       createdUpdatedAt: data['createdUpdatedAt'],
+    );
+  }
+
+  static ProductModel convertDocumentToProductModel(
+      Map<String, dynamic> data,
+      ) {
+    return ProductModel(
+      userId: data["userId"],
+      productName: data["productName"],
+      productDescription: data["productDescription"],
+      productPrice: data["productPrice"],
+      productCategory: data["productCategory"],
+      productPictureUrl: data["productPictureUrl"],
+      productProvince: data["productProvince"],
+      productCity: data["productCity"],
+      createdUpdatedAt: data["createdUpdatedAt"],
     );
   }
 }

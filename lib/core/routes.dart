@@ -45,7 +45,12 @@ Route routes(RouteSettings settings) {
     case ScreenConst.addProduct:
       return buildRoute(settings, const AddProductScreen());
     case ScreenConst.editProduct:
-      return buildRoute(settings, const EditProductScreen());
+      return buildRoute(
+        settings,
+        EditProductScreen(
+          productId: args['productId'],
+        ),
+      );
     case ScreenConst.detailProduct:
       return buildRoute(
         settings,

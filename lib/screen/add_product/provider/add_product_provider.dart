@@ -43,6 +43,7 @@ class AddProductProvider extends CustomChangeNotifier {
         productProvince.isNotEmpty &&
         productCity.isNotEmpty) {
       addProduct();
+      return true;
     }
     return false;
   }
@@ -100,17 +101,16 @@ class AddProductProvider extends CustomChangeNotifier {
   }
 
   void addProduct() {
-    //TODO: product id blm nemu carane auto generate/increment (udah bisa edit & add)
-    FirestoreProductService.createOrUpdateProduct(
-        productId: 'D3NMcZTUw3hfw9Z2lFv8',
-        userId: _userId,
-        productName: productNameController.text,
-        productDescription: productDescController.text,
-        productPrice: int.parse(productPriceController.text),
-        productCategory: productCategory,
-        productPicture: productPictureUrl,
-        productProvince: productProvince,
-        productCity: productCity);
+    FirestoreProductService.addProduct(
+      userId: _userId,
+      productName: productNameController.text,
+      productDescription: productDescController.text,
+      productPrice: int.parse(productPriceController.text),
+      productCategory: productCategory,
+      productPictureUrl: productPictureUrl,
+      productProvince: productProvince,
+      productCity: productCity,
+    );
   }
 
   @override

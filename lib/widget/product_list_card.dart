@@ -14,7 +14,7 @@ dynamic productListCard(AsyncSnapshot<QuerySnapshot> snapshot) {
               inject<Navigate>().navigateTo(
                 ScreenConst.detailProduct,
                 arguments: {
-                  'productId': doc['productId'],
+                  'productId': doc.id,
                 },
               );
             },

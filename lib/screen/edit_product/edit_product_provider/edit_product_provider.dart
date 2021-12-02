@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/async.dart';
+import 'package:consignt/common/utils.dart';
 import 'package:consignt/core/custom_change_notifier.dart';
 import 'package:consignt/core/model/city.dart';
+import 'package:consignt/core/model/product.dart';
 import 'package:consignt/core/model/province.dart';
 import 'package:consignt/core/network/response/city_response.dart';
 import 'package:consignt/core/network/response/province_response.dart';
@@ -26,8 +29,8 @@ class EditProductProvider extends CustomChangeNotifier {
   String productPictureUrl = '';
   String provinceId = '0';
 
-  EditProductProvider({required this.preferencesHelper}) {
-    _getUserId();
+  EditProductProvider({required this.preferencesHelper, required this.productId}) {
+    _getProductData(productId);
     getProvince();
   }
 
@@ -39,6 +42,7 @@ class EditProductProvider extends CustomChangeNotifier {
         productProvince.isNotEmpty &&
         productCity.isNotEmpty) {
       editProduct();
+      return true;
     }
     return false;
   }
@@ -48,9 +52,34 @@ class EditProductProvider extends CustomChangeNotifier {
   Async<List<Province>> province = uninitialized<List<Province>>();
   Async<List<City>> city = uninitialized<List<City>>();
 
-  Future<void> _getUserId() async {
+  // Future<void> _getUserId() async {
+  //   final user = await preferencesHelper.user;
+  //   _userId = user!.id!;
+  //   notifyListeners();
+  // }
+
+  Future<void> _getProductData(String tempProductId) async {
     final user = await preferencesHelper.user;
     _userId = user!.id!;
+
+    DocumentSnapshot? productSnapshot =
+    await  FirestoreProductService.getProductDataWithIdForEdit(tempProductId);
+
+    Map<String, dynamic> productData =
+    productSnapshot.data() as Map<String, dynamic>;
+
+    ProductModel productModel =
+    Utils.convertDocumentToProductModel(productData);
+
+    productId = tempProductId;
+    productPictureUrl = productModel.productPictureUrl;
+    productNameController.text = productModel.productName;
+    productDescController.text = productModel.productDescription;
+    productPriceController.text = productModel.productPrice.toString();
+    productCategory = productModel.productCategory;
+    productProvince = productModel.productProvince;
+    productCity = productModel.productCity;
+
     notifyListeners();
   }
 
@@ -101,16 +130,17 @@ class EditProductProvider extends CustomChangeNotifier {
   }
 
   void editProduct() {
-    FirestoreProductService.createOrUpdateProduct(
-        productId: productId,
-        userId: _userId,
-        productName: productNameController.text,
-        productDescription: productDescController.text,
-        productPrice: int.parse(productPriceController.text),
-        productCategory: productCategory,
-        productPicture: productPictureUrl,
-        productProvince: productProvince,
-        productCity: productCity);
+    FirestoreProductService.updateProduct(
+      productId: productId,
+      userId: _userId,
+      productName: productNameController.text,
+      productDescription: productDescController.text,
+      productPrice: int.parse(productPriceController.text),
+      productCategory: productCategory,
+      productPictureUrl: productPictureUrl,
+      productProvince: productProvince,
+      productCity: productCity,
+    );
   }
 
   @override

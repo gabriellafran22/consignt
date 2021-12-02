@@ -16,9 +16,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../di.dart';
 import 'edit_product_provider/edit_product_provider.dart';
 
-//TODO: EDIT BLM AMBIL DATA
 class EditProductScreen extends StatefulWidget {
-  const EditProductScreen({Key? key}) : super(key: key);
+  final String productId;
+  const EditProductScreen({Key? key, required this.productId}) : super(key: key);
 
   @override
   _EditProductScreenState createState() => _EditProductScreenState();
@@ -31,7 +31,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       create: (_) => EditProductProvider(
         preferencesHelper: PreferencesHelper(
           sharedPreferences: SharedPreferences.getInstance(),
-        ),
+        ), productId: widget.productId,
       ),
       child: Consumer<EditProductProvider>(
         builder: (context, provider, child) {
