@@ -28,6 +28,7 @@ class EditProductProvider extends CustomChangeNotifier {
   String productCity = '';
   String productPictureUrl = '';
   String provinceId = '0';
+  bool isChanged = false;
 
   EditProductProvider({required this.preferencesHelper, required this.productId}) {
     _getProductData(productId);
@@ -51,12 +52,6 @@ class EditProductProvider extends CustomChangeNotifier {
 
   Async<List<Province>> province = uninitialized<List<Province>>();
   Async<List<City>> city = uninitialized<List<City>>();
-
-  // Future<void> _getUserId() async {
-  //   final user = await preferencesHelper.user;
-  //   _userId = user!.id!;
-  //   notifyListeners();
-  // }
 
   Future<void> _getProductData(String tempProductId) async {
     final user = await preferencesHelper.user;
@@ -107,25 +102,34 @@ class EditProductProvider extends CustomChangeNotifier {
     );
   }
 
+  void isChangedTrue(){
+    isChanged = true;
+    notifyListeners();
+  }
+
   void setProductPicture(String imagePath) {
     productPictureUrl = imagePath;
+    isChanged = true;
     notifyListeners();
   }
 
   void setProductCategory(String tempCategory) {
     productCategory = tempCategory;
+    isChanged = true;
     notifyListeners();
   }
 
   void setProductProvince(Province tempProvince) {
     productProvince = tempProvince.province ?? '';
     provinceId = tempProvince.provinceId ?? '0';
+    isChanged = true;
     getCity();
     notifyListeners();
   }
 
   void setProductCity(City tempCity) {
     productCity = '${tempCity.type} ${tempCity.cityName}';
+    isChanged = true;
     notifyListeners();
   }
 

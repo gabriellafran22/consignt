@@ -1,10 +1,9 @@
 import 'package:consignt/common/navigate.dart';
-import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../di.dart';
+import '../di.dart';
 
-void backDialog(BuildContext context, ProfileProvider provider) {
+void backDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) {

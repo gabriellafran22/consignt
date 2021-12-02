@@ -49,7 +49,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             if (!snapshot.hasData) {
               return loadingIndicator();
             }
-            return productDetail(snapshot.data);
+            return productDetail(context, snapshot.data);
           },
         ),
       ),
@@ -89,14 +89,20 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
   }
 }
 
-dynamic productDetail(DocumentSnapshot? data) {
+dynamic productDetail(BuildContext context, DocumentSnapshot? data) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Center(
-        child: data?["productPictureUrl"] == null
-            ? Image.asset('assets/consignt_logo_cropped')
-            : Image.network(data?["productPictureUrl"]),
+      Container(
+        color: Colors.black,
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.4,
+        ),
+        child: Center(
+          child: data?["productPictureUrl"] == null
+              ? Image.asset('assets/consignt_logo_cropped')
+              : Image.network(data?["productPictureUrl"]),
+        ),
       ),
       Padding(
         padding: const EdgeInsets.all(20),

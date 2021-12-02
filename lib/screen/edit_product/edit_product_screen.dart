@@ -1,3 +1,4 @@
+
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/snackbar.dart';
 import 'package:consignt/common/styles.dart';
@@ -8,6 +9,7 @@ import 'package:consignt/screen/edit_product/widget_dialog/edit_category_dialog.
 import 'package:consignt/screen/edit_product/widget_dialog/edit_delete_dialog.dart';
 import 'package:consignt/screen/edit_product/widget_dialog/edit_product_city_dialog.dart';
 import 'package:consignt/screen/edit_product/widget_dialog/edit_product_province_dialog.dart';
+import 'package:consignt/widget/back_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +20,9 @@ import 'edit_product_provider/edit_product_provider.dart';
 
 class EditProductScreen extends StatefulWidget {
   final String productId;
-  const EditProductScreen({Key? key, required this.productId}) : super(key: key);
+
+  const EditProductScreen({Key? key, required this.productId})
+      : super(key: key);
 
   @override
   _EditProductScreenState createState() => _EditProductScreenState();
@@ -31,7 +35,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
       create: (_) => EditProductProvider(
         preferencesHelper: PreferencesHelper(
           sharedPreferences: SharedPreferences.getInstance(),
-        ), productId: widget.productId,
+        ),
+        productId: widget.productId,
       ),
       child: Consumer<EditProductProvider>(
         builder: (context, provider, child) {
@@ -42,19 +47,31 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 style: titleTextWhite,
               ),
               actions: [
-                IconButton(
-                  icon: const FaIcon(FontAwesomeIcons.check),
-                  onPressed: () async {
-                    if (await provider.saveForm()) {
-                      inject<Navigate>().pop();
-                      showSnackBar(
-                          context, 'Product Information has been Changed');
-                    } else {
-                      showSnackBar(context, 'All Fields Must be Filled');
-                    }
-                  },
-                )
+                provider.isChanged
+                    ? IconButton(
+                        icon: const FaIcon(FontAwesomeIcons.check),
+                        onPressed: () async {
+                          if (await provider.saveForm()) {
+                            inject<Navigate>().pop();
+                            showSnackBar(context,
+                                'Product Information has been Changed');
+                          } else {
+                            showSnackBar(context, 'All Fields Must be Filled');
+                          }
+                        },
+                      )
+                    : Container(),
               ],
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  if (provider.isChanged) {
+                    backDialog(context);
+                  } else {
+                    inject<Navigate>().pop();
+                  }
+                },
+              ),
             ),
             body: SingleChildScrollView(
               child: Form(
@@ -77,6 +94,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               hintText: 'Product Name',
                               border: InputBorder.none,
                             ),
+                            onChanged: (value) {
+                              provider.isChangedTrue();
+                            },
                           ),
                         ],
                       ),
@@ -100,6 +120,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               hintText: 'Product Description',
                               border: InputBorder.none,
                             ),
+                            onChanged: (value) {
+                              provider.isChangedTrue();
+                            },
                           ),
                         ],
                       ),
@@ -123,6 +146,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               hintText: 'Price',
                               border: InputBorder.none,
                             ),
+                            onChanged: (value) {
+                              provider.isChangedTrue();
+                            },
                           ),
                         ],
                       ),
@@ -191,7 +217,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 style: titleTextWhite,
                               ),
                               style: fullyRoundedButton(),
-                              onPressed: () => showDialogDelete(context),
+                              onPressed: () =>
+                                  showDialogDelete(context, provider),
                             ),
                           ),
                         ],

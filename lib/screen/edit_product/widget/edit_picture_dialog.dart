@@ -39,28 +39,38 @@ class _EditProductPictureState extends State<EditProductPicture> {
                     height: 150,
                     width: 150,
                     child: Center(
-                      child: Stack(
-                        children: [
-                          Image.network(widget.provider.productPictureUrl),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Container(
-                              width: 35,
-                              height: 35,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.indigo,
-                              ),
-                              child: const Center(
-                                child: FaIcon(
-                                  FontAwesomeIcons.camera,
-                                  size: 18,
-                                  color: Colors.white,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.blueGrey,
+                            width: 2,
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Center(
+                              child: Image.network(widget.provider.productPictureUrl),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                width: 35,
+                                height: 35,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.indigo,
+                                ),
+                                child: const Center(
+                                  child: FaIcon(
+                                    FontAwesomeIcons.camera,
+                                    size: 18,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   )

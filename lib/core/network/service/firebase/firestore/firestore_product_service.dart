@@ -55,6 +55,12 @@ class FirestoreProductService {
     productCollection.add(product.toJson());
   }
 
+  static Future<void> deleteProduct({
+    required String productId,
+  }) async {
+    await productCollection.doc(productId).delete();
+  }
+
   static Stream<QuerySnapshot> getAllProducts() {
     return productCollection.snapshots();
   }

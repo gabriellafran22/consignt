@@ -7,7 +7,7 @@ import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:consignt/screen/profile/widget/profile_detail.dart';
 import 'package:consignt/screen/profile/widget/profile_picture.dart';
-import 'package:consignt/screen/profile/widget_dialog/back_dialog.dart';
+import 'package:consignt/widget/back_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   if (provider.isDataChanged) {
-                    backDialog(context, provider);
+                    backDialog(context);
                   } else {
                     inject<Navigate>().pop();
                   }
