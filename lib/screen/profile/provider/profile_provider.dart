@@ -1,7 +1,6 @@
 import 'package:consignt/common/async.dart';
 import 'package:consignt/core/model/city.dart';
 import 'package:consignt/core/model/province.dart';
-import 'package:consignt/core/model/user.dart';
 import 'package:consignt/core/network/response/city_response.dart';
 import 'package:consignt/core/network/response/province_response.dart';
 import 'package:consignt/core/network/service/api/raja_ongkir_service.dart';
@@ -38,24 +37,27 @@ class ProfileProvider extends CustomChangeNotifier {
   String provinceId = '0';
 
   ProfileProvider({required this.preferencesHelper}) {
-    _getUserData();
+    _getUserId();
     getProvince();
   }
 
-  Future<void> _getUserData() async {
-    final user = await preferencesHelper.user;
-    _userId = user!.id!;
-    nameTextField.text = user.name!;
-    emailTextField.text = user.email!;
-    phoneNumberTextField.text = user.phoneNumber!;
-    provinceTextField.text = user.province!;
-    cityTextField.text = user.city!;
-    profilePictureUrl = user.profilePicture!;
-    isSeller = user.isSeller!;
-
-    initEmail = user.email!;
-    notifyListeners();
+  Future<void> _getUserId() async {
+    final userId = await preferencesHelper.userId;
+    _userId = userId;
   }
+
+  // Future<void> _getUserData() async {
+    // nameTextField.text = user.name!;
+    // emailTextField.text = user.email!;
+    // phoneNumberTextField.text = user.phoneNumber!;
+    // provinceTextField.text = user.province!;
+    // cityTextField.text = user.city!;
+    // profilePictureUrl = user.profilePicture!;
+    // isSeller = user.isSeller!;
+
+    // initEmail = user.email!;
+    // notifyListeners();
+  // }
 
   Future getProvince() async {
     customApi(
@@ -162,21 +164,6 @@ class ProfileProvider extends CustomChangeNotifier {
       profilePicture: profilePictureUrl,
       isSeller: isSeller,
     );
-
-    UserModel user = UserModel(
-      id: _userId,
-      email: emailTextField.text,
-      name: nameTextField.text,
-      phoneNumber: phoneNumberTextField.text,
-      province: provinceTextField.text,
-      city: cityTextField.text,
-      profilePicture: profilePictureUrl,
-      isSeller: isSeller,
-      createdUpdatedAt: DateTime.now().toIso8601String(),
-    );
-
-    preferencesHelper.setUser(user);
-    _getUserData();
   }
 
   @override

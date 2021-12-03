@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:consignt/common/utils.dart';
-import 'package:consignt/core/model/user.dart';
 import 'package:consignt/core/network/service/firebase/firestore/firestore_user_service.dart';
 import 'package:consignt/screen/login/provider/login_provider.dart';
 import 'package:consignt/screen/register/provider/register_provider.dart';
@@ -42,7 +39,7 @@ class AuthenticationService {
     }
   }
 
-  static Future<UserModel?> signIn({
+  static Future<User?> signIn({
     required String email,
     required String password,
   }) async {
@@ -51,16 +48,7 @@ class AuthenticationService {
           email: email, password: password);
       User? user = userCredential.user;
 
-      DocumentSnapshot? userSnapshot =
-          await FirestoreUserService.getUser(user?.uid);
-
-      Map<String, dynamic> userData =
-          userSnapshot.data() as Map<String, dynamic>;
-
-      UserModel userModel =
-          Utils.convertDocumentToUserModel(userData, user?.uid);
-
-      return userModel;
+      return user;
     } catch (error) {
       LoginProvider.status = error.toString();
       return null;
@@ -76,26 +64,15 @@ class AuthenticationService {
     }
   }
 
-  static Future<UserModel?> updateEmail(
+  static Future<void> updateEmail(
       String newEmail, String currentEmail, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: currentEmail, password: password);
       User? user = userCredential.user;
       user!.updateEmail(newEmail);
-
-      DocumentSnapshot? userSnapshot =
-          await FirestoreUserService.getUser(user.uid);
-
-      Map<String, dynamic> userData =
-          userSnapshot.data() as Map<String, dynamic>;
-
-      UserModel userModel =
-          Utils.convertDocumentToUserModel(userData, user.uid);
-
-      return userModel;
     } catch (error) {
-      return null;
+      print(error.toString());
     }
   }
 
@@ -114,6 +91,4 @@ class AuthenticationService {
   static Future<void> signOut() async {
     _auth.signOut();
   }
-
-  static Stream<User?> get userStream => _auth.authStateChanges();
 }

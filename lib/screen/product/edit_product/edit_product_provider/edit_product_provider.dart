@@ -55,8 +55,8 @@ class EditProductProvider extends CustomChangeNotifier {
   Async<List<City>> city = uninitialized<List<City>>();
 
   Future<void> _getProductData(String tempProductId) async {
-    final user = await preferencesHelper.user;
-    _userId = user!.id!;
+    final user = await preferencesHelper.userId;
+    _userId = user;
 
     DocumentSnapshot? productSnapshot =
         await FirestoreProductService.getProductDataWithIdForEdit(

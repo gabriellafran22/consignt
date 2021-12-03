@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:consignt/core/model/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesHelper {
@@ -20,17 +17,15 @@ class PreferencesHelper {
     prefs.setBool(listView, value);
   }
 
-  Future<UserModel?> get user async {
+  Future<String> get userId async {
     final prefs = await sharedPreferences;
-    String userJson = prefs.getString(userPreferences) ?? '';
-    UserModel? userModel =
-        userJson == '' ? null : UserModel.fromJson(jsonDecode(userJson));
-    return userModel;
+    String userId = prefs.getString(userPreferences) ?? '';
+    return userId;
   }
 
-  void setUser(UserModel user) async {
+  void setUserId(String userId) async {
     final prefs = await sharedPreferences;
-    prefs.setString(userPreferences, userToJson(user));
+    prefs.setString(userPreferences, userId);
   }
 
   void removeUser() async {

@@ -49,8 +49,8 @@ class AddProductProvider extends CustomChangeNotifier {
   }
 
   Future<void> _getUserId() async {
-    final user = await preferencesHelper.user;
-    _userId = user!.id!;
+    final user = await preferencesHelper.userId;
+    _userId = user;
     notifyListeners();
   }
 

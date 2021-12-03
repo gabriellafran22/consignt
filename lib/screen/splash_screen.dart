@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/constant/screen_const.dart';
-import 'package:consignt/core/model/user.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,10 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 3),
       () async {
-        UserModel? user =
-            await Provider.of<PreferencesProvider?>(context, listen: false)!
-                .getUser();
-        (user != null)
+        String userId = await context.read<PreferencesProvider>().getUserId();
+        (userId != '')
             ? inject<Navigate>().navigateTo(ScreenConst.init, replace: true)
             : inject<Navigate>().navigateTo(ScreenConst.login, replace: true);
       },

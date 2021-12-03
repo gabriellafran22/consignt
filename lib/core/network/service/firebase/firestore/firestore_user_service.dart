@@ -26,7 +26,7 @@ class FirestoreUserService {
     }, SetOptions(merge: true));
   }
 
-  static Future<DocumentSnapshot> getUser(String? id) async {
-    return await userCollection.doc(id).get();
+  static Stream<DocumentSnapshot<Object?>> getUserStream(String id) {
+    return userCollection.doc(id).snapshots();
   }
 }

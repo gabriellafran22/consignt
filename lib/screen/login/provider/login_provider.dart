@@ -1,6 +1,6 @@
-import 'package:consignt/core/model/user.dart';
 import 'package:consignt/core/network/service/firebase/authentication_service.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,12 +19,12 @@ class LoginProvider extends ChangeNotifier {
   Future<bool> saveForm() async {
     final bool isValid = formKey.currentState!.validate();
     if (isValid) {
-      UserModel? user = await AuthenticationService.signIn(
+      User? user = await AuthenticationService.signIn(
         email: emailController.text,
         password: passwordController.text,
       );
       if (user != null) {
-        preferencesHelper.setUser(user);
+        preferencesHelper.setUserId(user.uid);
         return true;
       } else {
         return false;

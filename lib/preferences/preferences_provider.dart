@@ -1,16 +1,18 @@
-import 'package:consignt/core/model/user.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:flutter/cupertino.dart';
 
 class PreferencesProvider extends ChangeNotifier {
   PreferencesHelper preferencesHelper;
   bool _isListView = true;
+  String _userId = '';
 
   PreferencesProvider({required this.preferencesHelper}) {
     _getView();
   }
 
   bool get isListView => _isListView;
+
+  String get userId => _userId;
 
   void _getView() async {
     _isListView = await preferencesHelper.isListView;
@@ -22,10 +24,10 @@ class PreferencesProvider extends ChangeNotifier {
     _getView();
   }
 
-  Future<UserModel?> getUser() async {
-    final user = await preferencesHelper.user;
+  Future<String> getUserId() async {
+    _userId = await preferencesHelper.userId;
     notifyListeners();
-    return user;
+    return _userId;
   }
 
   void removeUser() async {
