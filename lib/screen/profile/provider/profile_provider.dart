@@ -1,6 +1,7 @@
 import 'package:consignt/common/async.dart';
 import 'package:consignt/core/model/city.dart';
 import 'package:consignt/core/model/province.dart';
+import 'package:consignt/core/model/user.dart';
 import 'package:consignt/core/network/response/city_response.dart';
 import 'package:consignt/core/network/response/province_response.dart';
 import 'package:consignt/core/network/service/api/raja_ongkir_service.dart';
@@ -46,18 +47,18 @@ class ProfileProvider extends CustomChangeNotifier {
     _userId = userId;
   }
 
-  // Future<void> _getUserData() async {
-    // nameTextField.text = user.name!;
-    // emailTextField.text = user.email!;
-    // phoneNumberTextField.text = user.phoneNumber!;
-    // provinceTextField.text = user.province!;
-    // cityTextField.text = user.city!;
-    // profilePictureUrl = user.profilePicture!;
-    // isSeller = user.isSeller!;
+  void getUserData(UserModel user) {
+    nameTextField.text = user.name!;
+    emailTextField.text = user.email!;
+    phoneNumberTextField.text = user.phoneNumber!;
+    provinceTextField.text = user.province!;
+    cityTextField.text = user.city!;
+    profilePictureUrl = user.profilePicture!;
+    isSeller = user.isSeller!;
 
-    // initEmail = user.email!;
-    // notifyListeners();
-  // }
+    initEmail = user.email!;
+    notifyListeners();
+  }
 
   Future getProvince() async {
     customApi(

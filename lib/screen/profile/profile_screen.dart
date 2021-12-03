@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/snackbar.dart';
 import 'package:consignt/common/styles.dart';
-import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/common/utils.dart';
+import 'package:consignt/core/model/user.dart';
+import 'package:consignt/core/network/service/firebase/firestore/firestore_user_service.dart';
 import 'package:consignt/di.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
+import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:consignt/screen/profile/widget/profile_detail.dart';
 import 'package:consignt/screen/profile/widget/profile_picture.dart';
@@ -21,6 +25,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String userId = '';
+
+  @override
+  void initState() {
+    super.initState();
+    userId = context.read<PreferencesProvider>().userId;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -29,62 +41,71 @@ class _ProfileScreenState extends State<ProfileScreen> {
           sharedPreferences: SharedPreferences.getInstance(),
         ),
       ),
-      child: Consumer<ProfileProvider>(
-        builder: (context, provider, child) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                'My Profile',
-                style: titleTextWhite,
-              ),
-              actions: [
-                provider.isDataChanged
-                    ? IconButton(
-                        icon: const FaIcon(FontAwesomeIcons.check),
-                        onPressed: () {
-                          provider.updateData();
-                          showSnackBar(context, 'Data Updated');
+      child: StreamBuilder(
+        stream: FirestoreUserService.getUserStream(userId),
+        builder: (BuildContext context,
+            AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
+          if (snapshot.hasData) {
+            Map<String, dynamic> data =
+                snapshot.data?.data() as Map<String, dynamic>;
+            UserModel user = Utils.convertDocumentToUserModel(data);
+            context.read<ProfileProvider>().getUserData(user); // bug setState()
+            return Consumer<ProfileProvider>(
+              builder: (context, provider, _) {
+                return Scaffold(
+                  appBar: AppBar(
+                    title: Text(
+                      'My Profile',
+                      style: titleTextWhite,
+                    ),
+                    actions: [
+                      provider.isDataChanged
+                          ? IconButton(
+                              icon: const FaIcon(FontAwesomeIcons.check),
+                              onPressed: () {
+                                provider.updateData();
+                                showSnackBar(context, 'Data Updated');
+                                inject<Navigate>().pop();
+                              },
+                            )
+                          : const SizedBox(),
+                    ],
+                    leading: IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () {
+                        if (provider.isDataChanged) {
+                          backDialog(context);
+                        } else {
                           inject<Navigate>().pop();
-                          inject<Navigate>().navigateTo(
-                            ScreenConst.init,
-                            popPrevious: true,
-                          );
-                        },
-                      )
-                    : const SizedBox(),
-              ],
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  if (provider.isDataChanged) {
-                    backDialog(context);
-                  } else {
-                    inject<Navigate>().pop();
-                  }
-                },
-              ),
-            ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    width: double.infinity,
-                    height: 150,
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    color: Colors.blueGrey,
-                    child: Center(
-                      child: ProfilePicture(
-                        provider: provider,
-                      ),
+                        }
+                      },
                     ),
                   ),
-                  ProfileDetail(
-                    provider: provider,
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: double.infinity,
+                          height: 150,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          color: Colors.blueGrey,
+                          child: Center(
+                            child: ProfilePicture(
+                              provider: provider,
+                            ),
+                          ),
+                        ),
+                        ProfileDetail(
+                          provider: provider,
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            ),
-          );
+                );
+              },
+            );
+          }
+          return Container();
         },
       ),
     );
