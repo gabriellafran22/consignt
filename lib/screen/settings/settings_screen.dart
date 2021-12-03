@@ -31,7 +31,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel dataUser = UserModel();
+    bool isSeller = false;
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -50,6 +50,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Map<String, dynamic> data =
                             snapshot.data?.data() as Map<String, dynamic>;
                         UserModel user = Utils.convertDocumentToUserModel(data);
+                        isSeller = user.isSeller ?? false;
                         return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           color: Colors.blueGrey,
@@ -126,8 +127,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   inject<Navigate>().navigateTo(ScreenConst.profile);
                 },
               ),
-              //TODO: bug isSeller
-              dataUser.isSeller == true
+              isSeller == false
                   ? _listTileFaIcon(
                       FontAwesomeIcons.store,
                       Colors.brown,
