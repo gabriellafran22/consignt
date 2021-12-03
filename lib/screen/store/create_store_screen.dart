@@ -1,13 +1,11 @@
-import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
-import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/screen/store/provider/create_store_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../di.dart';
+import 'widget/dialog_open_store.dart';
 
 class CreateStoreScreen extends StatelessWidget {
   const CreateStoreScreen({Key? key}) : super(key: key);
@@ -52,36 +50,4 @@ class CreateStoreScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-void confirmOpenStore(BuildContext context, CreateStoreProvider provider) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Open My Own Store'),
-        content: const Text('Are you sure?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              inject<Navigate>().pop();
-            },
-            child: const Text('No'),
-          ),
-          TextButton(
-            onPressed: () {
-              provider.setIsSeller(true);
-              inject<Navigate>().pop();
-              inject<Navigate>().pop();
-              inject<Navigate>().navigateTo(
-                ScreenConst.init,
-                popPrevious: true,
-              );
-            },
-            child: const Text('Yes'),
-          ),
-        ],
-      );
-    },
-  );
 }

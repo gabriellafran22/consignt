@@ -31,150 +31,151 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isSeller = false;
-    return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              expandedHeight: 150.0,
-              floating: false,
-              pinned: false,
-              flexibleSpace: FlexibleSpaceBar(
-                background: SafeArea(
-                  child: StreamBuilder(
-                    stream: FirestoreUserService.getUserStream(userId),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
-                      if (snapshot.hasData) {
-                        Map<String, dynamic> data =
-                            snapshot.data?.data() as Map<String, dynamic>;
-                        UserModel user = Utils.convertDocumentToUserModel(data);
-                        isSeller = user.isSeller ?? false;
-                        return Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          color: Colors.blueGrey,
-                          child: Row(
-                            children: [
-                              user.profilePicture == ''
-                                  ? Container(
-                                      width: 80,
-                                      height: 80,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.grey,
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          '${user.name?.substring(0, 1)}',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 40,
+    return StreamBuilder(
+        stream: FirestoreUserService.getUserStream(userId),
+        builder: (BuildContext context,
+            AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
+          if (snapshot.hasData) {
+            Map<String, dynamic> data =
+                snapshot.data?.data() as Map<String, dynamic>;
+            UserModel user = Utils.convertDocumentToUserModel(data);
+            return Scaffold(
+              body: NestedScrollView(
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      expandedHeight: 150.0,
+                      floating: false,
+                      pinned: false,
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: SafeArea(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            color: Colors.blueGrey,
+                            child: Row(
+                              children: [
+                                user.profilePicture == ''
+                                    ? Container(
+                                        width: 80,
+                                        height: 80,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.grey,
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            '${user.name?.substring(0, 1)}',
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 40,
+                                            ),
                                           ),
                                         ),
+                                      )
+                                    : CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                          user.profilePicture ?? '',
+                                        ),
+                                        radius: 40,
                                       ),
-                                    )
-                                  : CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                        user.profilePicture ?? '',
-                                      ),
-                                      radius: 40,
-                                    ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      user.name ?? 'Your Name',
-                                      style: titleTextWhite,
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      user.email ?? 'Your Email',
-                                      style: titleTextWhite,
-                                    ),
-                                  ],
+                                const SizedBox(
+                                  width: 10,
                                 ),
-                              ),
-                            ],
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        user.name ?? 'Your Name',
+                                        style: titleTextWhite,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        user.email ?? 'Your Email',
+                                        style: titleTextWhite,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        );
-                      }
-                      return Container();
-                    },
-                  ),
+                        ),
+                      ),
+                    ),
+                  ];
+                },
+                body: ListView(
+                  children: ListTile.divideTiles(
+                    color: Colors.blueGrey,
+                    context: context,
+                    tiles: [
+                      _listTileFaIcon(
+                        FontAwesomeIcons.user,
+                        Colors.blue,
+                        'Profile',
+                        () {
+                          inject<Navigate>().navigateTo(ScreenConst.profile);
+                        },
+                      ),
+                      (user.isSeller == false)
+                          ? _listTileFaIcon(
+                              FontAwesomeIcons.store,
+                              Colors.brown,
+                              'Create Store',
+                              () {
+                                inject<Navigate>()
+                                    .navigateTo(ScreenConst.createStore);
+                              },
+                            )
+                          : _listTileFaIcon(
+                              FontAwesomeIcons.store,
+                              Colors.brown,
+                              'My Store',
+                              () {
+                                inject<Navigate>()
+                                    .navigateTo(ScreenConst.myStore);
+                              },
+                            ),
+                      const Divider(
+                        height: 10,
+                        thickness: 10,
+                      ),
+                      _listTileIcon(
+                        Icons.help_outline,
+                        Colors.greenAccent,
+                        'Help',
+                        () {
+                          //TODO: HELP PAGE
+                        },
+                      ),
+                      _listTileIcon(
+                        Icons.info_outlined,
+                        Colors.orange,
+                        'About App',
+                        () {
+                          inject<Navigate>().navigateTo(ScreenConst.about);
+                        },
+                      ),
+                      _listTileFaIcon(
+                        FontAwesomeIcons.signOutAlt,
+                        Colors.black54,
+                        'Log Out',
+                        () => showLogoutDialog(context),
+                      ),
+                    ],
+                  ).toList(),
                 ),
               ),
-            ),
-          ];
-        },
-        body: ListView(
-          children: ListTile.divideTiles(
-            color: Colors.blueGrey,
-            context: context,
-            tiles: [
-              _listTileFaIcon(
-                FontAwesomeIcons.user,
-                Colors.blue,
-                'Profile',
-                () {
-                  inject<Navigate>().navigateTo(ScreenConst.profile);
-                },
-              ),
-              isSeller == false
-                  ? _listTileFaIcon(
-                      FontAwesomeIcons.store,
-                      Colors.brown,
-                      'Create Store',
-                      () {
-                        inject<Navigate>().navigateTo(ScreenConst.createStore);
-                      },
-                    )
-                  : _listTileFaIcon(
-                      FontAwesomeIcons.store,
-                      Colors.brown,
-                      'My Store',
-                      () {
-                        inject<Navigate>().navigateTo(ScreenConst.myStore);
-                      },
-                    ),
-              const Divider(
-                height: 10,
-                thickness: 10,
-              ),
-              _listTileIcon(
-                Icons.help_outline,
-                Colors.greenAccent,
-                'Help',
-                () {
-                  //TODO: HELP PAGE
-                },
-              ),
-              _listTileIcon(
-                Icons.info_outlined,
-                Colors.orange,
-                'About App',
-                () {
-                  inject<Navigate>().navigateTo(ScreenConst.about);
-                },
-              ),
-              _listTileFaIcon(
-                FontAwesomeIcons.signOutAlt,
-                Colors.black54,
-                'Log Out',
-                () => showLogoutDialog(context),
-              ),
-            ],
-          ).toList(),
-        ),
-      ),
-    );
+            );
+          }
+          return Container();
+        });
   }
 }
 

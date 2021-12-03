@@ -29,4 +29,14 @@ class FirestoreUserService {
   static Stream<DocumentSnapshot<Object?>> getUserStream(String id) {
     return userCollection.doc(id).snapshots();
   }
+
+  static Future<void> updateIsSeller(
+    String? id,
+    bool? isSeller,
+  ) async {
+    await userCollection.doc(id).set({
+      'isSeller': isSeller,
+      'createdUpdatedAt': DateTime.now().toIso8601String(),
+    }, SetOptions(merge: true));
+  }
 }
