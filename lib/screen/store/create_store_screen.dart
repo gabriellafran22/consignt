@@ -1,6 +1,7 @@
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/screen/store/provider/create_store_provider.dart';
+import 'package:consignt/screen/store/widget/form_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +20,7 @@ class CreateStoreScreen extends StatelessWidget {
         ),
       ),
       child: Consumer<CreateStoreProvider>(
-        builder: (context, provider, child) {
+        builder: (context, provider, _) {
           return Scaffold(
             appBar: AppBar(
               title: Text(
@@ -30,18 +31,26 @@ class CreateStoreScreen extends StatelessWidget {
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    child: Text(
-                      'Open My Own Store',
-                      style: titleTextWhite,
+                child: Column(
+                  children: [
+                    FormContact(
+                      provider: provider,
                     ),
-                    style: fullyRoundedButton(),
-                    onPressed: () {
-                      confirmOpenStore(context, provider);
-                    },
-                  ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        child: Text(
+                          'Open My Own Store',
+                          style: titleTextWhite,
+                        ),
+                        style: fullyRoundedButton(),
+                        onPressed: () {
+                          confirmOpenStore(context, provider);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

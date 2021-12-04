@@ -1,5 +1,4 @@
 import 'package:consignt/common/navigate.dart';
-import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/screen/store/provider/create_store_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -21,13 +20,10 @@ void confirmOpenStore(BuildContext context, CreateStoreProvider provider) {
           ),
           TextButton(
             onPressed: () {
-              provider.updateIsSeller(true);
+              provider.updateIsSeller();
+              provider.createContact();
               inject<Navigate>().pop();
               inject<Navigate>().pop();
-              inject<Navigate>().navigateTo(
-                ScreenConst.init,
-                popPrevious: true,
-              );
             },
             child: const Text('Yes'),
           ),
