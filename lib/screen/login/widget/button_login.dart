@@ -1,8 +1,10 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/login/provider/login_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 import '../../../di.dart';
 
@@ -39,11 +41,12 @@ class ButtonLogin extends StatelessWidget {
                 content: Text('Account Logged in'),
               ),
             );
+            context.read<PreferencesProvider>().getUserId();
             inject<Navigate>().navigateTo(
               ScreenConst.init,
               popPrevious: true,
             );
-          } else if (LoginProvider.status.isNotEmpty){
+          } else if (LoginProvider.status.isNotEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(LoginProvider.status.split(']').last),
