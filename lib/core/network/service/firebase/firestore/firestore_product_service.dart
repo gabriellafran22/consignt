@@ -70,11 +70,11 @@ class FirestoreProductService {
         .snapshots();
   }
 
-  static Stream<DocumentSnapshot> getProductDataWithId(String id) {
+  static Stream<DocumentSnapshot> getProductDataWithIdStream(String id) {
     return productCollection.doc(id).snapshots();
   }
 
-  static Future<DocumentSnapshot> getProductDataWithIdForEdit(String id) async {
+  static Future<DocumentSnapshot> getProductDataWithIdFuture(String id) async {
     return await productCollection.doc(id).get();
   }
 

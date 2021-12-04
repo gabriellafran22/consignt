@@ -30,6 +30,13 @@ class FirestoreUserService {
     return userCollection.doc(id).snapshots();
   }
 
+  static Future<Map<String, dynamic>> getUserFuture(String id) async {
+     var snapshot =
+        await userCollection.doc(id).get();
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return data;
+  }
+
   static Future<void> updateIsSeller(
     String? id,
     bool? isSeller,

@@ -59,7 +59,7 @@ class EditProductProvider extends CustomChangeNotifier {
     _userId = user;
 
     DocumentSnapshot? productSnapshot =
-        await FirestoreProductService.getProductDataWithIdForEdit(
+        await FirestoreProductService.getProductDataWithIdFuture(
             tempProductId);
 
     Map<String, dynamic> productData =

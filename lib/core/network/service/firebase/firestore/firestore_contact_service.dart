@@ -15,4 +15,11 @@ class FirestoreContactService {
       'contactTelegram': telegramUsername,
     });
   }
+
+  static Future<Map<String, dynamic>> getContact(String userId) async {
+    var snapshot =
+        await contactCollection.where('userId', isEqualTo: userId).get();
+    Map<String, dynamic> data = snapshot.docs[0].data() as Map<String, dynamic>;
+    return data;
+  }
 }
