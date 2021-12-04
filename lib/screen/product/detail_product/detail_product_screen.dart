@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/common/utils.dart';
 import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
 import 'package:consignt/widget/loading_indicator.dart';
 import 'package:consignt/widget/price_format.dart';
@@ -89,7 +90,9 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
   }
 }
 
-dynamic productDetail(BuildContext context, DocumentSnapshot? data) {
+Widget productDetail(BuildContext context, DocumentSnapshot? snapshot) {
+  Map<String, dynamic> data = snapshot?.data() as Map<String, dynamic>;
+  var product = Utils.convertDocumentToProductModel(data);
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -99,9 +102,9 @@ dynamic productDetail(BuildContext context, DocumentSnapshot? data) {
           maxHeight: MediaQuery.of(context).size.height * 0.4,
         ),
         child: Center(
-          child: data?["productPictureUrl"] == null
+          child: product.productPictureUrl == ''
               ? Image.asset('assets/consignt_logo_cropped')
-              : Image.network(data?["productPictureUrl"]),
+              : Image.network(product.productPictureUrl),
         ),
       ),
       Padding(
@@ -113,7 +116,7 @@ dynamic productDetail(BuildContext context, DocumentSnapshot? data) {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  formatPrice(data?["productPrice"]),
+                  formatPrice(product.productPrice),
                   style: titleText20,
                 ),
                 const Icon(Icons.favorite_border),
@@ -123,7 +126,7 @@ dynamic productDetail(BuildContext context, DocumentSnapshot? data) {
               height: 10,
             ),
             Text(
-              data?["productName"] ?? 'Product Name Not Set',
+              product.productName,
               style: contentText18,
             ),
           ],
@@ -146,7 +149,7 @@ dynamic productDetail(BuildContext context, DocumentSnapshot? data) {
             ),
             Expanded(
               child: Text(
-                '${data?['productProvince']}, ${data?['productCity']}',
+                '${product.productProvince}, ${product.productCity}',
                 style: contentText18,
               ),
             ),
@@ -166,7 +169,7 @@ dynamic productDetail(BuildContext context, DocumentSnapshot? data) {
             ),
             Expanded(
               child: Text(
-                '${data?['productCategory']}',
+                product.productCategory,
                 style: contentText18,
               ),
             ),
@@ -190,7 +193,7 @@ dynamic productDetail(BuildContext context, DocumentSnapshot? data) {
               height: 10,
             ),
             Text(
-              data?["productDescription"] ?? 'Product Description Not Set',
+              product.productDescription,
               style: contentText18,
             ),
           ],
