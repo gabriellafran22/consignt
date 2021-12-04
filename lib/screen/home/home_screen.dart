@@ -95,24 +95,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ];
             },
             body: StreamBuilder(
-              stream:
-                  FirestoreProductService.getAllProducts(),
+              stream: FirestoreProductService.getAllProducts(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshots) {
                 if (snapshots.hasData) {
-                  if(snapshots.data!.docs.isEmpty){
+                  if (snapshots.data!.docs.isEmpty) {
                     return noProductsFound();
                   }
                   return prefProvider.isListView
-                      ? ListView(
-                          padding: EdgeInsets.zero,
-                          children: productListCard(snapshots),
-                        )
-                      : GridView.count(
-                          padding: EdgeInsets.zero,
-                          crossAxisCount: 2,
-                          children: productGridCard(snapshots),
-                        );
+                      ? productListCard(snapshots)
+                      : productGridCard(snapshots);
                 }
                 return Container();
               },
