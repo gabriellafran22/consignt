@@ -14,8 +14,9 @@ import 'package:consignt/screen/settings/rekber_request/rekber_request_screen.da
 import 'package:consignt/screen/settings/settings_screen.dart';
 import 'package:consignt/screen/shipping/shipping_screen.dart';
 import 'package:consignt/screen/splash_screen.dart';
-import 'package:consignt/screen/store/create_store_screen.dart';
-import 'package:consignt/screen/store/my_store_screen.dart';
+import 'package:consignt/screen/store/create_store/create_store_screen.dart';
+import 'package:consignt/screen/store/edit_store/edit_store_screen.dart';
+import 'package:consignt/screen/store/my_store/my_store_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -44,6 +45,10 @@ Route routes(RouteSettings settings) {
       return buildRoute(settings, const MyStoreScreen());
     case ScreenConst.createStore:
       return buildRoute(settings, const CreateStoreScreen());
+    case ScreenConst.editStore:
+      return buildRoute(settings, EditStoreScreen(
+        userId: args['userId'],
+      ));
     case ScreenConst.addProduct:
       return buildRoute(settings, const AddProductScreen());
     case ScreenConst.editProduct:

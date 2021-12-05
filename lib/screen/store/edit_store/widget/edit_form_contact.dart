@@ -1,14 +1,14 @@
-import 'package:consignt/screen/store/create_store/provider/create_store_provider.dart';
+import 'package:consignt/screen/store/edit_store/provider/edit_store_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class FormContact extends StatelessWidget {
-  const FormContact({
+class EditFormContact extends StatelessWidget {
+  const EditFormContact({
     Key? key,
     required this.provider,
   }) : super(key: key);
 
-  final CreateStoreProvider provider;
+  final EditStoreProvider provider;
 
   @override
   Widget build(BuildContext context) {

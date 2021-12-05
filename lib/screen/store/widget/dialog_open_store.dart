@@ -1,5 +1,5 @@
 import 'package:consignt/common/navigate.dart';
-import 'package:consignt/screen/store/provider/create_store_provider.dart';
+import 'package:consignt/screen/store/create_store/provider/create_store_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../di.dart';

@@ -16,6 +16,23 @@ class FirestoreContactService {
     });
   }
 
+  static Future<void> updateContact(
+    String userId,
+    String? whatsappNumber,
+    String? telegramUsername,
+  ) async {
+    var snapshot =
+        await contactCollection.where('userId', isEqualTo: userId).get();
+    var documentId = snapshot.docs.first.id;
+
+    Map<String, dynamic> data = {
+      'contactTelegram': telegramUsername,
+      'contactWhatsapp': whatsappNumber,
+    };
+
+    await contactCollection.doc(documentId).update(data);
+  }
+
   static Future<Map<String, dynamic>> getContact(String userId) async {
     var snapshot =
         await contactCollection.where('userId', isEqualTo: userId).get();

@@ -31,4 +31,11 @@ class CreateStoreProvider extends ChangeNotifier {
       telegramController.text,
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    telegramController.dispose();
+    whatsappController.dispose();
+  }
 }

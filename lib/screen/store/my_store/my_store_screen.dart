@@ -6,7 +6,7 @@ import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/core/model/product.dart';
 import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
-import 'package:consignt/screen/store/provider/my_store_provider.dart';
+import 'package:consignt/screen/store/my_store/provider/my_store_provider.dart';
 import 'package:consignt/widget/price_format.dart';
 import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../di.dart';
+import '../../../di.dart';
 
 class MyStoreScreen extends StatefulWidget {
   const MyStoreScreen({Key? key}) : super(key: key);
@@ -26,22 +26,31 @@ class MyStoreScreen extends StatefulWidget {
 class _MyStoreScreenState extends State<MyStoreScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'My Products',
-          style: titleTextWhite,
+    return ChangeNotifierProvider(
+      create: (_) => MyStoreProvider(
+        preferencesHelper: PreferencesHelper(
+          sharedPreferences: SharedPreferences.getInstance(),
         ),
       ),
-      body: ChangeNotifierProvider(
-        create: (_) => MyStoreProvider(
-          preferencesHelper: PreferencesHelper(
-            sharedPreferences: SharedPreferences.getInstance(),
-          ),
-        ),
-        child: Consumer<MyStoreProvider>(
-          builder: (context, provider, child) {
-            return StreamBuilder(
+      child: Consumer<MyStoreProvider>(
+        builder: (context, provider, child) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'My Products',
+                style: titleTextWhite,
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () => inject<Navigate>()
+                      .navigateTo(ScreenConst.editStore, arguments: {
+                    'userId': provider.userId,
+                  }),
+                  icon: const Icon(Icons.settings),
+                ),
+              ],
+            ),
+            body: StreamBuilder(
               stream:
                   FirestoreProductService.getAllUsersProducts(provider.userId),
               builder: (BuildContext context,
@@ -55,19 +64,74 @@ class _MyStoreScreenState extends State<MyStoreScreen> {
 
                 return Container();
               },
-            );
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const FaIcon(FontAwesomeIcons.plus),
-        onPressed: () {
-          inject<Navigate>().navigateTo(ScreenConst.addProduct);
+            ),
+            floatingActionButton: FloatingActionButton(
+              child: const FaIcon(FontAwesomeIcons.plus),
+              onPressed: () {
+                inject<Navigate>().navigateTo(ScreenConst.addProduct);
+              },
+            ),
+          );
         },
       ),
     );
   }
 }
+
+//
+// class _MyStoreScreenState extends State<MyStoreScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(
+//           'My Products',
+//           style: titleTextWhite,
+//         ),
+//         actions: [
+//           IconButton(
+//             onPressed: () => inject<Navigate>().navigateTo(ScreenConst.editStore, arguments: {
+//               'userId': '',
+//             }),
+//             icon: const Icon(Icons.settings),
+//           ),
+//         ],
+//       ),
+//       body: ChangeNotifierProvider(
+//         create: (_) => MyStoreProvider(
+//           preferencesHelper: PreferencesHelper(
+//             sharedPreferences: SharedPreferences.getInstance(),
+//           ),
+//         ),
+//         child: Consumer<MyStoreProvider>(
+//           builder: (context, provider, child) {
+//             return StreamBuilder(
+//               stream:
+//                   FirestoreProductService.getAllUsersProducts(provider.userId),
+//               builder: (BuildContext context,
+//                   AsyncSnapshot<QuerySnapshot> snapshots) {
+//                 if (snapshots.hasData) {
+//                   if (snapshots.data!.docs.isEmpty) {
+//                     return noProductsAdded();
+//                   }
+//                   return _myProductsList(snapshots);
+//                 }
+//
+//                 return Container();
+//               },
+//             );
+//           },
+//         ),
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         child: const FaIcon(FontAwesomeIcons.plus),
+//         onPressed: () {
+//           inject<Navigate>().navigateTo(ScreenConst.addProduct);
+//         },
+//       ),
+//     );
+//   }
+// }
 
 ListView _myProductsList(AsyncSnapshot<QuerySnapshot> snapshot) {
   List<ProductModel> allProduct = [];
