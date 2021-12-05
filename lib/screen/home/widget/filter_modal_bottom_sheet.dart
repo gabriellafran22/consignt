@@ -1,5 +1,6 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/screen/home/widget_dialog/filter_category_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,9 +14,9 @@ class FilterModalBottomSheet extends StatefulWidget {
 }
 
 class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
-  String sort = 'Newest';
   TextEditingController minPriceController = TextEditingController();
   TextEditingController maxPriceController = TextEditingController();
+  String productCategory = '';
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +49,22 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                   Text(
                     'Category',
                     style: titleText(16),
+                  ),
+                  //todo: masih error
+                  ListTile(
+                    title: productCategory.isEmpty
+                        ? const Text(
+                      'Choose a Product Category',
+                    )
+                        : Text(productCategory),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios,
+                    ),
+                    onTap: () async {
+                        print(productCategory);
+                        productCategory = await filterCategoryDialog(context);
+                        print(productCategory);
+                    },
                   ),
                   const Divider(
                     height: 40,
