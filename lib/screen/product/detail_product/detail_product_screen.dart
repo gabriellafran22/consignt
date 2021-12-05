@@ -55,7 +55,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               if (!snapshot.hasData) {
                 return loadingIndicator();
               }
-              return productDetail(context, snapshot.data);
+              return productDetail(context, snapshot.data, widget.productId);
             },
           ),
         ),

@@ -50,6 +50,31 @@ Widget noProductsAdded() {
   );
 }
 
+Widget noFavoriteProducts() {
+  return Padding(
+    padding: const EdgeInsets.all(20),
+    child: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const FaIcon(
+            FontAwesomeIcons.frownOpen,
+            size: 50,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'You Have Not Added Any Products to Favorites',
+            style: titleText(20),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 Widget pleaseCheckInternet() {
   return Padding(
     padding: const EdgeInsets.all(20),

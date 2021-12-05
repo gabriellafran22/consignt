@@ -8,6 +8,7 @@ class PreferencesProvider extends ChangeNotifier {
 
   PreferencesProvider({required this.preferencesHelper}) {
     _getView();
+    getUserId();
   }
 
   bool get isListView => _isListView;

@@ -4,7 +4,10 @@ import 'package:consignt/common/utils.dart';
 import 'package:consignt/widget/price_format.dart';
 import 'package:flutter/material.dart';
 
-Widget productDetail(BuildContext context, DocumentSnapshot? snapshot) {
+import 'favorite_handler.dart';
+
+Widget productDetail(
+    BuildContext context, DocumentSnapshot? snapshot, String productId) {
   Map<String, dynamic> data = snapshot?.data() as Map<String, dynamic>;
   var product = Utils.convertDocumentToProductModel(data);
   return Column(
@@ -33,7 +36,7 @@ Widget productDetail(BuildContext context, DocumentSnapshot? snapshot) {
                   formatPrice(product.productPrice),
                   style: titleText(20),
                 ),
-                const Icon(Icons.favorite_border),
+                FavoriteHandler(productId: productId),
               ],
             ),
             const SizedBox(

@@ -78,61 +78,6 @@ class _MyStoreScreenState extends State<MyStoreScreen> {
   }
 }
 
-//
-// class _MyStoreScreenState extends State<MyStoreScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(
-//           'My Products',
-//           style: titleTextWhite,
-//         ),
-//         actions: [
-//           IconButton(
-//             onPressed: () => inject<Navigate>().navigateTo(ScreenConst.editStore, arguments: {
-//               'userId': '',
-//             }),
-//             icon: const Icon(Icons.settings),
-//           ),
-//         ],
-//       ),
-//       body: ChangeNotifierProvider(
-//         create: (_) => MyStoreProvider(
-//           preferencesHelper: PreferencesHelper(
-//             sharedPreferences: SharedPreferences.getInstance(),
-//           ),
-//         ),
-//         child: Consumer<MyStoreProvider>(
-//           builder: (context, provider, child) {
-//             return StreamBuilder(
-//               stream:
-//                   FirestoreProductService.getAllUsersProducts(provider.userId),
-//               builder: (BuildContext context,
-//                   AsyncSnapshot<QuerySnapshot> snapshots) {
-//                 if (snapshots.hasData) {
-//                   if (snapshots.data!.docs.isEmpty) {
-//                     return noProductsAdded();
-//                   }
-//                   return _myProductsList(snapshots);
-//                 }
-//
-//                 return Container();
-//               },
-//             );
-//           },
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         child: const FaIcon(FontAwesomeIcons.plus),
-//         onPressed: () {
-//           inject<Navigate>().navigateTo(ScreenConst.addProduct);
-//         },
-//       ),
-//     );
-//   }
-// }
-
 ListView _myProductsList(AsyncSnapshot<QuerySnapshot> snapshot) {
   List<ProductModel> allProduct = [];
   for (var item in snapshot.data!.docs) {
