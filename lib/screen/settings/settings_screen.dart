@@ -159,7 +159,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Colors.greenAccent,
                         'Contact Us',
                         () {
-                          //TODO: Contact Us PAGE
+                          inject<Navigate>().navigateTo(ScreenConst.contactUs);
                         },
                       ),
                       _listTileIcon(

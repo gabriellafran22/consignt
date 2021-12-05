@@ -16,7 +16,7 @@ void showLogoutDialog(BuildContext context) {
       return AlertDialog(
         title: Text(
           'Log Out',
-          style: titleText16,
+          style: titleText(16),
         ),
         content: const Text(
           'Are you sure?',

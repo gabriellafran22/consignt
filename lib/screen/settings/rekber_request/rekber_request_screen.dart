@@ -4,8 +4,8 @@ import 'package:consignt/common/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class RekBerRequest extends StatelessWidget {
-  const RekBerRequest({Key? key}) : super(key: key);
+class RekBerRequestScreen extends StatelessWidget {
+  const RekBerRequestScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class RekBerRequest extends StatelessWidget {
             children: [
               Text(
                 'Please choose one of the admin below to help secure your transaction in CONSIGNT using RekBer (Rekening Bersama)',
-                style: titleText16,
+                style: titleText(16),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -61,7 +61,7 @@ class RekBerRequest extends StatelessWidget {
               ),
               Text(
                 'or',
-                style: titleText16,
+                style: titleText(16),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(

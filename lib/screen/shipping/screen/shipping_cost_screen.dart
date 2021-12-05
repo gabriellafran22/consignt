@@ -25,7 +25,7 @@ class ShippingCostScreen extends StatelessWidget {
             children: [
               Text(
                 'From (Origin City)',
-                style: titleText16,
+                style: titleText(16),
               ),
               const SizedBox(
                 height: 10,
@@ -39,7 +39,7 @@ class ShippingCostScreen extends StatelessWidget {
               ),
               Text(
                 'To (Destination City)',
-                style: titleText16,
+                style: titleText(16),
               ),
               const SizedBox(
                 height: 10,
@@ -73,7 +73,7 @@ class ShippingCostScreen extends StatelessWidget {
               ),
               Text(
                 'Courier',
-                style: titleText16,
+                style: titleText(16),
               ),
               const SizedBox(
                 height: 10,

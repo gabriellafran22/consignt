@@ -28,25 +28,13 @@ TextStyle titleTextWhite = const TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-TextStyle titleText20 = const TextStyle(
+TextStyle titleText(double fontSize) => TextStyle(
   color: Colors.black,
-  fontSize: 20,
+  fontSize: fontSize,
   fontWeight: FontWeight.bold,
 );
 
-TextStyle titleText16 = const TextStyle(
-  color: Colors.black,
-  fontSize: 16,
-  fontWeight: FontWeight.bold,
-);
-
-TextStyle titleText14 = const TextStyle(
-  color: Colors.black,
-  fontSize: 14,
-  fontWeight: FontWeight.bold,
-);
-
-TextStyle contentText18 = const TextStyle(
+TextStyle contentTextWithLineSpacing = const TextStyle(
   color: Colors.black,
   fontSize: 16,
   height: 1.5,

@@ -14,7 +14,7 @@ void showDialogDelete(BuildContext context, EditProductProvider provider) {
       return AlertDialog(
         title: Text(
           'Delete Product',
-          style: titleText16,
+          style: titleText(16),
         ),
         content: const Text(
           'Are you sure, you want to delete this product?',

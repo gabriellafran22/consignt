@@ -11,7 +11,7 @@ Widget noProductsFound(){
         children: [
           const FaIcon(FontAwesomeIcons.frownOpen, size: 50,),
           const SizedBox(height: 10,),
-          Text('No Products Found', style: titleText20,),
+          Text('No Products Found', style: titleText(20),),
         ],
       ),
     ),
@@ -27,7 +27,7 @@ Widget noProductsAdded(){
         children: [
           const FaIcon(FontAwesomeIcons.frownOpen, size: 50,),
           const SizedBox(height: 10,),
-          Text('You Have Not Added Any Products', style: titleText20,),
+          Text('You Have Not Added Any Products', style: titleText(20),),
         ],
       ),
     ),
@@ -43,7 +43,7 @@ Widget pleaseCheckInternet(){
         children: [
           const Icon(Icons.wifi_off_rounded),
           const SizedBox(height: 10,),
-          Text('Please Check Your Internet Connection', style: titleText20,),
+          Text('Please Check Your Internet Connection', style: titleText(20),),
         ],
       ),
     ),

@@ -26,13 +26,13 @@ class AirwayBillResultCard extends StatelessWidget {
               Center(
                 child: Text(
                   airwayBillData!.summary?.awb ?? '',
-                  style: titleText20,
+                  style: titleText(20),
                 ),
               ),
               const SizedBox(height: 30),
               Text(
                 'Package Overview',
-                style: titleText16,
+                style: titleText(16),
               ),
               const SizedBox(height: 10),
               _rowText(
@@ -71,7 +71,7 @@ class AirwayBillResultCard extends StatelessWidget {
               ),
               Text(
                 'Package Detail',
-                style: titleText16,
+                style: titleText(16),
               ),
               const SizedBox(height: 10),
               _rowText(
@@ -100,7 +100,7 @@ class AirwayBillResultCard extends StatelessWidget {
               ),
               Text(
                 'Package Process',
-                style: titleText16,
+                style: titleText(16),
               ),
               const SizedBox(
                 height: 10,
@@ -111,7 +111,7 @@ class AirwayBillResultCard extends StatelessWidget {
                       child: Center(
                         child: Text(
                           'History Data Not Available',
-                          style: titleText16,
+                          style: titleText(16),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -142,7 +142,7 @@ Widget _rowText(String title, String content) {
       children: [
         Text(
           title,
-          style: titleText14,
+          style: titleText(14),
         ),
         const SizedBox(
           width: 20,

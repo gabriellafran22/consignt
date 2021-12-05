@@ -24,7 +24,7 @@ class AirwayBillScreen extends StatelessWidget {
             children: [
               Text(
                 'Courier',
-                style: titleText16,
+                style: titleText(16),
               ),
               const SizedBox(
                 height: 10,
@@ -37,7 +37,7 @@ class AirwayBillScreen extends StatelessWidget {
               ),
               Text(
                 'AirwayBill',
-                style: titleText16,
+                style: titleText(16),
               ),
               const SizedBox(
                 height: 10,
@@ -98,7 +98,7 @@ Widget _airwayBillHandler(ShippingProvider provider) {
       return Center(
         child: Text(
           'Invalid tracking number, \nplease check your airwayBill number again',
-          style: titleText16,
+          style: titleText(16),
           textAlign: TextAlign.center,
         ),
       );
@@ -106,7 +106,7 @@ Widget _airwayBillHandler(ShippingProvider provider) {
       return Center(
         child: Text(
           'Invalid tracking number, \nplease check your airwayBill number again',
-          style: titleText16,
+          style: titleText(16),
           textAlign: TextAlign.center,
         ),
       );

@@ -23,7 +23,7 @@ class ShippingPriceCard extends StatelessWidget {
             children: [
               Text(
                 result?.name ?? '',
-                style: titleText20,
+                style: titleText(20),
               ),
               const SizedBox(height: 20),
               ListView.separated(

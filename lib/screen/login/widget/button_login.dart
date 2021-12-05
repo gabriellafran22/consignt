@@ -24,7 +24,7 @@ class ButtonLogin extends StatelessWidget {
       child: ElevatedButton(
         child: Text(
           'LOG IN',
-          style: titleText16,
+          style: titleText(16),
         ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.white),

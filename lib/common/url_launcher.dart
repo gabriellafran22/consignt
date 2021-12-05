@@ -8,6 +8,15 @@ Future<void> makePhoneCall(String phoneNumber) async {
   await launch(launchUri.toString());
 }
 
+Future<void> sendAnEmail(String subject, String body) async {
+  final Uri launchUri = Uri(
+    scheme: 'mailto',
+    path: 'consignt@gmail.com',
+    queryParameters: {'subject': subject, 'body': body},
+  );
+  await launch(launchUri.toString());
+}
+
 Future<void> launchInBrowser(String url) async {
   if (!await launch(
     url,

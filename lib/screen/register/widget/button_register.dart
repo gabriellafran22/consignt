@@ -18,7 +18,7 @@ class ButtonRegister extends StatelessWidget {
       child: ElevatedButton(
         child: Text(
           'REGISTER',
-          style: titleText16,
+          style: titleText(16),
         ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.white),

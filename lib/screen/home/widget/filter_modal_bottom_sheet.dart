@@ -39,7 +39,7 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                 children: [
                   Text(
                     'Location',
-                    style: titleText16,
+                    style: titleText(16),
                   ),
                   const Divider(
                     height: 40,
@@ -47,7 +47,7 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                   ),
                   Text(
                     'Category',
-                    style: titleText16,
+                    style: titleText(16),
                   ),
                   const Divider(
                     height: 40,
@@ -55,7 +55,7 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                   ),
                   Text(
                     'Price',
-                    style: titleText16,
+                    style: titleText(16),
                   ),
                   const SizedBox(
                     height: 10,

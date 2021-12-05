@@ -31,7 +31,7 @@ Widget productDetail(BuildContext context, DocumentSnapshot? snapshot) {
               children: [
                 Text(
                   formatPrice(product.productPrice),
-                  style: titleText20,
+                  style: titleText(20),
                 ),
                 const Icon(Icons.favorite_border),
               ],
@@ -41,7 +41,7 @@ Widget productDetail(BuildContext context, DocumentSnapshot? snapshot) {
             ),
             Text(
               product.productName,
-              style: contentText18,
+              style: contentTextWithLineSpacing,
             ),
           ],
         ),
@@ -64,7 +64,7 @@ Widget productDetail(BuildContext context, DocumentSnapshot? snapshot) {
             Expanded(
               child: Text(
                 '${product.productProvince}, ${product.productCity}',
-                style: contentText18,
+                style: contentTextWithLineSpacing,
               ),
             ),
           ],
@@ -84,7 +84,7 @@ Widget productDetail(BuildContext context, DocumentSnapshot? snapshot) {
             Expanded(
               child: Text(
                 product.productCategory,
-                style: contentText18,
+                style: contentTextWithLineSpacing,
               ),
             ),
           ],
@@ -101,14 +101,14 @@ Widget productDetail(BuildContext context, DocumentSnapshot? snapshot) {
           children: [
             Text(
               'Description',
-              style: titleText20,
+              style: titleText(20),
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
               product.productDescription,
-              style: contentText18,
+              style: contentTextWithLineSpacing,
             ),
           ],
         ),

@@ -9,6 +9,7 @@ import 'package:consignt/screen/product/edit_product/edit_product_screen.dart';
 import 'package:consignt/screen/profile/profile_screen.dart';
 import 'package:consignt/screen/register/register_screen.dart';
 import 'package:consignt/screen/settings/about/about_screen.dart';
+import 'package:consignt/screen/settings/contact_us/contact_us_screen.dart';
 import 'package:consignt/screen/settings/rekber_request/rekber_request_screen.dart';
 import 'package:consignt/screen/settings/settings_screen.dart';
 import 'package:consignt/screen/shipping/shipping_screen.dart';
@@ -62,7 +63,9 @@ Route routes(RouteSettings settings) {
     case ScreenConst.about:
       return buildRoute(settings, const AboutScreen());
     case ScreenConst.rekBerRequest:
-      return buildRoute(settings, const RekBerRequest());
+      return buildRoute(settings, const RekBerRequestScreen());
+    case ScreenConst.contactUs:
+      return buildRoute(settings, const ContactUsScreen());
     default:
       return buildRoute(settings, const SplashScreen());
   }
