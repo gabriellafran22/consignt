@@ -1,5 +1,4 @@
 import 'package:consignt/constant/screen_const.dart';
-import 'package:consignt/screen/about/about_screen.dart';
 import 'package:consignt/screen/favorite/favorite_screen.dart';
 import 'package:consignt/screen/home/home_screen.dart';
 import 'package:consignt/screen/init/init_screen.dart';
@@ -9,6 +8,8 @@ import 'package:consignt/screen/product/detail_product/detail_product_screen.dar
 import 'package:consignt/screen/product/edit_product/edit_product_screen.dart';
 import 'package:consignt/screen/profile/profile_screen.dart';
 import 'package:consignt/screen/register/register_screen.dart';
+import 'package:consignt/screen/settings/about/about_screen.dart';
+import 'package:consignt/screen/settings/rekber_request/rekber_request_screen.dart';
 import 'package:consignt/screen/settings/settings_screen.dart';
 import 'package:consignt/screen/shipping/shipping_screen.dart';
 import 'package:consignt/screen/splash_screen.dart';
@@ -60,6 +61,8 @@ Route routes(RouteSettings settings) {
       );
     case ScreenConst.about:
       return buildRoute(settings, const AboutScreen());
+    case ScreenConst.rekBerRequest:
+      return buildRoute(settings, const RekBerRequest());
     default:
       return buildRoute(settings, const SplashScreen());
   }

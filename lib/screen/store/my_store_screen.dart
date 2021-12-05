@@ -90,6 +90,8 @@ ListView _myProductsList(AsyncSnapshot<QuerySnapshot> snapshot) {
           );
         },
         child: Card(
+          elevation: 5,
+          shadowColor: Colors.blueGrey,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),

@@ -22,7 +22,6 @@ TextStyle textFormFieldStyle = const TextStyle(
   fontSize: 14,
 );
 
-
 TextStyle titleTextWhite = const TextStyle(
   color: Colors.white,
   fontSize: 16,
@@ -86,9 +85,18 @@ InputDecoration textFormFieldDecorationWithLabel(String labelText) =>
     );
 
 ButtonStyle fullyRoundedButton() => ButtonStyle(
-  shape: MaterialStateProperty.all(
-    RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20),
-    ),
-  ),
-);
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    );
+
+ButtonStyle fullyRoundedButtonCustomColor(Color color) => ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(color),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    );

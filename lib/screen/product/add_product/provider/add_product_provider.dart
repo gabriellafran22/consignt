@@ -24,6 +24,7 @@ class AddProductProvider extends CustomChangeNotifier {
   String productCity = '';
   String productPictureUrl = '';
   String provinceId = '0';
+  bool isChanged = false;
 
   AddProductProvider({required this.preferencesHelper}) {
     _getUserId();
@@ -80,23 +81,27 @@ class AddProductProvider extends CustomChangeNotifier {
 
   void setProductPicture(String imagePath) {
     productPictureUrl = imagePath;
+    isChanged = true;
     notifyListeners();
   }
 
   void setProductCategory(String tempCategory) {
     productCategory = tempCategory;
+    isChanged = true;
     notifyListeners();
   }
 
   void setProductProvince(Province tempProvince) {
     productProvince = tempProvince.province ?? '';
     provinceId = tempProvince.provinceId ?? '0';
+    isChanged = true;
     getCity();
     notifyListeners();
   }
 
   void setProductCity(City tempCity) {
     productCity = '${tempCity.type} ${tempCity.cityName}';
+    isChanged = true;
     notifyListeners();
   }
 

@@ -14,4 +14,5 @@ class ScreenConst {
   static const String editProduct = '/editProduct';
   static const String detailProduct = '/detail_product';
   static const String about = '/about';
+  static const String rekBerRequest = '/rekBerRequest';
 }

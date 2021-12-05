@@ -8,6 +8,7 @@ import 'package:consignt/screen/product/add_product/widget/add_product_picture.d
 import 'package:consignt/screen/product/add_product/widget_dialog/add_category_dialog.dart';
 import 'package:consignt/screen/product/add_product/widget_dialog/add_product_city_dialog.dart';
 import 'package:consignt/screen/product/add_product/widget_dialog/add_product_province_dialog.dart';
+import 'package:consignt/widget/back_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -52,6 +53,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   },
                 )
               ],
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  if (provider.isChanged ||
+                      provider.productNameController.text.isNotEmpty ||
+                      provider.productDescController.text.isNotEmpty ||
+                      provider.productPriceController.text.isNotEmpty) {
+                    backDialog(context);
+                  } else {
+                    inject<Navigate>().pop();
+                  }
+                },
+              ),
             ),
             body: SingleChildScrollView(
               child: Form(

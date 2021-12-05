@@ -146,12 +146,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         height: 10,
                         thickness: 10,
                       ),
+                      _listTileFaIcon(
+                        FontAwesomeIcons.handsHelping,
+                        Colors.lightBlueAccent,
+                        'RekBer Request',
+                            () {
+                          inject<Navigate>().navigateTo(ScreenConst.rekBerRequest);
+                        },
+                      ),
                       _listTileIcon(
                         Icons.help_outline,
                         Colors.greenAccent,
-                        'Help',
+                        'Contact Us',
                         () {
-                          //TODO: HELP PAGE
+                          //TODO: Contact Us PAGE
                         },
                       ),
                       _listTileIcon(

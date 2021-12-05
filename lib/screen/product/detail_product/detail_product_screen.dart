@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/common/url_launcher.dart';
 import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
 import 'package:consignt/screen/product/detail_product/widget/product_detail.dart';
 import 'package:consignt/screen/product/provider/contact_provider.dart';
@@ -7,7 +8,6 @@ import 'package:consignt/widget/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class DetailProductScreen extends StatefulWidget {
   final String productId;
@@ -81,7 +81,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                                   ),
                                   title: const Text('Phone Number'),
                                   onTap: () async {
-                                    _makePhoneCall(provider.phoneNumber);
+                                    makePhoneCall(provider.phoneNumber);
                                   },
                                 )
                               : const SizedBox(),
@@ -93,7 +93,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                                   ),
                                   title: const Text('Whats App'),
                                   onTap: () {
-                                    _launchInBrowser(
+                                    launchInBrowser(
                                       'https://api.whatsapp.com/send?phone=62${provider.whatsappNumber}',
                                     );
                                   },
@@ -107,7 +107,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                                   ),
                                   title: const Text('Telegram'),
                                   onTap: () {
-                                    _launchInBrowser(
+                                    launchInBrowser(
                                       'https://t.me/${provider.telegramUsername}',
                                     );
                                   },
@@ -128,24 +128,5 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         ),
       ),
     );
-  }
-}
-
-Future<void> _makePhoneCall(String phoneNumber) async {
-  final Uri launchUri = Uri(
-    scheme: 'tel',
-    path: phoneNumber,
-  );
-  await launch(launchUri.toString());
-}
-
-Future<void> _launchInBrowser(String url) async {
-  if (!await launch(
-    url,
-    forceSafariVC: false,
-    forceWebView: false,
-    headers: <String, String>{'my_header_key': 'my_header_value'},
-  )) {
-    throw 'Could not launch $url';
   }
 }
