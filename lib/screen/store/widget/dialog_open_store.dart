@@ -9,8 +9,8 @@ void confirmOpenStore(BuildContext context, CreateStoreProvider provider) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Open My Own Store'),
-        content: const Text('Are you sure?'),
+        title: const Text('Start Selling'),
+        content: const Text('Are you sure you want to start selling?'),
         actions: [
           TextButton(
             onPressed: () {

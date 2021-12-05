@@ -24,7 +24,7 @@ class CreateStoreScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                'Create Store',
+                'Open My Own Store',
                 style: titleTextWhite,
               ),
             ),
@@ -41,7 +41,7 @@ class CreateStoreScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         child: Text(
-                          'Open My Own Store',
+                          'Start Selling',
                           style: titleTextWhite,
                         ),
                         style: fullyRoundedButton(),

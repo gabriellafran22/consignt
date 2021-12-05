@@ -16,9 +16,10 @@ GridView productGridCard(AsyncSnapshot<QuerySnapshot> snapshot) {
     allProduct.add(product);
   }
   return GridView.builder(
+    padding: const EdgeInsets.all(5),
     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
       maxCrossAxisExtent: 200,
-      childAspectRatio: 3 / 2,
+      childAspectRatio: 2 / 2,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
     ),
@@ -35,6 +36,8 @@ GridView productGridCard(AsyncSnapshot<QuerySnapshot> snapshot) {
           );
         },
         child: Card(
+          elevation: 5,
+          shadowColor: Colors.blueGrey,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

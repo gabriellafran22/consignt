@@ -22,7 +22,10 @@ class FormContact extends StatelessWidget {
             prefix: Text('+62'),
             prefixIcon: Padding(
               padding: EdgeInsets.all(10.0),
-              child: FaIcon(FontAwesomeIcons.whatsapp),
+              child: FaIcon(
+                FontAwesomeIcons.whatsapp,
+                color: Colors.green,
+              ),
             ),
             fillColor: Colors.white,
             filled: true,
@@ -41,7 +44,10 @@ class FormContact extends StatelessWidget {
             hintText: 'username',
             prefixIcon: Padding(
               padding: EdgeInsets.all(10.0),
-              child: FaIcon(FontAwesomeIcons.telegram),
+              child: FaIcon(
+                FontAwesomeIcons.telegram,
+                color: Colors.lightBlueAccent,
+              ),
             ),
             fillColor: Colors.white,
             filled: true,

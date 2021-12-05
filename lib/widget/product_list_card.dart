@@ -17,6 +17,7 @@ ListView productListCard(AsyncSnapshot<QuerySnapshot> snapshot) {
     allProduct.add(product);
   }
   return ListView.builder(
+    padding: const EdgeInsets.all(5),
     itemCount: allProduct.length,
     itemBuilder: (context, index) {
       var product = allProduct[index];
@@ -30,6 +31,8 @@ ListView productListCard(AsyncSnapshot<QuerySnapshot> snapshot) {
           );
         },
         child: Card(
+          shadowColor: Colors.blueGrey,
+          elevation: 5,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
