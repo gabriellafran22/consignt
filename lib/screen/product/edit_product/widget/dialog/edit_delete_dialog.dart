@@ -5,7 +5,7 @@ import 'package:consignt/core/network/service/firebase/firestore/firestore_produ
 import 'package:consignt/screen/product/edit_product/edit_product_provider/edit_product_provider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../di.dart';
+import '../../../../../di.dart';
 
 void showDialogDelete(BuildContext context, EditProductProvider provider) {
   showDialog(

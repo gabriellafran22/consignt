@@ -3,7 +3,7 @@ import 'package:consignt/common/snackbar.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../di.dart';
+import '../../../../../di.dart';
 
 void checkPasswordInPasswordDialog(
     BuildContext context, ProfileProvider provider) {

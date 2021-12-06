@@ -1,13 +1,11 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/constant/product_category_const.dart';
+import 'package:consignt/screen/product/edit_product/edit_product_provider/edit_product_provider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../di.dart';
+import '../../../../../di.dart';
 
-//TODO: MASIH ERROR
-Future<String> filterCategoryDialog(BuildContext context) async {
-  String temp = '';
-
+void editCategoryDialog(BuildContext context, EditProductProvider provider) {
   showDialog(
     context: context,
     builder: (context) {
@@ -20,11 +18,11 @@ Future<String> filterCategoryDialog(BuildContext context) async {
             shrinkWrap: true,
             itemCount: productCategoryList.length,
             itemBuilder: (BuildContext context, int index) {
-              String category = productCategoryList[index];
+              var category = productCategoryList[index];
               return ListTile(
                 title: Text(category),
                 onTap: () {
-                  temp = category;
+                  provider.setProductCategory(category);
                   inject<Navigate>().pop();
                 },
               );
@@ -34,6 +32,4 @@ Future<String> filterCategoryDialog(BuildContext context) async {
       );
     },
   );
-
-  return temp;
 }

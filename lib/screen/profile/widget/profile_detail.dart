@@ -1,10 +1,10 @@
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
-import 'package:consignt/screen/profile/widget_dialog/city_dialog.dart';
-import 'package:consignt/screen/profile/widget_dialog/email_dialog.dart';
-import 'package:consignt/screen/profile/widget_dialog/name_dialog.dart';
-import 'package:consignt/screen/profile/widget_dialog/password_dialog.dart';
-import 'package:consignt/screen/profile/widget_dialog/phone_number_dialog.dart';
-import 'package:consignt/screen/profile/widget_dialog/province_dialog.dart';
+import 'package:consignt/screen/profile/widget/dialog/city_dialog.dart';
+import 'package:consignt/screen/profile/widget/dialog/email_dialog.dart';
+import 'package:consignt/screen/profile/widget/dialog/name_dialog.dart';
+import 'package:consignt/screen/profile/widget/dialog/password_dialog.dart';
+import 'package:consignt/screen/profile/widget/dialog/phone_number_dialog.dart';
+import 'package:consignt/screen/profile/widget/dialog/province_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ProfileDetail extends StatelessWidget {

@@ -4,7 +4,7 @@ import 'package:consignt/screen/search/search_result/provider/search_result_prov
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../di.dart';
+import '../../../../../di.dart';
 
 class SortModalBottomSheet extends StatelessWidget {
   final SearchResultProvider provider;

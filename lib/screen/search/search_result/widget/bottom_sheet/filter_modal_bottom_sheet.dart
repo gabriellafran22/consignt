@@ -1,10 +1,10 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
-import 'package:consignt/screen/home/widget_dialog/filter_category_dialog.dart';
+import 'package:consignt/screen/search/search_result/widget/dialog/filter_category_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../di.dart';
+import '../../../../../di.dart';
 
 class FilterModalBottomSheet extends StatefulWidget {
   const FilterModalBottomSheet({Key? key}) : super(key: key);

@@ -2,7 +2,7 @@ import 'package:consignt/common/navigate.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../di.dart';
+import '../../../../../di.dart';
 
 void phoneNumberDialog(BuildContext context, ProfileProvider provider) {
   String temp = provider.phoneNumberTextField.text;

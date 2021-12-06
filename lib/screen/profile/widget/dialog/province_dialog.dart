@@ -1,11 +1,11 @@
 import 'package:consignt/common/navigate.dart';
-import 'package:consignt/screen/product/add_product/provider/add_product_provider.dart';
+import 'package:consignt/common/snackbar.dart';
+import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../di.dart';
+import '../../../../../di.dart';
 
-void addProductProvinceDialog(
-    BuildContext context, AddProductProvider provider) {
+void provinceDialog(BuildContext context, ProfileProvider provider) {
   showDialog(
     context: context,
     builder: (context) {
@@ -17,8 +17,7 @@ void addProductProvinceDialog(
           child: provider.province.data == null
               ? const Center(
                   child: Text(
-                    'Province data is still loading, please close and open it again',
-                  ),
+                      'Province data is still loading, please close and open it again'),
                 )
               : ListView.builder(
                   shrinkWrap: true,
@@ -29,7 +28,11 @@ void addProductProvinceDialog(
                     return ListTile(
                       title: Text(provinceName),
                       onTap: () {
-                        provider.setProductProvince(province);
+                        showSnackBar(
+                          context,
+                          'Province changed to: $provinceName',
+                        );
+                        provider.setProvince(province);
                         inject<Navigate>().pop();
                       },
                     );

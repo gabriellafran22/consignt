@@ -1,9 +1,9 @@
-// This is a basic Flutter widget_dialog test.
+// This is a basic Flutter dialog test.
 //
-// To perform an interaction with a widget_dialog in your test, use the WidgetTester
+// To perform an interaction with a dialog in your test, use the WidgetTester
 // utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widget_dialog in the widget_dialog
-// tree, read text, and verify that the values of widget_dialog properties are correct.
+// gestures. You can also use WidgetTester to find child dialog in the dialog
+// tree, read text, and verify that the values of dialog properties are correct.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
