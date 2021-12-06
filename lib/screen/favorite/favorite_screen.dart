@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/core/network/service/firebase/firestore/firestore_favorites_service.dart';
+import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
+import 'package:consignt/screen/favorite/widget/grid_favorite_product.dart';
+import 'package:consignt/screen/favorite/widget/list_favorite_product.dart';
+import 'package:consignt/widget/loading_indicator.dart';
 import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,102 +20,102 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Favorite Products',
-          style: titleTextWhite,
-        ),
-      ),
-      body: Consumer<PreferencesProvider>(
-        builder: (context, provider, child) {
-          return StreamBuilder(
+    return Consumer<PreferencesProvider>(
+      builder: (context, provider, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Favorite Products',
+              style: titleTextWhite,
+            ),
+            actions: [
+              IconButton(
+                icon: provider.isListViewInFavorites
+                    ? const Icon(
+                        Icons.format_list_bulleted,
+                        color: Colors.white,
+                      )
+                    : const Icon(
+                        Icons.grid_view,
+                        color: Colors.white,
+                      ),
+                onPressed: () {
+                  if (provider.isListViewInFavorites) {
+                    provider.setViewInFavorites(false);
+                  } else {
+                    provider.setViewInFavorites(true);
+                  }
+                },
+              ),
+            ],
+          ),
+          body: StreamBuilder(
             stream: FirestoreFavoriteService.allFavoriteDataBasedOnUserId(
-                provider.userId),
+              provider.userId,
+            ),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshots) {
               if (snapshots.hasData) {
                 if (snapshots.data!.docs.isEmpty) {
                   return noFavoriteProducts();
                 }
-                // return _myFavoritesList(snapshots);
-                return Container();
+                return provider.isListViewInFavorites
+                    ? _myFavoritesList(snapshots)
+                    : _myFavoritesGrid(snapshots);
               }
 
               return Container();
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
 
-// ListView _myFavoritesList(AsyncSnapshot<QuerySnapshot> snapshot) {
-//   List<ProductModel> allProduct = [];
-//   for (var item in snapshot.data!.docs) {
-//     Map<String, dynamic> data = item.data() as Map<String, dynamic>;
-//     ProductModel product = Utils.convertDocumentToProductModel(data);
-//     allProduct.add(product);
-//   }
-//   return ListView.builder(
-//     itemCount: allProduct.length,
-//     itemBuilder: (context, index) {
-//       var product = allProduct[index];
-//       return InkWell(
-//         onTap: () {
-//           inject<Navigate>().navigateTo(
-//             ScreenConst.editProduct,
-//             arguments: {
-//               'productId': snapshot.data!.docs[index].id,
-//             },
-//           );
-//         },
-//         child: Card(
-//           elevation: 5,
-//           shadowColor: Colors.blueGrey,
-//           shape:
-//           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-//           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-//           child: Padding(
-//             padding: const EdgeInsets.all(10),
-//             child: Row(
-//               children: [
-//                 Image.network(
-//                   product.productPictureUrl,
-//                   width: 80,
-//                   height: 80,
-//                 ),
-//                 const SizedBox(
-//                   width: 10,
-//                 ),
-//                 Expanded(
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         product.productName,
-//                         overflow: TextOverflow.ellipsis,
-//                         maxLines: 2,
-//                       ),
-//                       const SizedBox(
-//                         height: 5,
-//                       ),
-//                       Text(
-//                         formatPrice(product.productPrice),
-//                         maxLines: 2,
-//                         overflow: TextOverflow.ellipsis,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       );
-//     },
-//   );
-// }
+ListView _myFavoritesList(AsyncSnapshot<QuerySnapshot> snapshot) {
+  return ListView.builder(
+    itemCount: snapshot.data!.docs.length,
+    itemBuilder: (context, index) {
+      var product = snapshot.data!.docs[index];
+      return StreamBuilder(
+        stream: FirestoreProductService.getProductDataWithIdStream(
+            product['productId']),
+        builder: (BuildContext context,
+            AsyncSnapshot<DocumentSnapshot> snapshotProduct) {
+          if (!snapshotProduct.hasData) {
+            return loadingIndicator();
+          }
+          return listFavoriteProduct(snapshotProduct);
+        },
+      );
+    },
+  );
+}
 
+GridView _myFavoritesGrid(AsyncSnapshot<QuerySnapshot> snapshot) {
+  return GridView.builder(
+    padding: const EdgeInsets.all(5),
+    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+      maxCrossAxisExtent: 200,
+      childAspectRatio: 2 / 2,
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+    ),
+    itemCount: snapshot.data!.docs.length,
+    itemBuilder: (context, index) {
+      var product = snapshot.data!.docs[index];
+      return StreamBuilder(
+        stream: FirestoreProductService.getProductDataWithIdStream(
+            product['productId']),
+        builder: (BuildContext context,
+            AsyncSnapshot<DocumentSnapshot> snapshotProduct) {
+          if (!snapshotProduct.hasData) {
+            return loadingIndicator();
+          }
+          return gridFavoriteProduct(snapshotProduct);
+        },
+      );
+    },
+  );
+}
