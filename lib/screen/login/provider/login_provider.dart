@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginProvider extends ChangeNotifier {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool _obscurePassword = true;
 
   final GlobalKey<FormState> formKey = GlobalKey();
 
@@ -15,6 +16,8 @@ class LoginProvider extends ChangeNotifier {
   );
 
   static String status = '';
+
+  bool get obscurePassword => _obscurePassword;
 
   Future<bool> saveForm() async {
     final bool isValid = formKey.currentState!.validate();
@@ -31,6 +34,11 @@ class LoginProvider extends ChangeNotifier {
       }
     }
     return false;
+  }
+
+  void setObscurePassword(bool temp){
+    _obscurePassword = temp;
+    notifyListeners();
   }
 
   @override

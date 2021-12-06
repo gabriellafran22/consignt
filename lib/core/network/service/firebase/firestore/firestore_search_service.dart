@@ -8,7 +8,10 @@ class FirestoreSearchService {
   static Stream<QuerySnapshot> getAllProductsWithQueryOrSort(
       {String? sort, int? minPrice, int? maxPrice}) {
     if (sort!.isEmpty) {
-      return productCollection.snapshots();
+      return productCollection
+          .where('productPrice', isGreaterThanOrEqualTo: minPrice)
+          .where('productPrice', isLessThanOrEqualTo: maxPrice)
+          .snapshots();
     } else {
       if (sort == SortConst.priceHighToLow) {
         return productCollection
@@ -23,6 +26,7 @@ class FirestoreSearchService {
             .orderBy('productPrice')
             .snapshots();
       } else {
+        //TODO: INI ERROR KARENA WHERE & ORDERBY NYA GA SAMA
         return productCollection
             .where('productPrice', isGreaterThanOrEqualTo: minPrice)
             .where('productPrice', isLessThanOrEqualTo: maxPrice)

@@ -12,7 +12,7 @@ Widget gridSearchResult(AsyncSnapshot<QuerySnapshot> snapshot, String query) {
     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
       maxCrossAxisExtent: 200,
       childAspectRatio: 2 / 2,
-      crossAxisSpacing: 10,
+      crossAxisSpacing: 2,
       mainAxisSpacing: 10,
     ),
     children: [

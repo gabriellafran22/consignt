@@ -3,6 +3,7 @@ import 'package:consignt/common/styles.dart';
 import 'package:consignt/screen/search/search_result/provider/search_result_provider.dart';
 import 'package:consignt/screen/search/search_result/widget/dialog/filter_category_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../di.dart';
@@ -57,6 +58,7 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                       Expanded(
                         child: TextField(
                           controller: widget.provider.minPriceController,
+                          keyboardType: TextInputType.number,
                           decoration:
                               textFormFieldDecorationWithLabel('Min Price'),
                         ),
@@ -67,6 +69,7 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                       Expanded(
                         child: TextField(
                           controller: widget.provider.maxPriceController,
+                          keyboardType: TextInputType.number,
                           decoration:
                               textFormFieldDecorationWithLabel('Max Price'),
                         ),

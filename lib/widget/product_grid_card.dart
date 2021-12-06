@@ -20,7 +20,7 @@ GridView productGridCard(AsyncSnapshot<QuerySnapshot> snapshot) {
     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
       maxCrossAxisExtent: 200,
       childAspectRatio: 2 / 2,
-      crossAxisSpacing: 10,
+      crossAxisSpacing: 2,
       mainAxisSpacing: 10,
     ),
     itemCount: allProduct.length,

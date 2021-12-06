@@ -1,7 +1,9 @@
+import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/common/validation.dart';
 import 'package:consignt/screen/login/provider/login_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'button_login.dart';
@@ -50,13 +52,37 @@ class FormLogin extends StatelessWidget {
                 ),
                 TextFormField(
                   controller: provider.passwordController,
-                  obscureText: true,
+                  obscureText: provider.obscurePassword,
                   enableSuggestions: false,
                   autocorrect: false,
                   validator: (value) {
                     return passwordValidation(value);
                   },
-                  decoration: textFormFieldDecoration('Password'),
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Password',
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 0,
+                      horizontal: 12,
+                    ),
+                    suffixIcon: IconButton(
+                      icon: FaIcon(
+                        provider.obscurePassword
+                            ? FontAwesomeIcons.eyeSlash
+                            : FontAwesomeIcons.eye,
+                        color: darkGrey,
+                      ),
+                      onPressed: () {
+                        provider.obscurePassword
+                            ? provider.setObscurePassword(false)
+                            : provider.setObscurePassword(true);
+                      },
+                    ),
+                  ),
                   style: textFormFieldStyle,
                 ),
                 const SizedBox(
