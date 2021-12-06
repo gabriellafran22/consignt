@@ -31,6 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Center(
             child: TextField(
               controller: searchController,
+              autofocus: true,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(top: 8),
                 prefixIcon: const Icon(Icons.search),

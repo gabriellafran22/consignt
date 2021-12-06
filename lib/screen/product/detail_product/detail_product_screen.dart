@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/common/url_launcher.dart';
+import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
+import 'package:consignt/di.dart';
 import 'package:consignt/screen/product/detail_product/widget/product_detail.dart';
 import 'package:consignt/screen/product/provider/contact_provider.dart';
 import 'package:consignt/widget/loading_indicator.dart';
@@ -38,8 +41,9 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                   hintText: 'Search a product',
                   border: InputBorder.none,
                 ),
+                readOnly: true,
                 onTap: () {
-                  //TODO: PINDAH KE SEARCH PAGE
+                  inject<Navigate>().navigateTo(ScreenConst.searchScreen);
                 },
               ),
             ),

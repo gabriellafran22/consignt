@@ -1,18 +1,16 @@
 import 'package:consignt/common/navigate.dart';
+import 'package:consignt/constant/sort_const.dart';
+import 'package:consignt/screen/search/search_result/provider/search_result_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../di.dart';
 
-class SortModalBottomSheet extends StatefulWidget {
-  const SortModalBottomSheet({Key? key}) : super(key: key);
+class SortModalBottomSheet extends StatelessWidget {
+  final SearchResultProvider provider;
 
-  @override
-  _SortModalBottomSheetState createState() => _SortModalBottomSheetState();
-}
-
-class _SortModalBottomSheetState extends State<SortModalBottomSheet> {
-  String sort = 'Newest';
+  const SortModalBottomSheet({Key? key, required this.provider})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class _SortModalBottomSheetState extends State<SortModalBottomSheet> {
             size: 14,
           ),
         ),
-        label: Text('Sort: ' + sort),
+        label: Text(provider.sort),
         onPressed: () {
           showModalBottomSheet(
             context: context,
@@ -40,28 +38,22 @@ class _SortModalBottomSheetState extends State<SortModalBottomSheet> {
                       ListTile(
                         title: const Text('Newest'),
                         onTap: () {
-                          setState(() {
-                            sort = 'Newest';
-                            inject<Navigate>().pop();
-                          });
+                          provider.setSort(SortConst.newest);
+                          inject<Navigate>().pop();
                         },
                       ),
                       ListTile(
                         title: const Text('Price: Low to High'),
                         onTap: () {
-                          setState(() {
-                            sort = 'Price: Low to High';
-                            inject<Navigate>().pop();
-                          });
+                          provider.setSort(SortConst.priceLowToHigh);
+                          inject<Navigate>().pop();
                         },
                       ),
                       ListTile(
                         title: const Text('Price: High to Low'),
                         onTap: () {
-                          setState(() {
-                            sort = 'Price: High to Low';
-                            inject<Navigate>().pop();
-                          });
+                          provider.setSort(SortConst.priceHighToLow);
+                          inject<Navigate>().pop();
                         },
                       ),
                     ],

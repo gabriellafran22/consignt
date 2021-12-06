@@ -61,9 +61,7 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                       Icons.arrow_forward_ios,
                     ),
                     onTap: () async {
-                        print(productCategory);
                         productCategory = await filterCategoryDialog(context);
-                        print(productCategory);
                     },
                   ),
                   const Divider(
