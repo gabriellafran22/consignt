@@ -5,18 +5,27 @@ class FirestoreSearchService {
   static CollectionReference productCollection =
       FirebaseFirestore.instance.collection('products');
 
-  static Stream<QuerySnapshot> getAllProducts({String? sort}) {
+  static Stream<QuerySnapshot> getAllProductsWithQueryOrSort(
+      {String? sort, int? minPrice, int? maxPrice}) {
     if (sort!.isEmpty) {
       return productCollection.snapshots();
     } else {
       if (sort == SortConst.priceHighToLow) {
         return productCollection
+            .where('productPrice', isGreaterThanOrEqualTo: minPrice)
+            .where('productPrice', isLessThanOrEqualTo: maxPrice)
             .orderBy('productPrice', descending: true)
             .snapshots();
       } else if (sort == SortConst.priceLowToHigh) {
-        return productCollection.orderBy('productPrice').snapshots();
+        return productCollection
+            .where('productPrice', isGreaterThanOrEqualTo: minPrice)
+            .where('productPrice', isLessThanOrEqualTo: maxPrice)
+            .orderBy('productPrice')
+            .snapshots();
       } else {
         return productCollection
+            .where('productPrice', isGreaterThanOrEqualTo: minPrice)
+            .where('productPrice', isLessThanOrEqualTo: maxPrice)
             .orderBy('createdUpdatedAt', descending: true)
             .snapshots();
       }

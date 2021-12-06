@@ -4,12 +4,13 @@ import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/constant/sort_const.dart';
 import 'package:consignt/core/network/service/firebase/firestore/firestore_search_service.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
+import 'package:consignt/screen/search/search_result/provider/search_result_provider.dart';
 import 'package:consignt/screen/search/search_result/widget/bottom_sheet/filter_modal_bottom_sheet.dart';
 import 'package:consignt/screen/search/search_result/widget/bottom_sheet/sort_modal_bottom_sheet.dart';
-import 'package:consignt/screen/search/search_result/provider/search_result_provider.dart';
 import 'package:consignt/screen/search/search_result/widget/grid_search_result.dart';
 import 'package:consignt/screen/search/search_result/widget/list_search_result.dart';
 import 'package:consignt/widget/loading_indicator.dart';
+import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -81,7 +82,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                       horizontal: 10),
                                   child: Row(
                                     children: [
-                                      const FilterModalBottomSheet(),
+                                      FilterModalBottomSheet(
+                                        provider: provider,
+                                      ),
                                       SortModalBottomSheet(
                                         provider: provider,
                                       ),
@@ -114,16 +117,21 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     ];
                   },
                   body: StreamBuilder(
-                    stream: FirestoreSearchService.getAllProducts(
+                    stream: FirestoreSearchService.getAllProductsWithQueryOrSort(
                       sort: provider.sort == SortConst.defaultValue
                           ? ''
                           : provider.sort,
+                      minPrice: provider.minPrice,
+                      maxPrice: provider.maxPrice,
                     ),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (!snapshot.hasData) {
                         return loadingIndicator();
                       } else {
+                        if(snapshot.data!.docs.isEmpty){
+                          return noProductsFound();
+                        }
                         return prefProvider.isListView
                             ? listSearchResult(
                                 snapshot, widget.searchQueryController.text)
