@@ -8,6 +8,8 @@ import 'package:consignt/screen/product/detail_product/detail_product_screen.dar
 import 'package:consignt/screen/product/edit_product/edit_product_screen.dart';
 import 'package:consignt/screen/profile/profile_screen.dart';
 import 'package:consignt/screen/register/register_screen.dart';
+import 'package:consignt/screen/search/search/search_screen.dart';
+import 'package:consignt/screen/search/search_result/search_result_screen.dart';
 import 'package:consignt/screen/settings/about/about_screen.dart';
 import 'package:consignt/screen/settings/contact_us/contact_us_screen.dart';
 import 'package:consignt/screen/settings/rekber_request/rekber_request_screen.dart';
@@ -71,6 +73,12 @@ Route routes(RouteSettings settings) {
       return buildRoute(settings, const RekBerRequestScreen());
     case ScreenConst.contactUs:
       return buildRoute(settings, const ContactUsScreen());
+    case ScreenConst.searchScreen:
+      return buildRoute(settings, const SearchScreen());
+    case ScreenConst.searchResultScreen:
+      return buildRoute(settings, SearchResultScreen(
+        searchQueryController: args['searchQueryController'],
+      ));
     default:
       return buildRoute(settings, const SplashScreen());
   }
