@@ -117,7 +117,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     ];
                   },
                   body: StreamBuilder(
-                    stream: FirestoreSearchService.getAllProductsWithQueryOrSort(
+                    stream:
+                        FirestoreSearchService.getAllProductsWithQueryOrSort(
                       sort: provider.sort == SortConst.defaultValue
                           ? ''
                           : provider.sort,
@@ -129,7 +130,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       if (!snapshot.hasData) {
                         return loadingIndicator();
                       } else {
-                        if(snapshot.data!.docs.isEmpty){
+                        if (snapshot.data!.docs.isEmpty) {
                           return noProductsFound();
                         }
                         return prefProvider.isListView

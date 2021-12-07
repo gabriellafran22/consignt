@@ -99,3 +99,28 @@ Widget pleaseCheckInternet() {
     ),
   );
 }
+
+Widget searchProductMessage() {
+  return Padding(
+    padding: const EdgeInsets.all(20),
+    child: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.search,
+            size: 50,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Search a product',
+            style: titleText(20),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    ),
+  );
+}

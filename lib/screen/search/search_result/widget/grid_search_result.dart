@@ -3,11 +3,21 @@ import 'package:consignt/common/navigate.dart';
 import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/widget/loading_indicator.dart';
 import 'package:consignt/widget/price_format.dart';
+import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../di.dart';
 
 Widget gridSearchResult(AsyncSnapshot<QuerySnapshot> snapshot, String query) {
+  if (snapshot.data!.docs
+      .where((QueryDocumentSnapshot<Object?> element) => element['productName']
+          .toString()
+          .toLowerCase()
+          .contains(query.toLowerCase()))
+      .isEmpty) {
+    return noProductsFound();
+  }
+
   return GridView(
     padding: const EdgeInsets.all(5),
     gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -51,8 +61,9 @@ Widget gridSearchResult(AsyncSnapshot<QuerySnapshot> snapshot, String query) {
                     ),
                     child: Image.network(
                       data['productPictureUrl'],
-                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
-                        if(loadingProgress == null){
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
                           return child;
                         }
                         return loadingPicture(80, 80);

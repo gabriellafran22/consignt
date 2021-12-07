@@ -3,11 +3,21 @@ import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/widget/price_format.dart';
+import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../di.dart';
 
 Widget listSearchResult(AsyncSnapshot<QuerySnapshot> snapshot, String query) {
+  if (snapshot.data!.docs
+      .where((QueryDocumentSnapshot<Object?> element) => element['productName']
+          .toString()
+          .toLowerCase()
+          .contains(query.toLowerCase()))
+      .isEmpty) {
+    return noProductsFound();
+  }
+
   return ListView(
     padding: EdgeInsets.zero,
     children: [
