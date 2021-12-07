@@ -27,9 +27,19 @@ class SearchHistoryDatabaseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteSearchHistory(int id) async {
+  void deleteSearchHistoryById(int id) async {
     try {
-      await searchHistoryDatabaseHelper.deleteSearchHistory(id);
+      await searchHistoryDatabaseHelper.deleteSearchHistoryById(id);
+      _getSearchHistory();
+    } catch (e) {
+      print(e);
+    }
+    notifyListeners();
+  }
+
+  void deleteAllSearchHistory() async {
+    try {
+      await searchHistoryDatabaseHelper.deleteAllSearchHistory();
       _getSearchHistory();
     } catch (e) {
       print(e);

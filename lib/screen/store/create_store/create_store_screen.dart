@@ -24,7 +24,7 @@ class CreateStoreScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                'Open My Own Store',
+                'Start Selling',
                 style: titleTextWhite,
               ),
             ),

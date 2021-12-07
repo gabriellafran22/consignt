@@ -128,7 +128,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ? _listTileFaIcon(
                               FontAwesomeIcons.store,
                               Colors.brown,
-                              'Create Store',
+                              'Start Selling Now',
                               () {
                                 inject<Navigate>()
                                     .navigateTo(ScreenConst.createStore);

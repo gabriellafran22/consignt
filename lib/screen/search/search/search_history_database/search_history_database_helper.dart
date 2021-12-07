@@ -26,7 +26,12 @@ class SearchHistoryDatabaseHelper {
     await db!.insert(_tblSearchHistory, searchHistoryModel.toJson());
   }
 
-  Future<void> deleteSearchHistory(int id) async {
+  Future<void> deleteAllSearchHistory() async {
+    final db = await database;
+    await db!.delete(_tblSearchHistory);
+  }
+
+  Future<void> deleteSearchHistoryById(int id) async {
     final db = await database;
     await db!.delete(
       _tblSearchHistory,
