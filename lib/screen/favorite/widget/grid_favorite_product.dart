@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/widget/loading_indicator.dart';
 import 'package:consignt/widget/price_format.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,12 @@ Widget gridFavoriteProduct(AsyncSnapshot<DocumentSnapshot> snapshotProduct) {
               ),
               child: Image.network(
                 snapshotProduct.data!['productPictureUrl'],
+                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                  if(loadingProgress == null){
+                    return child;
+                  }
+                  return loadingPicture(80, 80);
+                },
               ),
             ),
           ),

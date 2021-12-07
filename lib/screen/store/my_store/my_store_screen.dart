@@ -7,6 +7,7 @@ import 'package:consignt/core/model/product.dart';
 import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
 import 'package:consignt/preferences/preferences_helper.dart';
 import 'package:consignt/screen/store/my_store/provider/my_store_provider.dart';
+import 'package:consignt/widget/loading_indicator.dart';
 import 'package:consignt/widget/price_format.dart';
 import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +113,13 @@ ListView _myProductsList(AsyncSnapshot<QuerySnapshot> snapshot) {
                   product.productPictureUrl,
                   width: 80,
                   height: 80,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return loadingPicture(80, 80);
+                  },
                 ),
                 const SizedBox(
                   width: 10,

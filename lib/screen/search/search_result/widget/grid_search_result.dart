@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/widget/loading_indicator.dart';
 import 'package:consignt/widget/price_format.dart';
 import 'package:flutter/material.dart';
 
@@ -50,6 +51,12 @@ Widget gridSearchResult(AsyncSnapshot<QuerySnapshot> snapshot, String query) {
                     ),
                     child: Image.network(
                       data['productPictureUrl'],
+                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                        if(loadingProgress == null){
+                          return child;
+                        }
+                        return loadingPicture(80, 80);
+                      },
                     ),
                   ),
                 ),

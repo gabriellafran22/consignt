@@ -76,6 +76,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     : CircleAvatar(
                                         backgroundImage: NetworkImage(
                                           user.profilePicture ?? '',
+
                                         ),
                                         radius: 40,
                                       ),

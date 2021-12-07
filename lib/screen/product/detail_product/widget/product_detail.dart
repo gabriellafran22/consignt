@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/common/utils.dart';
+import 'package:consignt/widget/loading_indicator.dart';
 import 'package:consignt/widget/price_format.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,16 @@ Widget productDetail(
         child: Center(
           child: product.productPictureUrl == ''
               ? Image.asset('assets/consignt_logo_cropped')
-              : Image.network(product.productPictureUrl),
+              : Image.network(
+                  product.productPictureUrl,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return loadingPicture(MediaQuery.of(context).size.height * 0.4, MediaQuery.of(context).size.width);
+                  },
+                ),
         ),
       ),
       Padding(

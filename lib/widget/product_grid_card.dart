@@ -7,6 +7,7 @@ import 'package:consignt/widget/price_format.dart';
 import 'package:flutter/material.dart';
 
 import '../di.dart';
+import 'loading_indicator.dart';
 
 GridView productGridCard(AsyncSnapshot<QuerySnapshot> snapshot) {
   List<ProductModel> allProduct = [];
@@ -53,6 +54,12 @@ GridView productGridCard(AsyncSnapshot<QuerySnapshot> snapshot) {
                   ),
                   child: Image.network(
                     product.productPictureUrl,
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                      if(loadingProgress == null){
+                        return child;
+                      }
+                      return loadingPicture(80, 80);
+                    },
                   ),
                 ),
               ),
