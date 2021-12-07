@@ -4,6 +4,7 @@ import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/core/network/service/firebase/authentication_service.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/init/provider/init_provider.dart';
+import 'package:consignt/screen/search/search/search_history_database/search_history_database_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
@@ -31,6 +32,7 @@ void showLogoutDialog(BuildContext context) {
           TextButton(
             onPressed: () {
               AuthenticationService.signOut();
+              context.read<SearchHistoryDatabaseProvider>().deleteAllSearchHistory();
               context.read<PreferencesProvider>().removeUser();
               context.read<InitProvider>().bottomNavIndex = 0;
               inject<Navigate>()
