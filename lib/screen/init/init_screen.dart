@@ -1,3 +1,4 @@
+import 'package:consignt/screen/category/category_screen.dart';
 import 'package:consignt/screen/favorite/favorite_screen.dart';
 import 'package:consignt/screen/home/home_screen.dart';
 import 'package:consignt/screen/init/provider/init_provider.dart';
@@ -18,6 +19,7 @@ class _InitScreenState extends State<InitScreen> {
   final List<Widget> _listWidget = [
     const HomeScreen(),
     const FavoriteScreen(),
+    const CategoryScreen(),
     const ShippingScreen(),
     const SettingsScreen(),
   ];
@@ -59,6 +61,18 @@ class _InitScreenState extends State<InitScreen> {
               ),
               BottomNavigationBarItem(
                 icon: provider.bottomNavIndex == 2
+                    ? const Icon(
+                        Icons.category,
+                        color: Colors.blueAccent,
+                      )
+                    : const Icon(
+                        Icons.category_outlined,
+                        color: Colors.black54,
+                      ),
+                label: 'Category',
+              ),
+              BottomNavigationBarItem(
+                icon: provider.bottomNavIndex == 3
                     ? const FaIcon(
                         FontAwesomeIcons.shippingFast,
                         color: Colors.purple,
@@ -70,7 +84,7 @@ class _InitScreenState extends State<InitScreen> {
                 label: 'Shipping',
               ),
               BottomNavigationBarItem(
-                icon: provider.bottomNavIndex == 3
+                icon: provider.bottomNavIndex == 4
                     ? const Icon(
                         Icons.settings,
                         color: Colors.deepOrange,
