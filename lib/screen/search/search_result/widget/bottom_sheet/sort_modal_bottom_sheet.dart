@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:consignt/common/navigate.dart';
+import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/sort_const.dart';
 import 'package:consignt/screen/search/search_result/provider/search_result_provider.dart';
 import 'package:flutter/material.dart';
@@ -27,42 +30,91 @@ class SortModalBottomSheet extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
+            ),
             builder: (context) {
-              return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.25,
-                child: ListView(
-                  children: ListTile.divideTiles(
-                    color: Colors.blueGrey,
-                    context: context,
-                    tiles: [
-                      ListTile(
-                        title: const Text('Newest'),
-                        onTap: () {
-                          provider.setSort(SortConst.newest);
-                          inject<Navigate>().pop();
-                        },
+              return Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomTile(
+                        provider: provider,
+                        sort: SortConst.newest,
+                        text: 'Newest Product',
                       ),
-                      ListTile(
-                        title: const Text('Price: Low to High'),
-                        onTap: () {
-                          provider.setSort(SortConst.priceLowToHigh);
-                          inject<Navigate>().pop();
-                        },
+                      const Divider(height: 40, thickness: 5),
+                      CustomTile(
+                        provider: provider,
+                        sort: SortConst.latest,
+                        text: 'Latest Product',
                       ),
-                      ListTile(
-                        title: const Text('Price: High to Low'),
-                        onTap: () {
-                          provider.setSort(SortConst.priceHighToLow);
-                          inject<Navigate>().pop();
-                        },
+                      const Divider(height: 40, thickness: 5),
+                      CustomTile(
+                        provider: provider,
+                        sort: SortConst.priceLowToHigh,
+                        text: 'Price: Low to High',
+                      ),
+                      const Divider(height: 40, thickness: 5),
+                      CustomTile(
+                        provider: provider,
+                        sort: SortConst.priceHighToLow,
+                        text: 'Price: High to Low',
+                      ),
+                      const Divider(height: 40, thickness: 5),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          child: const Text('Reset Sort'),
+                          style: fullyRoundedButton(),
+                          onPressed: () {
+                            provider.setSort("Sort");
+                            inject<Navigate>().pop();
+                          },
+                        ),
                       ),
                     ],
-                  ).toList(),
+                  ),
                 ),
               );
             },
           );
         },
+      ),
+    );
+  }
+}
+
+class CustomTile extends StatelessWidget {
+  const CustomTile({
+    Key? key,
+    required this.provider,
+    required this.sort,
+    required this.text,
+  }) : super(key: key);
+
+  final SearchResultProvider provider;
+  final String sort;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: InkWell(
+        onTap: () {
+          provider.setSort(sort);
+          inject<Navigate>().pop();
+        },
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 16),
+        ),
       ),
     );
   }

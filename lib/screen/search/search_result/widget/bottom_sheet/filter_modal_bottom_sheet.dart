@@ -1,11 +1,9 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/screen/search/search_result/provider/search_result_provider.dart';
-import 'package:consignt/screen/search/search_result/widget/dialog/filter_category_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../di.dart';
 
@@ -42,7 +40,7 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
           ),
           builder: (context) {
             return Container(
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.55,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,38 +78,6 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                   const Divider(
                     height: 40,
                     thickness: 5,
-                  ),
-                  Text(
-                    'Location',
-                    style: titleText(16),
-                  ),
-                  const Divider(
-                    height: 40,
-                    thickness: 5,
-                  ),
-                  Text(
-                    'Category',
-                    style: titleText(16),
-                  ),
-                  //todo: gabisa auto update
-                  Consumer<SearchResultProvider>(
-                    builder: (context, provider, _) {
-                      return ListTile(
-                        title: provider.category.isEmpty
-                            ? const Text(
-                                'Choose a Product Category',
-                              )
-                            : Text(provider.category),
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios,
-                        ),
-                        onTap: () {
-                          setState(() {
-                            filterCategoryDialog(context, provider);
-                          });
-                        },
-                      );
-                    },
                   ),
                   const SizedBox(
                     height: 10,

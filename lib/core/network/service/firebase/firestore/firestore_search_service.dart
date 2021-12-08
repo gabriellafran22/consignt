@@ -25,13 +25,14 @@ class FirestoreSearchService {
             .where('productPrice', isLessThanOrEqualTo: maxPrice)
             .orderBy('productPrice')
             .snapshots();
-      } else {
-        //TODO: INI ERROR KARENA WHERE & ORDERBY NYA GA SAMA
+      } else if (sort == SortConst.newest) {
         return productCollection
-            .where('productPrice', isGreaterThanOrEqualTo: minPrice)
-            .where('productPrice', isLessThanOrEqualTo: maxPrice)
             .orderBy('createdUpdatedAt', descending: true)
             .snapshots();
+      } else if (sort == SortConst.latest) {
+        return productCollection.orderBy('createdUpdatedAt').snapshots();
+      } else {
+        return productCollection.snapshots();
       }
     }
   }
