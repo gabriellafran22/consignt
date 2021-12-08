@@ -5,6 +5,7 @@ import 'package:consignt/screen/search/search_result/widget/dialog/filter_catego
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../di.dart';
 
@@ -93,19 +94,23 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                     style: titleText(16),
                   ),
                   //todo: gabisa auto update
-                  ListTile(
-                    title: widget.provider.category.isEmpty
-                        ? const Text(
-                            'Choose a Product Category',
-                          )
-                        : Text(widget.provider.category),
-                    trailing: const Icon(
-                      Icons.arrow_forward_ios,
-                    ),
-                    onTap: () {
-                      setState(() {
-                        filterCategoryDialog(context, widget.provider);
-                      });
+                  Consumer<SearchResultProvider>(
+                    builder: (context, provider, _) {
+                      return ListTile(
+                        title: provider.category.isEmpty
+                            ? const Text(
+                                'Choose a Product Category',
+                              )
+                            : Text(provider.category),
+                        trailing: const Icon(
+                          Icons.arrow_forward_ios,
+                        ),
+                        onTap: () {
+                          setState(() {
+                            filterCategoryDialog(context, provider);
+                          });
+                        },
+                      );
                     },
                   ),
                   const SizedBox(
