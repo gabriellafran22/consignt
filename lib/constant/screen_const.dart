@@ -19,4 +19,6 @@ class ScreenConst {
   static const String contactUs = '/contactUs';
   static const String searchScreen = '/searchScreen';
   static const String searchResultScreen = '/searchResultScreen';
+  static const String category = 'category';
+  static const String categoryDetail = '';
 }

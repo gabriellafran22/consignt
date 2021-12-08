@@ -1,4 +1,6 @@
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/screen/category/category_detail_screen.dart';
+import 'package:consignt/screen/category/category_screen.dart';
 import 'package:consignt/screen/favorite/favorite_screen.dart';
 import 'package:consignt/screen/home/home_screen.dart';
 import 'package:consignt/screen/init/init_screen.dart';
@@ -48,9 +50,11 @@ Route routes(RouteSettings settings) {
     case ScreenConst.createStore:
       return buildRoute(settings, const CreateStoreScreen());
     case ScreenConst.editStore:
-      return buildRoute(settings, EditStoreScreen(
-        userId: args['userId'],
-      ));
+      return buildRoute(
+          settings,
+          EditStoreScreen(
+            userId: args['userId'],
+          ));
     case ScreenConst.addProduct:
       return buildRoute(settings, const AddProductScreen());
     case ScreenConst.editProduct:
@@ -76,9 +80,16 @@ Route routes(RouteSettings settings) {
     case ScreenConst.searchScreen:
       return buildRoute(settings, const SearchScreen());
     case ScreenConst.searchResultScreen:
-      return buildRoute(settings, SearchResultScreen(
-        searchQueryController: args['searchQueryController'],
-      ));
+      return buildRoute(
+          settings,
+          SearchResultScreen(
+            searchQueryController: args['searchQueryController'],
+          ));
+    case ScreenConst.category:
+      return buildRoute(settings, const CategoryScreen());
+    case ScreenConst.categoryDetail:
+      return buildRoute(
+          settings,  CategoryDetailScreen(category: args['category']));
     default:
       return buildRoute(settings, const SplashScreen());
   }

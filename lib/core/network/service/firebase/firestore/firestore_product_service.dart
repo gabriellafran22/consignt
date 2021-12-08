@@ -3,7 +3,7 @@ import 'package:consignt/core/model/product.dart';
 
 class FirestoreProductService {
   static CollectionReference productCollection =
-  FirebaseFirestore.instance.collection('products');
+      FirebaseFirestore.instance.collection('products');
 
   static Future<void> updateProduct({
     required String productId,
@@ -41,18 +41,17 @@ class FirestoreProductService {
     required String productCity,
   }) async {
     ProductModel product = ProductModel(
-        userId: userId,
-        productName: productName,
-        productDescription: productDescription,
-        productPrice: productPrice,
-        productCategory: productCategory,
-        productPictureUrl: productPictureUrl,
-        productProvince: productProvince,
-        productCity: productCity,
-        createdUpdatedAt: DateTime.now().toIso8601String(),
+      userId: userId,
+      productName: productName,
+      productDescription: productDescription,
+      productPrice: productPrice,
+      productCategory: productCategory,
+      productPictureUrl: productPictureUrl,
+      productProvince: productProvince,
+      productCity: productCity,
+      createdUpdatedAt: DateTime.now().toIso8601String(),
     );
-    await
-    productCollection.add(product.toJson());
+    await productCollection.add(product.toJson());
   }
 
   static Future<void> deleteProduct({
@@ -66,8 +65,7 @@ class FirestoreProductService {
   }
 
   static Stream<QuerySnapshot> getAllUsersProducts(String userId) {
-    return productCollection.where('userId', isEqualTo: userId)
-        .snapshots();
+    return productCollection.where('userId', isEqualTo: userId).snapshots();
   }
 
   static Stream<DocumentSnapshot> getProductDataWithIdStream(String id) {
@@ -78,4 +76,9 @@ class FirestoreProductService {
     return await productCollection.doc(id).get();
   }
 
+  static Stream<QuerySnapshot> getAllProductsCategory(String category) {
+    return productCollection
+        .where('productCategory', isEqualTo: category)
+        .snapshots();
+  }
 }
