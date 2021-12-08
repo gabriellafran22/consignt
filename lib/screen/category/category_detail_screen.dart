@@ -5,7 +5,7 @@ import 'package:consignt/widget/product_grid_card.dart';
 import 'package:consignt/widget/product_list_card.dart';
 import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
   const CategoryDetailScreen({

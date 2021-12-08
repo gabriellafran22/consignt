@@ -34,7 +34,7 @@ class _MyStoreScreenState extends State<MyStoreScreen> {
         ),
       ),
       child: Consumer<MyStoreProvider>(
-        builder: (context, provider, child) {
+        builder: (context, provider, _) {
           return Scaffold(
             appBar: AppBar(
               title: Text(

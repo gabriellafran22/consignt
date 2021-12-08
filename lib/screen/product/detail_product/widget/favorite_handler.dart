@@ -12,7 +12,7 @@ class FavoriteHandler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<PreferencesProvider>(
-      builder: (context, provider, child) {
+      builder: (context, provider, _) {
         String userId = provider.userId;
         return StreamBuilder(
           stream: FirestoreFavoriteService.checkIsFavorite(

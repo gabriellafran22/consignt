@@ -33,7 +33,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         ),
       ),
       child: Consumer<AddProductProvider>(
-        builder: (context, provider, child) {
+        builder: (context, provider, _) {
           return Scaffold(
             appBar: AppBar(
               title: Text(

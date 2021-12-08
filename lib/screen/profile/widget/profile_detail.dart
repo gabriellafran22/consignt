@@ -77,7 +77,7 @@ class ProfileDetail extends StatelessWidget {
           thickness: 10,
         ),
         Consumer<SearchHistoryDatabaseProvider>(
-          builder: (context, dbProvider, child) {
+          builder: (context, dbProvider, _) {
             return _listTile(
               'Clear Search History',
               '',

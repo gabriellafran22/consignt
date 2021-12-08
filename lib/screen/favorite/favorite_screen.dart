@@ -21,7 +21,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<PreferencesProvider>(
-      builder: (context, provider, child) {
+      builder: (context, provider, _) {
         return Scaffold(
           appBar: AppBar(
             title: Text(

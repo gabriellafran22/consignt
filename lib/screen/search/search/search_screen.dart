@@ -20,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<SearchHistoryDatabaseProvider>(
-      builder: (context, provider, child) {
+      builder: (context, provider, _) {
         return Scaffold(
           appBar: AppBar(
             title: Container(

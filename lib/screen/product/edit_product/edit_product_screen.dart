@@ -38,7 +38,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         productId: widget.productId,
       ),
       child: Consumer<EditProductProvider>(
-        builder: (context, provider, child) {
+        builder: (context, provider, _) {
           return Scaffold(
             appBar: AppBar(
               title: Text(

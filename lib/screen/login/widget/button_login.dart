@@ -4,7 +4,7 @@ import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/login/provider/login_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../di.dart';
 

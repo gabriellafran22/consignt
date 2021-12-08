@@ -6,7 +6,7 @@ import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/init/provider/init_provider.dart';
 import 'package:consignt/screen/search/search/search_history_database/search_history_database_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../di.dart';
 
