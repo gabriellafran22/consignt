@@ -32,6 +32,8 @@ class AuthenticationService {
         isSeller: isSeller,
       );
 
+      user!.sendEmailVerification();
+
       return user;
     } catch (error) {
       RegisterProvider.status = error.toString();

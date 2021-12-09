@@ -32,7 +32,7 @@ class ButtonRegister extends StatelessWidget {
           if (await provider.saveForm()) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Account Registered'),
+                content: Text('Account Registered, An email verification has been sent to your email'),
               ),
             );
             Navigator.pop(context);

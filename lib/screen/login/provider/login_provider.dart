@@ -27,12 +27,22 @@ class LoginProvider extends ChangeNotifier {
         password: passwordController.text,
       );
       if (user != null) {
-        preferencesHelper.setUserId(user.uid);
-        return true;
+        if(user.emailVerified){
+          preferencesHelper.setUserId(user.uid);
+          return true;
+        }
+        status = 'Email have not been verified, please check your email';
+        return false;
       } else {
+        status = 'Username or password is incorrect';
+
         return false;
       }
+
+
     }
+    status = 'Something went wrong, please try again';
+
     return false;
   }
 

@@ -54,8 +54,8 @@ class ButtonLogin extends StatelessWidget {
             );
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Data is not correct or Something went wrong'),
+              SnackBar(
+                content: Text(LoginProvider.status),
               ),
             );
           }
