@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:consignt/common/styles.dart';
 import 'package:consignt/core/network/service/firebase/firestore/firestore_product_service.dart';
 import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/widget/product_grid_card.dart';
@@ -19,7 +20,10 @@ class CategoryDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(category),
+        title: Text(
+          category,
+          style: titleTextWhite,
+        ),
       ),
       body: StreamBuilder(
         stream: FirestoreProductService.getAllProductsCategory(category),

@@ -1,4 +1,5 @@
 import 'package:consignt/common/navigate.dart';
+import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/product_category_const.dart';
 import 'package:consignt/constant/screen_const.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,10 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Category'),
+        title: Text(
+          'Category',
+          style: titleTextWhite,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
