@@ -90,6 +90,15 @@ class AuthenticationService {
     }
   }
 
+  static Future<void> resetPassword(
+     String email) async {
+    try {
+      _auth.sendPasswordResetEmail(email: email);
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   static Future<void> signOut() async {
     _auth.signOut();
   }

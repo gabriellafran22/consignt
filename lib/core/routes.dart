@@ -2,6 +2,7 @@ import 'package:consignt/constant/screen_const.dart';
 import 'package:consignt/screen/category/category_detail_screen.dart';
 import 'package:consignt/screen/category/category_screen.dart';
 import 'package:consignt/screen/favorite/favorite_screen.dart';
+import 'package:consignt/screen/forgot_password/forgot_password.dart';
 import 'package:consignt/screen/home/home_screen.dart';
 import 'package:consignt/screen/init/init_screen.dart';
 import 'package:consignt/screen/login/login_screen.dart';
@@ -33,6 +34,8 @@ Route routes(RouteSettings settings) {
       return buildRoute(settings, const LoginScreen());
     case ScreenConst.register:
       return buildRoute(settings, const RegisterScreen());
+    case ScreenConst.forgotPassword:
+      return buildRoute(settings, const ForgotPasswordScreen());
     case ScreenConst.init:
       return buildRoute(settings, const InitScreen());
     case ScreenConst.home:

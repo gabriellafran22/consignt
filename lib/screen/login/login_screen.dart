@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'assets/consignt_logo_cropped.jpg',
                 ),
                 Text(
-                  'LOGIN AN ACCOUNT',
+                  'LOGIN',
                   style: loginAndRegisterLargeText,
                 ),
                 const SizedBox(
@@ -41,6 +41,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 const FormLogin(),
                 const SizedBox(
                   height: 10,
+                ),
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      inject<Navigate>().navigateTo(ScreenConst.forgotPassword);
+                    },
+                    child: Text(
+                      'Forgot Password?',
+                      style: loginAndRegisterTextWithUnderline,
+                    ),
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                    ),
+                  ),
                 ),
                 Center(
                   child: TextButton(
