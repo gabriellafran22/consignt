@@ -3,6 +3,7 @@ import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/product_category_const.dart';
 import 'package:consignt/constant/screen_const.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../di.dart';
 
@@ -29,8 +30,12 @@ class CategoryScreen extends StatelessWidget {
             mainAxisSpacing: 10,
           ),
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
+            return Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
               child: InkWell(
                 onTap: () => inject<Navigate>().navigateTo(
                   ScreenConst.categoryDetail,
@@ -41,7 +46,9 @@ class CategoryScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.category),
+                    productCategoryIcon[index] == FontAwesomeIcons
+                        ? FaIcon(productCategoryIcon[index])
+                        : Icon(productCategoryIcon[index]),
                     const SizedBox(height: 10),
                     Text(
                       productCategoryList[index],
