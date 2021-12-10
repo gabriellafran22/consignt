@@ -20,8 +20,14 @@ class CategoryScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView.separated(
+        child: GridView.builder(
           itemCount: productCategoryList.length,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 1 / 1,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -32,15 +38,20 @@ class CategoryScreen extends StatelessWidget {
                     'category': productCategoryList[index],
                   },
                 ),
-                child: Text(
-                  productCategoryList[index],
-                  style: const TextStyle(fontSize: 16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.category),
+                    const SizedBox(height: 10),
+                    Text(
+                      productCategoryList[index],
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
                 ),
               ),
             );
-          },
-          separatorBuilder: (context, index) {
-            return const Divider();
           },
         ),
       ),
