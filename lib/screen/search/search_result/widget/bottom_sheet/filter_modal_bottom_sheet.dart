@@ -1,6 +1,9 @@
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
+import 'package:consignt/common/validation.dart';
+import 'package:consignt/core/model/city.dart';
 import 'package:consignt/screen/search/search_result/provider/search_result_provider.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -40,11 +43,83 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
           ),
           builder: (context) {
             return Container(
-              height: MediaQuery.of(context).size.height * 0.55,
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+              height: MediaQuery.of(context).size.height * 0.8,
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'City',
+                        style: titleText(16),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          widget.provider.clearAll();
+                          inject<Navigate>().pop();
+                        },
+                        child: Text(
+                          'Clear all filter',
+                          style: titleText(16),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  DropdownSearch<City>(
+                    clearButtonBuilder: (context) {
+                      return IconButton(
+                        onPressed: () {
+                          widget.provider.cityTextField.text = 'City';
+                        },
+                        icon: const Icon(Icons.clear),
+                      );
+                    },
+                    dropdownSearchDecoration: textFormFieldDecoration(
+                      widget.provider.cityTextField.text.isNotEmpty
+                          ? widget.provider.cityTextField.text
+                          : 'City',
+                    ),
+                    showSearchBox: true,
+                    validator: (value) => dropdownValidation(value),
+                    searchBoxDecoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 25,
+                      ),
+                      hintText: "City...",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onFind: (text) async {
+                      await widget.provider.getAllCity();
+                      return widget.provider.city.data ?? [];
+                    },
+                    onChanged: (value) {
+                      widget.provider.setCity(value!);
+                    },
+                    popupItemBuilder: (context, item, isSelected) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        child: Text(
+                          "${item.type} ${item.cityName}",
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      );
+                    },
+                    itemAsString: (item) => "${item.type} ${item.cityName}",
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     'Price',
                     style: titleText(16),
@@ -85,10 +160,12 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      child: const Text('Apply Filter'),
+                      child: Text(
+                        'Apply Filter',
+                        style: titleTextWhite,
+                      ),
                       style: fullyRoundedButton(),
                       onPressed: () {
-                        //TODO: APPLY THE FILTER BASED ON DATABASE
                         widget.provider.setPrice();
                         inject<Navigate>().pop();
                       },

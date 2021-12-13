@@ -100,7 +100,7 @@ GridView _myFavoritesGrid(AsyncSnapshot<QuerySnapshot> snapshot) {
       maxCrossAxisExtent: 200,
       childAspectRatio: 2 / 2,
       crossAxisSpacing: 2,
-      mainAxisSpacing: 10,
+      mainAxisSpacing: 5,
     ),
     itemCount: snapshot.data!.docs.length,
     itemBuilder: (context, index) {

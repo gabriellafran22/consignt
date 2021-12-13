@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'assets/consignt_logo_cropped.jpg',
                 ),
                 Text(
-                  'LOGIN',
+                  'L O G I N',
                   style: loginAndRegisterLargeText,
                 ),
                 const SizedBox(

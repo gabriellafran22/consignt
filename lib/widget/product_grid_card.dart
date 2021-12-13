@@ -22,7 +22,7 @@ GridView productGridCard(AsyncSnapshot<QuerySnapshot> snapshot) {
       maxCrossAxisExtent: 200,
       childAspectRatio: 2 / 2,
       crossAxisSpacing: 2,
-      mainAxisSpacing: 10,
+      mainAxisSpacing: 5,
     ),
     itemCount: allProduct.length,
     itemBuilder: (context, index) {

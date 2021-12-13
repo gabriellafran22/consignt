@@ -29,6 +29,7 @@ class FavoriteHandler extends StatelessWidget {
                   icon: const Icon(
                     Icons.favorite,
                     color: Colors.red,
+                    size: 28,
                   ),
                   onPressed: () {
                     FirestoreFavoriteService.deleteFavoriteProduct(
@@ -39,7 +40,10 @@ class FavoriteHandler extends StatelessWidget {
                 );
               } else {
                 return IconButton(
-                  icon: const Icon(Icons.favorite_border),
+                  icon: const Icon(
+                    Icons.favorite_border,
+                    size: 28,
+                  ),
                   onPressed: () {
                     FirestoreFavoriteService.addFavoriteProduct(
                       userId,

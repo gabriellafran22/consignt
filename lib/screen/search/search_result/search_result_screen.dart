@@ -7,8 +7,8 @@ import 'package:consignt/preferences/preferences_provider.dart';
 import 'package:consignt/screen/search/search_result/provider/search_result_provider.dart';
 import 'package:consignt/screen/search/search_result/widget/bottom_sheet/filter_modal_bottom_sheet.dart';
 import 'package:consignt/screen/search/search_result/widget/bottom_sheet/sort_modal_bottom_sheet.dart';
-import 'package:consignt/screen/search/search_result/widget/grid_search_result.dart';
-import 'package:consignt/screen/search/search_result/widget/list_search_result.dart';
+import 'package:consignt/screen/search/search_result/widget/grid_product/grid_search_result.dart';
+import 'package:consignt/screen/search/search_result/widget/list_product/list_search_result.dart';
 import 'package:consignt/widget/loading_indicator.dart';
 import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
@@ -132,9 +132,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       }
                       return prefProvider.isListView
                           ? listSearchResult(
-                              snapshot, widget.searchQueryController.text)
+                              snapshot, widget.searchQueryController.text, context)
                           : gridSearchResult(
-                              snapshot, widget.searchQueryController.text);
+                              snapshot, widget.searchQueryController.text, context);
                     }
                   },
                 ),
