@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/screen/search/search_result/provider/search_result_provider.dart';
 import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import 'grid_product.dart';
 

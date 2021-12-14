@@ -4,7 +4,7 @@ import 'package:consignt/screen/search/search_result/widget/grid_product/grid_pr
 import 'package:consignt/screen/search/search_result/widget/grid_product/grid_search_result_with_city.dart';
 import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 Widget gridSearchResult(
     AsyncSnapshot<QuerySnapshot> snapshot, String query, BuildContext context) {
