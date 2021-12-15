@@ -31,7 +31,6 @@ class AllCityWidget extends StatelessWidget {
         ),
       ),
       onFind: (text) async {
-        await provider.getAllCity();
         return provider.city.data ?? [];
       },
       onChanged: (value) {

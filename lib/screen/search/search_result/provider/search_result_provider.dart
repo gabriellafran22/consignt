@@ -24,6 +24,7 @@ class SearchResultProvider extends CustomChangeNotifier {
 
   SearchResultProvider() {
     getAllCity();
+    cityTextField.text = 'City';
   }
 
   Future getAllCity() async {
@@ -69,5 +70,7 @@ class SearchResultProvider extends CustomChangeNotifier {
     minPriceController.dispose();
     maxPriceController.dispose();
     cityTextField.dispose();
+    cityTextField.text = 'City';
+    print('aaa');
   }
 }

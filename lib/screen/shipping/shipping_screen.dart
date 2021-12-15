@@ -48,9 +48,7 @@ class _ShippingScreenState extends State<ShippingScreen>
               ),
             ]),
       ),
-      body: ChangeNotifierProvider<ShippingProvider>(
-        create: (_) => ShippingProvider(),
-        child: Consumer<ShippingProvider>(
+      body: Consumer<ShippingProvider>(
           builder: (context, provider, _) {
             return TabBarView(controller: tabController, children: [
               ShippingCostScreen(provider: provider),
@@ -58,7 +56,6 @@ class _ShippingScreenState extends State<ShippingScreen>
             ]);
           },
         ),
-      ),
     );
   }
 

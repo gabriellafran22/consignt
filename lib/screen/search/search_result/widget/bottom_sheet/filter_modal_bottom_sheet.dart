@@ -97,7 +97,6 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
                       ),
                     ),
                     onFind: (text) async {
-                      await widget.provider.getAllCity();
                       return widget.provider.city.data ?? [];
                     },
                     onChanged: (value) {
