@@ -14,7 +14,12 @@ Future<void> sendAnEmail(String subject, String body) async {
     path: 'consignt@gmail.com',
     queryParameters: {'subject': subject, 'body': body},
   );
-  await launch(launchUri.toString());
+
+  final String _emailUriString = launchUri
+      .toString()
+      .replaceAll('+', '\%20');
+
+  await launch(_emailUriString);
 }
 
 Future<void> launchInBrowser(String url) async {

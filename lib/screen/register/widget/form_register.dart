@@ -25,7 +25,7 @@ class FormRegister extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Name',
+                  'Username',
                   style: loginAndRegisterText,
                 ),
                 const SizedBox(
