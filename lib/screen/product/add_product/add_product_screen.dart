@@ -85,7 +85,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             controller: provider.productNameController,
                             maxLength: 100,
                             decoration: const InputDecoration(
-                              hintText: 'Product Name',
+                              hintText: 'Enter Product Name',
                               border: InputBorder.none,
                             ),
                           ),
@@ -101,14 +101,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Product Description'),
+                          const Text('Enter Product Description'),
                           TextFormField(
                             validator: (value) => isEmptyFieldValidation(value),
                             controller: provider.productDescController,
                             keyboardType: TextInputType.multiline,
                             maxLines: null,
                             decoration: const InputDecoration(
-                              hintText: 'Product Description',
+                              hintText: 'Enter Product Description',
                               border: InputBorder.none,
                             ),
                           ),
@@ -130,8 +130,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             controller: provider.productPriceController,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
-                              prefix: Text('Rp. '),
-                              hintText: 'Price',
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.only(top: 12),
+                                child: Text(
+                                  'Rp.',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                              hintText: 'Enter Price',
                               border: InputBorder.none,
                             ),
                           ),

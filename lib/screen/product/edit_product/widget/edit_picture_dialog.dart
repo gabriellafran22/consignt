@@ -65,6 +65,7 @@ class _EditProductPictureState extends State<EditProductPicture> {
                             Align(
                               alignment: Alignment.bottomRight,
                               child: Container(
+                                margin: const EdgeInsets.all(5),
                                 width: 35,
                                 height: 35,
                                 decoration: const BoxDecoration(

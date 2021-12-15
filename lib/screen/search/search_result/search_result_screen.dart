@@ -79,12 +79,18 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    FilterModalBottomSheet(
-                                      provider: provider,
-                                    ),
-                                    SortModalBottomSheet(
-                                      provider: provider,
+                                    Row(
+                                      children: [
+                                        FilterModalBottomSheet(
+                                          provider: provider,
+                                        ),
+                                        const SizedBox(width: 10,),
+                                        SortModalBottomSheet(
+                                          provider: provider,
+                                        ),
+                                      ],
                                     ),
                                     IconButton(
                                       icon: prefProvider.isListView

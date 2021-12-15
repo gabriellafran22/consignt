@@ -141,7 +141,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             controller: provider.productPriceController,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
-                              prefix: Text('Rp. '),
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.only(top: 12),
+                                child: Text(
+                                  'Rp.',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                               hintText: 'Price',
                               border: InputBorder.none,
                             ),

@@ -17,8 +17,7 @@ class SortModalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ActionChip(
+    return ActionChip(
         backgroundColor: Colors.white30,
         avatar: const CircleAvatar(
           child: FaIcon(
@@ -84,7 +83,7 @@ class SortModalBottomSheet extends StatelessWidget {
             },
           );
         },
-      ),
+
     );
   }
 }

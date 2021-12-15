@@ -1,3 +1,4 @@
+import 'package:consignt/common/colors.dart';
 import 'package:consignt/screen/profile/provider/profile_provider.dart';
 import 'package:consignt/screen/profile/widget/dialog/city_dialog.dart';
 import 'package:consignt/screen/profile/widget/dialog/clear_search_history_dialog.dart';
@@ -81,7 +82,7 @@ class ProfileDetail extends StatelessWidget {
             return _listTile(
               'Clear Search History',
               '',
-                  () {
+              () {
                 clearSearchHistoryDialog(context, dbProvider);
               },
             );
@@ -98,7 +99,11 @@ Widget _listTile(String leading, String title, void Function() dialog) {
       padding: const EdgeInsets.all(8.0),
       child: Text(leading),
     ),
-    title: Text(title),
+    title: Text(
+      title,
+      textAlign: TextAlign.right,
+      style: TextStyle(color: darkGrey),
+    ),
     trailing: const Icon(Icons.arrow_forward_ios),
     onTap: dialog,
   );

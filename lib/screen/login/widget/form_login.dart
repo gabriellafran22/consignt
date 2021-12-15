@@ -69,18 +69,22 @@ class FormLogin extends StatelessWidget {
                       vertical: 0,
                       horizontal: 12,
                     ),
-                    suffixIcon: IconButton(
-                      icon: FaIcon(
-                        provider.obscurePassword
-                            ? FontAwesomeIcons.eyeSlash
-                            : FontAwesomeIcons.eye,
-                        color: darkGrey,
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: IconButton(
+                        icon: FaIcon(
+                          provider.obscurePassword
+                              ? FontAwesomeIcons.eyeSlash
+                              : FontAwesomeIcons.eye,
+                          color: darkGrey,
+                          size: 18,
+                        ),
+                        onPressed: () {
+                          provider.obscurePassword
+                              ? provider.setObscurePassword(false)
+                              : provider.setObscurePassword(true);
+                        },
                       ),
-                      onPressed: () {
-                        provider.obscurePassword
-                            ? provider.setObscurePassword(false)
-                            : provider.setObscurePassword(true);
-                      },
                     ),
                   ),
                   style: textFormFieldStyle,

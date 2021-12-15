@@ -39,7 +39,14 @@ class _AddProductPictureState extends State<AddProductPicture> {
                     height: 150,
                     width: 150,
                     child: Center(
-                      child: Stack(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.blueGrey,
+                            width: 2,
+                          ),
+                        ),
+                        child: Stack(
                         children: [
                           Image.network(
                             widget.provider.productPictureUrl,
@@ -53,6 +60,7 @@ class _AddProductPictureState extends State<AddProductPicture> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Container(
+                              margin: const EdgeInsets.all(5),
                               width: 35,
                               height: 35,
                               decoration: const BoxDecoration(
@@ -69,6 +77,7 @@ class _AddProductPictureState extends State<AddProductPicture> {
                             ),
                           ),
                         ],
+                      ),
                       ),
                     ),
                   )
