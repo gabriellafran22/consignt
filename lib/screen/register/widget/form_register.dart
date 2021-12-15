@@ -36,7 +36,7 @@ class FormRegister extends StatelessWidget {
                   validator: (value) {
                     return nameValidation(value);
                   },
-                  decoration: textFormFieldDecoration('Name'),
+                  decoration: textFormFieldDecoration('Username'),
                   style: textFormFieldStyle,
                 ),
                 const SizedBox(
