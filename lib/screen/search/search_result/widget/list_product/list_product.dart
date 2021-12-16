@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consignt/common/navigate.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/constant/screen_const.dart';
+import 'package:consignt/widget/loading_indicator.dart';
 import 'package:consignt/widget/price_format.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +40,15 @@ class ListProduct extends StatelessWidget {
                 data['productPictureUrl'],
                 width: 80,
                 height: 80,
+                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+                  if(loadingProgress == null){
+                    return child;
+                  }
+                  return loadingPicture(80, 80);
+                },
+                errorBuilder: (context, object, trace){
+                  return loadingPicture(80, 80);
+                },
               ),
               const SizedBox(
                 width: 10,

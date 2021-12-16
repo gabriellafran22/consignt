@@ -23,13 +23,13 @@ class _LoginScreenState extends State<LoginScreen> {
     return ChangeNotifierProvider(
       create: (_) => LoginProvider(),
       child: Scaffold(
-        backgroundColor: darkGrey,
+        backgroundColor: lightBlueGrey,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 Image.asset(
-                  'assets/consignt_logo_cropped.jpg',
+                  'assets/consignt_logo_cropped.png',
                 ),
                 Text(
                   'L O G I N',

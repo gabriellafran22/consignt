@@ -19,7 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return ChangeNotifierProvider(
       create: (_) => RegisterProvider(),
       child: Scaffold(
-        backgroundColor: darkGrey,
+        backgroundColor: lightBlueGrey,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -27,7 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
-                  'assets/consignt_logo_cropped.jpg',
+                  'assets/consignt_logo_cropped.png',
                 ),
                 Text(
                   'REGISTER AN ACCOUNT',

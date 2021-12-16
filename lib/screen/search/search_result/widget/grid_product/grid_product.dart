@@ -51,6 +51,9 @@ class GridProduct extends StatelessWidget {
                     }
                     return loadingPicture(80, 80);
                   },
+                  errorBuilder: (context, object, trace){
+                    return loadingPicture(80, 80);
+                  },
                 ),
               ),
             ),

@@ -31,7 +31,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkGrey,
+      backgroundColor: lightBlueGrey,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -42,7 +42,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Image.asset(
-                    'assets/consignt_logo_cropped.jpg',
+                    'assets/consignt_logo_cropped.png',
                   ),
                   Center(
                     child: Text(

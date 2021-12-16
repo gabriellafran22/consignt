@@ -21,7 +21,7 @@ Widget productDetail(
         ),
         child: Center(
           child: product.productPictureUrl == ''
-              ? Image.asset('assets/consignt_logo_cropped')
+              ? Image.asset('assets/consignt_logo_cropped.png')
               : Image.network(
                   product.productPictureUrl,
                   loadingBuilder: (BuildContext context, Widget child,

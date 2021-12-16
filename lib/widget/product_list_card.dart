@@ -51,6 +51,9 @@ ListView productListCard(AsyncSnapshot<QuerySnapshot> snapshot) {
                     }
                     return loadingPicture(80, 80);
                   },
+                  errorBuilder: (context, object, trace){
+                    return loadingPicture(80, 80);
+                  },
                 ),
                 const SizedBox(
                   width: 10,
