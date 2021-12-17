@@ -10,6 +10,7 @@ import 'package:consignt/screen/search/search_result/widget/bottom_sheet/sort_mo
 import 'package:consignt/screen/search/search_result/widget/grid_product/grid_search_result.dart';
 import 'package:consignt/screen/search/search_result/widget/list_product/list_search_result.dart';
 import 'package:consignt/widget/loading_indicator.dart';
+import 'package:consignt/widget/price_format.dart';
 import 'package:consignt/widget/warning_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,78 +40,127 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     (BuildContext context, bool innerBoxIsScrolled) {
                   return <Widget>[
                     SliverAppBar(
-                      collapsedHeight: 100,
+                      collapsedHeight: 110,
                       floating: true,
                       pinned: true,
                       flexibleSpace: FlexibleSpaceBar(
                         background: SafeArea(
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                margin: const EdgeInsets.only(
-                                  left: 10,
-                                  top: 10,
-                                  right: 10,
-                                ),
-                                width: double.infinity,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Center(
-                                  child: TextField(
-                                    controller: widget.searchQueryController,
-                                    decoration: const InputDecoration(
-                                      contentPadding: EdgeInsets.only(top: 8),
-                                      prefixIcon: Icon(Icons.search),
-                                      hintText: 'Search a product',
-                                      border: InputBorder.none,
+                              Row(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                      left: 10,
+                                      top: 10,
+                                      right: 10,
                                     ),
-                                    readOnly: true,
-                                    onTap: () {
-                                      inject<Navigate>()
-                                          .navigateTo(ScreenConst.searchScreen);
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Center(
+                                      child: TextField(
+                                        controller:
+                                            widget.searchQueryController,
+                                        decoration: const InputDecoration(
+                                          contentPadding:
+                                              EdgeInsets.only(top: 8),
+                                          prefixIcon: Icon(Icons.search),
+                                          hintText: 'Search a product',
+                                          border: InputBorder.none,
+                                        ),
+                                        readOnly: true,
+                                        onTap: () {
+                                          inject<Navigate>().navigateTo(
+                                              ScreenConst.searchScreen);
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 40,
+                                    width: 40,
+                                    child: FilterModalBottomSheet(
+                                      provider: provider,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: prefProvider.isListView
+                                        ? const Icon(
+                                            Icons.format_list_bulleted,
+                                            color: Colors.white,
+                                          )
+                                        : const Icon(
+                                            Icons.grid_view,
+                                            color: Colors.white,
+                                          ),
+                                    onPressed: () {
+                                      if (prefProvider.isListView) {
+                                        prefProvider.setView(false);
+                                      } else {
+                                        prefProvider.setView(true);
+                                      }
                                     },
                                   ),
-                                ),
+                                ],
                               ),
-                              Padding(
+                              Container(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        FilterModalBottomSheet(
-                                          provider: provider,
-                                        ),
-                                        const SizedBox(width: 10,),
-                                        SortModalBottomSheet(
-                                          provider: provider,
-                                        ),
-                                      ],
-                                    ),
-                                    IconButton(
-                                      icon: prefProvider.isListView
-                                          ? const Icon(
-                                              Icons.format_list_bulleted,
-                                              color: Colors.white,
-                                            )
-                                          : const Icon(
-                                              Icons.grid_view,
-                                              color: Colors.white,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SortModalBottomSheet(
+                                        provider: provider,
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      provider.cityTextField.text == 'City'
+                                          ? Container()
+                                          : Chip(
+                                              backgroundColor: Colors.white,
+                                              label: Text(
+                                                provider.cityTextField.text,
+                                              ),
                                             ),
-                                      onPressed: () {
-                                        if (prefProvider.isListView) {
-                                          prefProvider.setView(false);
-                                        } else {
-                                          prefProvider.setView(true);
-                                        }
-                                      },
-                                    ),
-                                  ],
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      provider.minPrice == 0
+                                          ? Container()
+                                          : Chip(
+                                              backgroundColor: Colors.white,
+                                              label: Text(
+                                                  'Min Price: ${formatPrice(
+                                                provider.minPrice,
+                                              )}'),
+                                            ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      provider.maxPrice == 999999999999999999
+                                          ? Container()
+                                          : SizedBox(
+                                              height: 40,
+                                              child: Chip(
+                                                padding: EdgeInsets.zero,
+                                                backgroundColor: Colors.white,
+                                                label: Text(
+                                                    'Max Price: ${formatPrice(
+                                                  provider.maxPrice,
+                                                )}'),
+                                              ),
+                                            ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -137,10 +187,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         return noProductsFound();
                       }
                       return prefProvider.isListView
-                          ? listSearchResult(
-                              snapshot, widget.searchQueryController.text, context)
-                          : gridSearchResult(
-                              snapshot, widget.searchQueryController.text, context);
+                          ? listSearchResult(snapshot,
+                              widget.searchQueryController.text, context)
+                          : gridSearchResult(snapshot,
+                              widget.searchQueryController.text, context);
                     }
                   },
                 ),

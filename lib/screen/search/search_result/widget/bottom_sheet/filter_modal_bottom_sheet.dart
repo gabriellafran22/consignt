@@ -23,15 +23,11 @@ class FilterModalBottomSheet extends StatefulWidget {
 class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return ActionChip(
-      backgroundColor: Colors.white30,
-      avatar: const CircleAvatar(
-        child: FaIcon(
-          FontAwesomeIcons.filter,
-          size: 14,
-        ),
+    return IconButton(
+      icon: const Icon(
+        FontAwesomeIcons.filter,
+        color: Colors.white,
       ),
-      label: const Text('Filter'),
       onPressed: () {
         showModalBottomSheet(
           isScrollControlled: true,

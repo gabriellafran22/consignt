@@ -57,10 +57,24 @@ class SearchResultProvider extends CustomChangeNotifier {
     cityTextField.text = '${tempCity.type} ${tempCity.cityName}';
   }
 
-  void clearAll(){
+  void resetCity() {
     cityTextField.text = 'City';
-    minPriceController.text = '';
+  }
+
+  void resetMinPrice() {
+    minPrice = 0;
     maxPriceController.text = '';
+  }
+
+  void resetMaxPrice() {
+    minPriceController.text = '';
+    maxPrice = 999999999999999999;
+  }
+
+  void clearAll() {
+    resetCity();
+    resetMinPrice();
+    resetMaxPrice();
     notifyListeners();
   }
 
@@ -71,6 +85,5 @@ class SearchResultProvider extends CustomChangeNotifier {
     maxPriceController.dispose();
     cityTextField.dispose();
     cityTextField.text = 'City';
-    print('aaa');
   }
 }
