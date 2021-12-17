@@ -1,7 +1,9 @@
+import 'package:consignt/common/colors.dart';
 import 'package:consignt/common/styles.dart';
 import 'package:consignt/common/validation.dart';
 import 'package:consignt/screen/register/provider/register_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'button_register.dart';
@@ -70,13 +72,41 @@ class FormRegister extends StatelessWidget {
                 ),
                 TextFormField(
                   controller: provider.passwordController,
-                  obscureText: true,
+                  obscureText: provider.obscurePassword,
                   enableSuggestions: false,
                   autocorrect: false,
                   validator: (value) {
                     return passwordValidation(value);
                   },
-                  decoration: textFormFieldDecoration('Password'),
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Password',
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 0,
+                      horizontal: 12,
+                    ),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: IconButton(
+                        icon: FaIcon(
+                          provider.obscurePassword
+                              ? FontAwesomeIcons.eyeSlash
+                              : FontAwesomeIcons.eye,
+                          color: darkGrey,
+                          size: 18,
+                        ),
+                        onPressed: () {
+                          provider.obscurePassword
+                              ? provider.setObscurePassword(false)
+                              : provider.setObscurePassword(true);
+                        },
+                      ),
+                    ),
+                  ),
                   style: textFormFieldStyle,
                 ),
                 const SizedBox(
@@ -84,14 +114,42 @@ class FormRegister extends StatelessWidget {
                 ),
                 TextFormField(
                   controller: provider.passwordRetypedController,
-                  obscureText: true,
+                  obscureText: provider.obscureConfirmPassword,
                   enableSuggestions: false,
                   autocorrect: false,
                   validator: (value) {
                     return passwordMatched(
                         provider.passwordController.text, value);
                   },
-                  decoration: textFormFieldDecoration('Retype Password'),
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Retype Password',
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 0,
+                      horizontal: 12,
+                    ),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: IconButton(
+                        icon: FaIcon(
+                          provider.obscureConfirmPassword
+                              ? FontAwesomeIcons.eyeSlash
+                              : FontAwesomeIcons.eye,
+                          color: darkGrey,
+                          size: 18,
+                        ),
+                        onPressed: () {
+                          provider.obscureConfirmPassword
+                              ? provider.setObscureConfirmPassword(false)
+                              : provider.setObscureConfirmPassword(true);
+                        },
+                      ),
+                    ),
+                  ),
                   style: textFormFieldStyle,
                 ),
                 const SizedBox(

@@ -30,6 +30,8 @@ class RegisterProvider extends CustomChangeNotifier {
 
   final GlobalKey<FormState> formKey = GlobalKey();
 
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
   var hiddenCity = true;
   var provinceId = 0;
   var provinceName = '';
@@ -37,6 +39,9 @@ class RegisterProvider extends CustomChangeNotifier {
   var cityName = '';
 
   static String status = '';
+
+  bool get obscurePassword => _obscurePassword;
+  bool get obscureConfirmPassword => _obscureConfirmPassword;
 
   Future<bool> saveForm() async {
     final bool isValid = formKey.currentState!.validate();
@@ -80,6 +85,16 @@ class RegisterProvider extends CustomChangeNotifier {
         );
       },
     );
+  }
+
+  void setObscurePassword(bool temp){
+    _obscurePassword = temp;
+    notifyListeners();
+  }
+
+  void setObscureConfirmPassword(bool temp2){
+    _obscureConfirmPassword = temp2;
+    notifyListeners();
   }
 
   Future setProvince(Province? province) async {
