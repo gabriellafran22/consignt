@@ -31,10 +31,14 @@ Widget listFavoriteProduct(AsyncSnapshot<DocumentSnapshot> snapshotProduct) {
               snapshotProduct.data!['productPictureUrl'],
               width: 80,
               height: 80,
-              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
-                if(loadingProgress == null){
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) {
                   return child;
                 }
+                return loadingPicture(80, 80);
+              },
+              errorBuilder: (context, object, trace) {
                 return loadingPicture(80, 80);
               },
             ),

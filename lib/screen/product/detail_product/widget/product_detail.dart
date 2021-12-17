@@ -29,7 +29,16 @@ Widget productDetail(
                     if (loadingProgress == null) {
                       return child;
                     }
-                    return loadingPicture(MediaQuery.of(context).size.height * 0.4, MediaQuery.of(context).size.width);
+                    return loadingPicture(
+                      MediaQuery.of(context).size.height * 0.4,
+                      MediaQuery.of(context).size.width,
+                    );
+                  },
+                  errorBuilder: (context, object, trace) {
+                    return loadingPicture(
+                      MediaQuery.of(context).size.height * 0.4,
+                      MediaQuery.of(context).size.width,
+                    );
                   },
                 ),
         ),

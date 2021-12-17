@@ -35,10 +35,14 @@ Widget gridFavoriteProduct(AsyncSnapshot<DocumentSnapshot> snapshotProduct) {
               ),
               child: Image.network(
                 snapshotProduct.data!['productPictureUrl'],
-                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
-                  if(loadingProgress == null){
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) {
                     return child;
                   }
+                  return loadingPicture(80, 80);
+                },
+                errorBuilder: (context, object, trace) {
                   return loadingPicture(80, 80);
                 },
               ),
