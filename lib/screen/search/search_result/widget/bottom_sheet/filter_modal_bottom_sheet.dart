@@ -24,6 +24,7 @@ class _FilterModalBottomSheetState extends State<FilterModalBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      padding: const EdgeInsets.only(top: 10),
       icon: const Icon(
         FontAwesomeIcons.filter,
         color: Colors.white,

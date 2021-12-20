@@ -90,6 +90,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                     ),
                                   ),
                                   IconButton(
+                                    padding: const EdgeInsets.only(top: 10),
                                     icon: prefProvider.isListView
                                         ? const Icon(
                                             Icons.format_list_bulleted,
@@ -110,8 +111,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                 ],
                               ),
                               Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 5),
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
@@ -130,6 +131,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                               label: Text(
                                                 provider.cityTextField.text,
                                               ),
+                                              onDeleted: () {
+                                                provider.resetCity();
+                                              },
                                             ),
                                       const SizedBox(
                                         width: 10,
@@ -142,6 +146,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                   'Min Price: ${formatPrice(
                                                 provider.minPrice,
                                               )}'),
+                                              onDeleted: () {
+                                                provider.resetMinPrice();
+                                              },
                                             ),
                                       const SizedBox(
                                         width: 10,
@@ -157,6 +164,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                     'Max Price: ${formatPrice(
                                                   provider.maxPrice,
                                                 )}'),
+                                                onDeleted: () {
+                                                  provider.resetMaxPrice();
+                                                },
                                               ),
                                             ),
                                     ],

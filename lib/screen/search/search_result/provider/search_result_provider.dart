@@ -59,16 +59,19 @@ class SearchResultProvider extends CustomChangeNotifier {
 
   void resetCity() {
     cityTextField.text = 'City';
+    notifyListeners();
   }
 
   void resetMinPrice() {
     minPrice = 0;
-    maxPriceController.text = '';
+    minPriceController.text = '';
+    notifyListeners();
   }
 
   void resetMaxPrice() {
-    minPriceController.text = '';
+    maxPriceController.text = '';
     maxPrice = 999999999999999999;
+    notifyListeners();
   }
 
   void clearAll() {
