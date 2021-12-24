@@ -4,6 +4,8 @@ import 'package:consignt/core/model/product.dart';
 class FirestoreProductService {
   static CollectionReference productCollection =
       FirebaseFirestore.instance.collection('products');
+  static CollectionReference favoriteCollection =
+      FirebaseFirestore.instance.collection('favorites');
 
   static Future<void> updateProduct({
     required String productId,
@@ -58,6 +60,10 @@ class FirestoreProductService {
     required String productId,
   }) async {
     await productCollection.doc(productId).delete();
+    QuerySnapshot deleteFavorite = await favoriteCollection.where('productId', isEqualTo: productId).get();
+    deleteFavorite.docs.forEach((doc) async {
+      await favoriteCollection.doc(doc.id).delete();
+    });
   }
 
   static Stream<QuerySnapshot> getAllProducts() {

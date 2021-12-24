@@ -8,7 +8,7 @@ class BinderByteService {
     var response = await client
         .get('https://api.binderbyte.com/v1/track', queryParameters: {
       'api_key':
-          '47d64488656c3a506bc4cd4500141c2365521d25381b34bc7ba55e42469a792a',
+          '65118d45e8714205cdb35ecd207e76edbc16d5c0008f3cbd710d5e9b889e61b7',
       'courier': courier,
       'awb': awb
     });
